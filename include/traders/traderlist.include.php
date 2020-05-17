@@ -98,11 +98,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.html"><img src="images/product/1.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.html"><img src="images/product/2.jpg" alt="product images"></a>
+	        								<a class="first__img" href="single-product.php"><img src="images/product/1.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/2.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.html">Ali Smith</a></h2>
+	        								<h2><a href="single-product.php">Ali Smith</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -117,9 +117,9 @@
 	        								</ul>
 	        								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
 	        								<ul class="cart__action d-flex">
-	        									<li class="cart"><a href="cart.html">Add to cart</a></li>
-	        									<li class="wishlist"><a href="cart.html"></a></li>
-	        									<li class="compare"><a href="cart.html"></a></li>
+	        									<li class="cart"><a href="cart.php">Add to cart</a></li>
+	        									<li class="wishlist"><a href="cart.php"></a></li>
+	        									<li class="compare"><a href="cart.php"></a></li>
 	        								</ul>
 
 	        							</div>
@@ -128,11 +128,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view mt--40">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.html"><img src="images/product/2.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.html"><img src="images/product/4.jpg" alt="product images"></a>
+	        								<a class="first__img" href="single-product.php"><img src="images/product/2.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/4.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.html">Blood In Water</a></h2>
+	        								<h2><a href="single-product.php">Blood In Water</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -147,9 +147,9 @@
 	        								</ul>
 	        								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
 	        								<ul class="cart__action d-flex">
-	        									<li class="cart"><a href="cart.html">Add to cart</a></li>
-	        									<li class="wishlist"><a href="cart.html"></a></li>
-	        									<li class="compare"><a href="cart.html"></a></li>
+	        									<li class="cart"><a href="cart.php">Add to cart</a></li>
+	        									<li class="wishlist"><a href="cart.php"></a></li>
+	        									<li class="compare"><a href="cart.php"></a></li>
 	        								</ul>
 
 	        							</div>
@@ -158,11 +158,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view mt--40">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.html"><img src="images/product/3.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.html"><img src="images/product/6.jpg" alt="product images"></a>
+	        								<a class="first__img" href="single-product.php"><img src="images/product/3.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/6.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.html">Madeness Overated</a></h2>
+	        								<h2><a href="single-product.php">Madeness Overated</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -177,9 +177,9 @@
 	        								</ul>
 	        								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
 	        								<ul class="cart__action d-flex">
-	        									<li class="cart"><a href="cart.html">Add to cart</a></li>
-	        									<li class="wishlist"><a href="cart.html"></a></li>
-	        									<li class="compare"><a href="cart.html"></a></li>
+	        									<li class="cart"><a href="cart.php">Add to cart</a></li>
+	        									<li class="wishlist"><a href="cart.php"></a></li>
+	        									<li class="compare"><a href="cart.php"></a></li>
 	        								</ul>
 
 	        							</div>
@@ -188,11 +188,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view mt--40">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.html"><img src="images/product/4.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.html"><img src="images/product/6.jpg" alt="product images"></a>
+	        								<a class="first__img" href="single-product.php"><img src="images/product/4.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/6.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.html">Watching You</a></h2>
+	        								<h2><a href="single-product.php">Watching You</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -207,9 +207,9 @@
 	        								</ul>
 	        								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
 	        								<ul class="cart__action d-flex">
-	        									<li class="cart"><a href="cart.html">Add to cart</a></li>
-	        									<li class="wishlist"><a href="cart.html"></a></li>
-	        									<li class="compare"><a href="cart.html"></a></li>
+	        									<li class="cart"><a href="cart.php">Add to cart</a></li>
+	        									<li class="wishlist"><a href="cart.php"></a></li>
+	        									<li class="compare"><a href="cart.php"></a></li>
 	        								</ul>
 
 	        							</div>
@@ -218,11 +218,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view mt--40">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.html"><img src="images/product/5.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.html"><img src="images/product/9.jpg" alt="product images"></a>
+	        								<a class="first__img" href="single-product.php"><img src="images/product/5.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/9.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.html">Court Wings Run</a></h2>
+	        								<h2><a href="single-product.php">Court Wings Run</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -237,9 +237,9 @@
 	        								</ul>
 	        								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
 	        								<ul class="cart__action d-flex">
-	        									<li class="cart"><a href="cart.html">Add to cart</a></li>
-	        									<li class="wishlist"><a href="cart.html"></a></li>
-	        									<li class="compare"><a href="cart.html"></a></li>
+	        									<li class="cart"><a href="cart.php">Add to cart</a></li>
+	        									<li class="wishlist"><a href="cart.php"></a></li>
+	        									<li class="compare"><a href="cart.php"></a></li>
 	        								</ul>
 	        							</div>
 	        						</div>
