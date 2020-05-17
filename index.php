@@ -9,4 +9,5 @@ include("include/index/productslider.include.php");
 include("include/banner.include.php");
 include("include/index/productslider.include.php");
 include("include/footer.include.php");
+include("include/connection.php");
 ?>
