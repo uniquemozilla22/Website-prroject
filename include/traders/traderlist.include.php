@@ -98,11 +98,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.php"><img src="images/product/1.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/2.jpg" alt="product images"></a>
+	        								<a class="first__img" href="singleproduct.php"><img src="images/product/1.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="singleproduct.php"><img src="images/product/2.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.php">Ali Smith</a></h2>
+	        								<h2><a href="singleproduct.php">Ali Smith</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -128,11 +128,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view mt--40">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.php"><img src="images/product/2.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/4.jpg" alt="product images"></a>
+	        								<a class="first__img" href="singleproduct.php"><img src="images/product/2.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="singleproduct.php"><img src="images/product/4.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.php">Blood In Water</a></h2>
+	        								<h2><a href="singleproduct.php">Blood In Water</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -158,11 +158,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view mt--40">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.php"><img src="images/product/3.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/6.jpg" alt="product images"></a>
+	        								<a class="first__img" href="singleproduct.php"><img src="images/product/3.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="singleproduct.php"><img src="images/product/6.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.php">Madeness Overated</a></h2>
+	        								<h2><a href="singleproduct.php">Madeness Overated</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -188,11 +188,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view mt--40">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.php"><img src="images/product/4.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/6.jpg" alt="product images"></a>
+	        								<a class="first__img" href="singleproduct.php"><img src="images/product/4.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="singleproduct.php"><img src="images/product/6.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.php">Watching You</a></h2>
+	        								<h2><a href="singleproduct.php">Watching You</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
@@ -218,11 +218,11 @@
 	        						<!-- Start Single Product -->
 	        						<div class="list__view mt--40">
 	        							<div class="thumb">
-	        								<a class="first__img" href="single-product.php"><img src="images/product/5.jpg" alt="product images"></a>
-	        								<a class="second__img animation1" href="single-product.php"><img src="images/product/9.jpg" alt="product images"></a>
+	        								<a class="first__img" href="singleproduct.php"><img src="images/product/5.jpg" alt="product images"></a>
+	        								<a class="second__img animation1" href="singleproduct.php"><img src="images/product/9.jpg" alt="product images"></a>
 	        							</div>
 	        							<div class="content">
-	        								<h2><a href="single-product.php">Court Wings Run</a></h2>
+	        								<h2><a href="singleproduct.php">Court Wings Run</a></h2>
 	        								<ul class="rating d-flex">
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
 	        									<li class="on"><i class="fa fa-star-o"></i></li>
