@@ -1,6 +1,6 @@
 <?php 
 
-include("includes/connection.php");
+include("includes/db.php");
 
 ?>
 
@@ -55,11 +55,11 @@ include("includes/connection.php");
                    
                    <div class="form-group"> 
                        
-                      <label class="col-md-3 control-label"> Product Name </label> 
+                      <label class="col-md-3 control-label"> Product Title </label> 
                       
                       <div class="col-md-6"> 
                           
-                          <input name="product_name" type="text" class="form-control" required>
+                          <input name="product_title" type="text" class="form-control" required>
                           
                       </div> 
                        
@@ -67,13 +67,13 @@ include("includes/connection.php");
                    
                                       <div class="form-group"> 
                        
-                      <label class="col-md-3 control-label"> Product Type </label> 
+                      <label class="col-md-3 control-label"> Category </label> 
                       
                       <div class="col-md-6"> 
                           
-                          <select name="type" class="form-control"> 
+                          <select name="cat" class="form-control"> 
                               
-                              <option> Select a Product Type </option>
+                              <option> Select a Category </option>
                               
                               <?php 
                               
