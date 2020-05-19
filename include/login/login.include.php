@@ -105,3 +105,5 @@
 		elseif ($password==$confirm_password) {
 			header("Location: ../login.php?error=passwordcheckname=".$username."&email".$email);
 		}
+
+		else
