@@ -81,6 +81,27 @@
 			$phone=$_POST["number"];
 			$password=$_POST["password"];
 			$confirm_password=$_POST["password1"];
-		
+
+		if(empty($username) ||empty($email) ||empty($address1) ||empty($address2) ||empty($phone) ||empty($password) ||empty($confirm_password)){
+			//header("Location: ../login.php?error=emptyfield&name=".$username."&email=".$email."&address1=".$address1."&address2=".$address2."&number=".$phone."&password=".$password."password1=".$confirm_password);
+			exit();
+		}
+
+		elseif(!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $username)){
+			header("Location: ../login.php?error=invaidemailname");
+			exit();
+		}
+
+		elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			header("location: ../login.php?error=invalidemail&name=".$username);		}
+
 		}
 		
+		elseif(!preg_match("/^[a-zA-Z0-9]*$/", $username)){
+			header("Location: ../login.php?error=invaidname&email=".$email);
+			exit();
+		}
+
+		elseif ($password==$confirm_password) {
+			header("Location: ../login.php?error=passwordcheckname=".$username."&email".$email);
+		}
