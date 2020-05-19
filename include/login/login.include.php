@@ -9,11 +9,11 @@
 								<div class="account__form">
 									<div class="input__box">
 										<label>Username or email address <span>*</span></label>
-										<input type="text" name="username">
+										<input type="text" name="username" required>
 									</div>
 									<div class="input__box">
 										<label>Password<span>*</span></label>
-										<input type="text" name="pwd">
+										<input type="text" name="pwd" required>
 									</div>
 									<div class="form__btn">
 										<button type="submit" name="login">Login</button>
@@ -30,34 +30,34 @@
 					<div class="col-lg-6 col-12">
 						<div class="my__account__wrapper">
 							<h3 class="account__title">Register</h3>
-							<form action="#" method="POST">
+							<form action="#" method="POST" enctype="multipart/form-data">
 								<div class="account__form">
 								<div class="input__box">
 										<label>Your Name<span>*</span></label>
-										<input type="text" name="name">
+										<input type="text" name="name" required>
 									</div>
 									<div class="input__box">
 										<label>Email address <span>*</span></label>
-										<input type="email" name="email">
+										<input type="email" name="email" required>
 									</div>
 									<div class="input__box">
 										<label>Your Address</label>
 										<label>Address 1 <span>*</span></label>
-										<input type="text" name="address1">
+										<input type="text" name="address1" required>
 										<label>Address 2</label>
 										<input type="text" name="address2">
 									</div>
 									<div class="input__box">
 										<label>Phone Number<span>*</span></label>
-										<input type="email" name="number">
+										<input type="number" name="number" required>
 									</div>
 									<div class="input__box">
 										<label>Password<span>*</span></label>
-										<input type="password" name="password">
+										<input type="password" name="password" required>
 									</div>
 									<div class="input__box">
 										<label>Confirm Password<span>*</span></label>
-										<input type="password" name="password1">
+										<input type="password" name="password1" required>
 									</div>
 									<div class="form__btn">
 										<button type="submit" name="register">Register</button>
@@ -81,11 +81,6 @@
 			$phone=$_POST["number"];
 			$password=$_POST["password"];
 			$confirm_password=$_POST["password1"];
-
-			if(empty($username) || empty($email) || empty($address1) || empty($address2) || empty($phone) || empty($password) || empty($confirm_password)){
-				header("Location:../login.php?error=emptyfields&name=".$username."&email=".$email.);
-
-			}
 		
 		}
-		>
+		
