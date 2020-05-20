@@ -1,4 +1,36 @@
 <!-- Start My Account Area -->
+<?php
+include("include/connection.php");
+
+if(isset($_POST['register'])){
+	$username=$_POST['name'];
+	$email=$_POST['email'];
+	$address=$_POST['address'];
+	$contact=$_POST['contact'];
+	$password=$_POST['password'];
+	$confirm_password=$_POST['password1'];
+
+	$password=password_hash($password, PASSWORD_BCRYPT);
+	$confirm_password=password_hash($confirm_password, PASSWORD_BCRYPT);
+
+	$emailquery="Select * from usera where email='$email' ";
+	$query=oci_parse($connection,$emailquery);
+
+	$emailcount=mysqli_num_rows($query);
+
+	if($emailcount>0){
+		echo "email already exists";
+	}else{
+		if($password === $confirm_password){
+			$insertquery="INSERT INTO USERA (USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL ) VALUES(')";
+
+
+		}else{
+			echo "Password are not matching";
+		}
+	}
+}
+?>
 <section class="my_account_area pt--80 pb--55 bg--white">
 			<div class="container">
 				<div class="row">
@@ -41,15 +73,12 @@
 										<input type="email" name="email" required>
 									</div>
 									<div class="input__box">
-										<label>Your Address</label>
-										<label>Address 1 <span>*</span></label>
-										<input type="text" name="address1" required>
-										<label>Address 2</label>
-										<input type="text" name="address2">
+										<label>Address <span>*</span></label>
+										<input type="text" name="address" required>
 									</div>
 									<div class="input__box">
 										<label>Phone Number<span>*</span></label>
-										<input type="number" name="number" required>
+										<input type="number" name="contact" required>
 									</div>
 									<div class="input__box">
 										<label>Password<span>*</span></label>
@@ -71,39 +100,5 @@
 		</section>
 		<!-- End My Account Area -->
 
-		<?php
-		if(isset($_POST['register'])){
-			include("include/connection.php");
-			$username=$_POST["name"];
-			$email=$_POST["email"];
-			$address1=$_POST["address1"];
-			$address2=$_POST["address2"];
-			$phone=$_POST["number"];
-			$password=$_POST["password"];
-			$confirm_password=$_POST["password1"];
-
-		if(empty($username) ||empty($email) ||empty($address1) ||empty($address2) ||empty($phone) ||empty($password) ||empty($confirm_password)){
-			//header("Location: ../login.php?error=emptyfield&name=".$username."&email=".$email."&address1=".$address1."&address2=".$address2."&number=".$phone."&password=".$password."password1=".$confirm_password);
-			exit();
-		}
-
-		elseif(!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $username)){
-			header("Location: ../login.php?error=invaidemailname");
-			exit();
-		}
-
-		elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			header("location: ../login.php?error=invalidemail&name=".$username);		}
-
-		}
 		
-		elseif(!preg_match("/^[a-zA-Z0-9]*$/", $username)){
-			header("Location: ../login.php?error=invaidname&email=".$email);
-			exit();
-		}
 
-		elseif ($password==$confirm_password) {
-			header("Location: ../login.php?error=passwordcheckname=".$username."&email".$email);
-		}
-
-		else
