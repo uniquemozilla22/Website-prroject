@@ -31,6 +31,36 @@ if(isset($_POST['register'])){
 	}
 }
 ?>
+
+ <?php
+        session_start();
+        global $conn;
+        include("include/connection.php");
+        if(isset($_POST['login'])){
+            $user = $_POST['username'];
+            $pass = $_POST['password'];
+            $s = oci_parse($conn, "select 
+
+username,password from usera where username='$user' 
+
+and password='$pass'");       
+            oci_execute($s);
+            $row = oci_fetch_all($s, $res);
+            if($row){
+                    $_SESSION['user']=$user;
+                    $_SESSION['time_start_login'] = time
+
+();
+                    header("location: dashboard.php");
+            }else{
+
+                echo "wrong password or username";
+            }
+        }
+
+
+
+     ?>
 <section class="my_account_area pt--80 pb--55 bg--white">
 			<div class="container">
 				<div class="row">
