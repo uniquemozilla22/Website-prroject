@@ -33,24 +33,20 @@ if(isset($_POST['register'])){
 ?>
 
  <?php
-        session_start();
+        //session_start();
         global $conn;
         include("include/connection.php");
         if(isset($_POST['login'])){
             $user = $_POST['username'];
-            $pass = $_POST['password'];
+            $pass = $_POST['pwd'];
             $s = oci_parse($conn, "select 
 
-username,password from usera where username='$user' 
-
-and password='$pass'");       
+username,password from usera where username='$user' and pwd='$pass'");       
             oci_execute($s);
             $row = oci_fetch_all($s, $res);
             if($row){
                     $_SESSION['user']=$user;
-                    $_SESSION['time_start_login'] = time
-
-();
+                    $_SESSION['time_start_login'] = time();
                     header("location: dashboard.php");
             }else{
 
