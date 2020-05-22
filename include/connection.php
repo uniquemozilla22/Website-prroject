@@ -1,8 +1,13 @@
-<?php $conn = oci_connect('projectmanagement', 'projectmanagement', '//localhost/xe'); 
+<?php 
+/*$conn = oci_connect('projectmanagement', 'projectmanagement', '//localhost/xe'); 
 if (!$conn) {
    $m = oci_error();
    echo $m['message'], "\n";
    exit; } else {
    print "Connected to Oracle!"; } 
-    oci_close($conn); 
+    oci_close($conn); */
+    ?>
+
+    <?php
+    $connection=mysqli_connect("localhost","root","","ecom_store");
     ?>
