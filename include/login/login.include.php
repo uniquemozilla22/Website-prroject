@@ -29,9 +29,11 @@ if(isset($_POST['register'])){
 	}else{
 		if($password === $confirm_password){
 			$confirm_password=password_hash($confirm_password, PASSWORD_BCRYPT);
-			$insertquery="INSERT INTO USERA (USER_ID,USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL,USER_TYPE ) VALUES(1,'$username','$confirm_password','$contact','$address','$email','$constumer_type')";
+			$insertquery="INSERT INTO USERA (USER_ID,USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL,USER_TYPE ) VALUES(3,'$username','$confirm_password','$contact','$address','$email','$constumer_type')";
 			$query=oci_parse($conn,$insertquery);
-			oci_execute($query);               
+			oci_execute($query); 
+			
+			echo 'you are registered';
 
 		}else{
 			echo "Password are not matching";
@@ -47,33 +49,38 @@ if(isset($_POST['login'])){
     
     $username = $_POST['username'];
     
-    $password = $_POST['pass'];
+	$password = $_POST['pass'];
+
+	
+	
     
-	$select_customer = "select * from USERA where USERNAME='$username' AND USER_PASSWORD='$password'";
+	$select_customer = "select USERNAME ,USER_PASSWORD from USERA where USERNAME='$username' AND USER_PASSWORD='$password'";
     
     $run_customer = oci_parse($conn,$select_customer);
 
 	oci_execute($run_customer);
 
-
-
 	echo $run_customer;
-	// $result = oci_result($run_customer,'USER_PASSWORD');
+	while($row = oci_fetch_array($run_customer)){
+		$pass= $row['USER_PASSWORD'];
+		$uname= $row['USERNAME'];
 
+		echo 'this is working';
 
-	
-	while ($row = oci_fetch_assoc($run_customer)){
 		
-		$passwordcheck= password_verify($password,$row['USER_PASSWORD']);
+		$verify = password_verify($password,$pass);
 
-		if ($passwordcheck){
-			echo "login Sucessfull";
+		if ($verify== true && $uname == $username){
+
+			echo "Congratulations Your account is correct and you are logged in.";
 		}
-		else {
-			echo "not logged in.";
+		else if ($verify== false && $uname == $username){
+			echo 'Wrong Password entered';
 		}
-	}
-    
+		else{
+			echo'invalid credentials';
+		}
+	}    
   
     
 }
