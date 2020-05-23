@@ -14,14 +14,23 @@
 					<div class="product product__style--3">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="product__thumb">
+<<<<<<< Updated upstream
 								<a class="first__img" href="singleproduct.php"><img src="images/books/1.jpg" alt="product image"></a>
 								<a class="second__img animation1" href="singleproduct.php"><img src="images/books/2.jpg" alt="product image"></a>
+=======
+								<a class="first__img" href="single-product.php"><img src="images/books/1.jpg" alt="product image"></a>
+								<a class="second__img animation1" href="single-product.php"><img src="images/books/2.jpg" alt="product image"></a>
+>>>>>>> Stashed changes
 								<div class="hot__box">
 									<span class="hot-label">BEST SALLER</span>
 								</div>
 							</div>
 							<div class="product__content content--center">
+<<<<<<< Updated upstream
 								<h4><a href="singleproduct.php">robin parrish</a></h4>
+=======
+								<h4><a href="single-product.php">robin parrish</a></h4>
+>>>>>>> Stashed changes
 								<ul class="prize d-flex">
 									<li>$35.00</li>
 									<li class="old_prize">$35.00</li>
@@ -53,14 +62,23 @@
 					<div class="product product__style--3">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="product__thumb">
+<<<<<<< Updated upstream
 								<a class="first__img" href="singleproduct.php"><img src="images/books/3.jpg" alt="product image"></a>
 								<a class="second__img animation1" href="singleproduct.php"><img src="images/books/4.jpg" alt="product image"></a>
+=======
+								<a class="first__img" href="single-product.php"><img src="images/books/3.jpg" alt="product image"></a>
+								<a class="second__img animation1" href="single-product.php"><img src="images/books/4.jpg" alt="product image"></a>
+>>>>>>> Stashed changes
 								<div class="hot__box color--2">
 									<span class="hot-label">HOT</span>
 								</div>
 							</div>
 							<div class="product__content content--center">
+<<<<<<< Updated upstream
 								<h4><a href="singleproduct.php">The Remainng</a></h4>
+=======
+								<h4><a href="single-product.php">The Remainng</a></h4>
+>>>>>>> Stashed changes
 								<ul class="prize d-flex">
 									<li>$35.00</li>
 									<li class="old_prize">$35.00</li>
@@ -92,14 +110,23 @@
 					<div class="product product__style--3">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="product__thumb">
+<<<<<<< Updated upstream
 								<a class="first__img" href="singleproduct.php"><img src="images/books/5.jpg" alt="product image"></a>
 								<a class="second__img animation1" href="singleproduct.php"><img src="images/books/6.jpg" alt="product image"></a>
+=======
+								<a class="first__img" href="single-product.php"><img src="images/books/5.jpg" alt="product image"></a>
+								<a class="second__img animation1" href="single-product.php"><img src="images/books/6.jpg" alt="product image"></a>
+>>>>>>> Stashed changes
 								<div class="hot__box">
 									<span class="hot-label">BEST SALLER</span>
 								</div>
 							</div>
 							<div class="product__content content--center">
+<<<<<<< Updated upstream
 								<h4><a href="singleproduct.php">Bowen Greenwood</a></h4>
+=======
+								<h4><a href="single-product.php">Bowen Greenwood</a></h4>
+>>>>>>> Stashed changes
 								<ul class="prize d-flex">
 									<li>$40.00</li>
 									<li class="old_prize">$35.00</li>
@@ -131,14 +158,23 @@
 					<div class="product product__style--3">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="product__thumb">
+<<<<<<< Updated upstream
 								<a class="first__img" href="singleproduct.php"><img src="images/books/7.jpg" alt="product image"></a>
 								<a class="second__img animation1" href="singleproduct.php"><img src="images/books/8.jpg" alt="product image"></a>
+=======
+								<a class="first__img" href="single-product.php"><img src="images/books/7.jpg" alt="product image"></a>
+								<a class="second__img animation1" href="single-product.php"><img src="images/books/8.jpg" alt="product image"></a>
+>>>>>>> Stashed changes
 								<div class="hot__box">
 									<span class="hot-label">HOT</span>
 								</div>
 							</div>
 							<div class="product__content content--center">
+<<<<<<< Updated upstream
 								<h4><a href="singleproduct.php">Lando</a></h4>
+=======
+								<h4><a href="single-product.php">Lando</a></h4>
+>>>>>>> Stashed changes
 								<ul class="prize d-flex">
 									<li>$35.00</li>
 									<li class="old_prize">$50.00</li>
@@ -170,14 +206,23 @@
 					<div class="product product__style--3">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="product__thumb">
+<<<<<<< Updated upstream
 								<a class="first__img" href="singleproduct.php"><img src="images/books/9.jpg" alt="product image"></a>
 								<a class="second__img animation1" href="singleproduct.php"><img src="images/books/10.jpg" alt="product image"></a>
+=======
+								<a class="first__img" href="single-product.php"><img src="images/books/9.jpg" alt="product image"></a>
+								<a class="second__img animation1" href="single-product.php"><img src="images/books/10.jpg" alt="product image"></a>
+>>>>>>> Stashed changes
 								<div class="hot__box">
 									<span class="hot-label">HOT</span>
 								</div>
 							</div>
 							<div class="product__content content--center">
+<<<<<<< Updated upstream
 								<h4><a href="singleproduct.php">Doctor Wldo</a></h4>
+=======
+								<h4><a href="single-product.php">Doctor Wldo</a></h4>
+>>>>>>> Stashed changes
 								<ul class="prize d-flex">
 									<li>$35.00</li>
 									<li class="old_prize">$35.00</li>
@@ -209,14 +254,23 @@
 					<div class="product product__style--3">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="product__thumb">
+<<<<<<< Updated upstream
 								<a class="first__img" href="singleproduct.php"><img src="images/books/11.jpg" alt="product image"></a>
 								<a class="second__img animation1" href="singleproduct.php"><img src="images/books/2.jpg" alt="product image"></a>
+=======
+								<a class="first__img" href="single-product.php"><img src="images/books/11.jpg" alt="product image"></a>
+								<a class="second__img animation1" href="single-product.php"><img src="images/books/2.jpg" alt="product image"></a>
+>>>>>>> Stashed changes
 								<div class="hot__box">
 									<span class="hot-label">BEST SALER</span>
 								</div>
 							</div>
 							<div class="product__content content--center content--center">
+<<<<<<< Updated upstream
 								<h4><a href="singleproduct.php">Ghost</a></h4>
+=======
+								<h4><a href="single-product.php">Ghost</a></h4>
+>>>>>>> Stashed changes
 								<ul class="prize d-flex">
 									<li>$50.00</li>
 									<li class="old_prize">$35.00</li>
