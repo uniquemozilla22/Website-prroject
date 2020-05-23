@@ -44,48 +44,89 @@ if(isset($_POST['register'])){
 
 <!-- LOGIN -->
 <?php 
-
 if(isset($_POST['login'])){
-    
-    $username = $_POST['username'];
-    
-	$password = $_POST['pass'];
+$user = $_POST['username'];
+$pass = $_POST['pass'];
 
-	
-	
-    
-	$select_customer = "select USERNAME ,USER_PASSWORD from USERA where USERNAME='$username' AND USER_PASSWORD='$password'";
-    
-    $run_customer = oci_parse($conn,$select_customer);
+$sql_login = "SELECT USERNAME FROM USERA WHERE USERNAME='$user' AND USER_PASSWORD='$pass'"; 
 
-	oci_execute($run_customer);
+$login_stmt = oci_parse($conn, $sql_login);
 
-	echo $run_customer;
-	while($row = oci_fetch_array($run_customer)){
-		$pass= $row['USER_PASSWORD'];
-		$uname= $row['USERNAME'];
-
-		echo 'this is working';
-
-		
-		$verify = password_verify($password,$pass);
-
-		if ($verify== true && $uname == $username){
-
-			echo "Congratulations Your account is correct and you are logged in.";
-		}
-		else if ($verify== false && $uname == $username){
-			echo 'Wrong Password entered';
-		}
-		else{
-			echo'invalid credentials';
-		}
-	}    
-  
-    
+if(!$login_stmt)
+{
+    echo "An error occurred in parsing the sql string.\n"; 
+    exit; 
 }
 
-?>
+oci_execute($login_stmt);
+
+while(oci_fetch_array($login_stmt))
+{
+	$password = oci_result($login_stmt,"Password");
+	echo $password;
+}
+
+if ($password == "")
+{
+    echo 'Password = blank';
+}
+
+if ($pass == $password)
+{
+    echo 'Logged In';
+}
+else
+{
+    echo 'Login Failed';
+}
+
+
+}
+
+
+
+
+// if(isset($_POST['login'])){
+    
+//     $username = $_POST['username'];
+    
+// 	$password = $_POST['pass'];
+
+	
+	
+    
+// 	$select_customer = "select USERNAME ,USER_PASSWORD from USERA where USERNAME='$username' AND USER_PASSWORD='$password'";
+    
+//     $run_customer = oci_parse($conn,$select_customer);
+
+// 	oci_execute($run_customer);
+
+// 	echo $run_customer;
+// 	while($row = oci_fetch_array($run_customer)){
+// 		$pass= $row['USER_PASSWORD'];
+// 		$uname= $row['USERNAME'];
+
+// 		echo 'this is working';
+
+		
+// 		$verify = password_verify($password,$pass);
+
+// 		if ($verify== true && $uname == $username){
+
+// 			echo "Congratulations Your account is correct and you are logged in.";
+// 		}
+// 		else if ($verify== false && $uname == $username){
+// 			echo 'Wrong Password entered';
+// 		}
+// 		else{
+// 			echo'invalid credentials';
+// 		}
+// 	}    
+  
+    
+// }
+
+?> 
 <section class="my_account_area pt--80 pb--55 bg--white">
 			<div class="container">
 				<div class="row">
