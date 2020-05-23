@@ -29,7 +29,7 @@ if(isset($_POST['register'])){
 	}else{
 		if($password === $confirm_password){
 			$confirm_password=password_hash($confirm_password, PASSWORD_BCRYPT);
-			$insertquery="INSERT INTO USERA (USER_ID,USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL,USER_TYPE ) VALUES(3,'$username','$confirm_password','$contact','$address','$email','$constumer_type')";
+			$insertquery="INSERT INTO USERA (USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL,USER_TYPE ) VALUES('$username','$confirm_password','$contact','$address','$email','$constumer_type')";
 			$query=oci_parse($conn,$insertquery);
 			oci_execute($query); 
 			
