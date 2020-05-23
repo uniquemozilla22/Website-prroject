@@ -9,21 +9,29 @@ if(isset($_POST['register'])){
 	$contact=$_POST['contact'];
 	$password=$_POST['password'];
 	$confirm_password=$_POST['password1'];
+	$constumer_type = $_POST['customertype'];
+	
 
-	$password=password_hash($password, PASSWORD_BCRYPT);
-	$confirm_password=password_hash($confirm_password, PASSWORD_BCRYPT);
+	// $password=password_hash($password, PASSWORD_BCRYPT);
+	// $confirm_password=password_hash($confirm_password, PASSWORD_BCRYPT);
+
+
+	// password for the backend = sabdeeka123
 
 	$emailquery="Select * from usera where email='$email' ";
-	$query=oci_parse($connection,$emailquery);
+	$equery=oci_parse($conn,$emailquery);
+	
 
-	$emailcount=mysqli_num_rows($query);
+	$emailcount=oci_num_rows($equery);
 
 	if($emailcount>0){
-		echo "email already exists";
+		echo "<script> alert('email already exists')</script>";
 	}else{
 		if($password === $confirm_password){
-			$insertquery="INSERT INTO USERA (USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL ) VALUES(')";
-
+			$confirm_password=password_hash($confirm_password, PASSWORD_BCRYPT);
+			$insertquery="INSERT INTO USERA (USER_ID,USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL,USER_TYPE ) VALUES(1,'$username','$confirm_password','$contact','$address','$email','$constumer_type')";
+			$query=oci_parse($conn,$insertquery);
+			oci_execute($query);               
 
 		}else{
 			echo "Password are not matching";
@@ -32,31 +40,45 @@ if(isset($_POST['register'])){
 }
 ?>
 
- <?php
-        //session_start();
-        global $conn;
-        include("include/connection.php");
-        if(isset($_POST['login'])){
-            $user = $_POST['username'];
-            $pass = $_POST['pwd'];
-            $s = oci_parse($conn, "select 
+<!-- LOGIN -->
+<?php 
 
-username,password from usera where username='$user' and pwd='$pass'");       
-            oci_execute($s);
-            $row = oci_fetch_all($s, $res);
-            if($row){
-                    $_SESSION['user']=$user;
-                    $_SESSION['time_start_login'] = time();
-                    header("location: dashboard.php");
-            }else{
+if(isset($_POST['login'])){
+    
+    $username = $_POST['username'];
+    
+    $password = $_POST['pass'];
+    
+	$select_customer = "select * from USERA where USERNAME='$username' AND USER_PASSWORD='$password'";
+    
+    $run_customer = oci_parse($conn,$select_customer);
 
-                echo "wrong password or username";
-            }
-        }
+	oci_execute($run_customer);
 
 
 
-     ?>
+	echo $run_customer;
+	// $result = oci_result($run_customer,'USER_PASSWORD');
+
+
+	
+	while ($row = oci_fetch_assoc($run_customer)){
+		
+		$passwordcheck= password_verify($password,$row['USER_PASSWORD']);
+
+		if ($passwordcheck){
+			echo "login Sucessfull";
+		}
+		else {
+			echo "not logged in.";
+		}
+	}
+    
+  
+    
+}
+
+?>
 <section class="my_account_area pt--80 pb--55 bg--white">
 			<div class="container">
 				<div class="row">
@@ -71,7 +93,7 @@ username,password from usera where username='$user' and pwd='$pass'");
 									</div>
 									<div class="input__box">
 										<label>Password<span>*</span></label>
-										<input type="text" name="pwd" required>
+										<input type="text" name="pass" required>
 									</div>
 									<div class="form__btn">
 										<button type="submit" name="login">Login</button>
@@ -114,6 +136,14 @@ username,password from usera where username='$user' and pwd='$pass'");
 										<label>Confirm Password<span>*</span></label>
 										<input type="password" name="password1" required>
 									</div>
+									<div class="input__box">
+										<label>Select the Type<span>*</span></label>
+										<select name='customertype'>  
+                    					<option value='customer'>Customer</option>
+                    					<option value='trader'>Trader</option>
+                						</select>
+									</div>
+									
 									<div class="form__btn">
 										<button type="submit" name="register">Register</button>
 									</div>
