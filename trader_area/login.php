@@ -1,7 +1,7 @@
 <?php 
 
     session_start();
-    include("includes/db.php");
+    include("includes/connection.php");
 ?>
 
 <!DOCTYPE html>
@@ -9,24 +9,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The HomyWood Furniture</title>
+    <title>Taste Best</title>
     <link rel="stylesheet" href="css/bootstrap-337.min.css">
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
-<body style="background:background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(163,241,77,0.989233193277311) 0%, rgba(0,212,255,1) 100%);">
-   
+<body style="background-image: url('image/messy-pizza-on-a-black-table_bg2.jpg'); height: 100%;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover">
+  
    <div class="container"><!-- container begin -->
        <form action="" class="form-login" method="post"><!-- form-login begin -->
-           <h2 class="form-login-heading"> Admin Login </h2>
+           <h2 class="form-login-heading"> Trder Login </h2>
            
-           <input type="text" class="form-control" placeholder="Email Address" name="admin_email" required>
+           <input type="text" class="form-control" placeholder="Email Address" name="trader_email" required>
            
-           <input type="password" class="form-control" placeholder="Your Password" name="admin_pass" required>
+           <input type="password" class="form-control" placeholder="Your Password" name="trader_pass" required>
            
-           <button type="submit" class="btn btn-lg btn-primary btn-block" name="admin_login"><!-- btn btn-lg btn-primary btn-block begin -->
+           <button type="submit" class="btn btn-lg btn-primary btn-block" name="trader_login"><!-- btn btn-lg btn-primary btn-block begin -->
                
                Login
                
@@ -41,17 +43,19 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(163,241,77,0.98923319
 
 <?php 
 
-    if(isset($_POST['admin_login'])){
+    if(isset($_POST['trader_login'])){
         
-        $admin_email = mysqli_real_escape_string($con,$_POST['admin_email']);
-        
-        $admin_pass = mysqli_real_escape_string($con,$_POST['admin_pass']);
+        $admin_email = $_POST['trader_email'];
+
+        $admin_pass = $_POST['trader_pass'];
         
         $get_admin = "select * from admins where admin_email='$admin_email' AND admin_pass='$admin_pass'";
         
-        $run_admin = mysqli_query($con,$get_admin);
+        $run_admin = oci_parse($conn,$get_admin);
+
+        oci_execute($run_admin);
         
-        $count = mysqli_num_rows($run_admin);
+        $count = oci_fetch($run_admin);
         
         if($count==1){
             
