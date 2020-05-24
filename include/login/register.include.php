@@ -29,7 +29,15 @@ if(isset($_POST['register'])){
 	}else{
 		if($password === $confirm_password){
 
-			//sanitize form d$username=$myoci->
+			//sanitize form data
+			$username=$myoci->real_escape_string($username);
+			$email=$myoci->real_escape_string($email);
+			$address=$myoci->real_escape_string($address);
+			$contact=$myoci->real_escape_string($contact);
+			$password=$myoci->real_escape_string($password);
+			$confirm_password=$myoci->real_escape_string($confirm_password);
+			$customer_type=$myoci->real_escape_string($customertype);
+
 			$confirm_password=password_hash($confirm_password, PASSWORD_DEFAULT);
 			$insertquery="INSERT INTO USERA (USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL,USER_TYPE ) VALUES('$username','$confirm_password','$contact','$address','$email','$constumer_type')";
 			$query=oci_parse($conn,$insertquery);
