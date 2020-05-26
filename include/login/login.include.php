@@ -8,6 +8,7 @@ include("../connection.php");
 if(isset($_POST['login'])){
 $user = $_POST['username'];
 $pass = $_POST['pass'];
+$type= $_POSt[]
 
 $sql_login = "SELECT * FROM USERA WHERE USERNAME='$user'"; 
 
