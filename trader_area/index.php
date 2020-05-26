@@ -1,27 +1,30 @@
 <?php 
-         error_reporting(0);  
+           
     session_start();
     include("includes/connection.php");
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['username'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "hello";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
         
-        $admin_session = $_SESSION['admin_email'];
+        $admin_session = $_SESSION['username'];
         
-        $get_admin = "select * from admins where admin_email='$admin_session'";
+        $get_admin = "select * from usera where USERNAME='$admin_session'";
         
-        $run_admin = mysqli_query($con,$get_admin);
+        $run_admin = oci_parse($conn,$get_admin);
+
+        oci_execute($run_admin);
         
-        $row_admin = mysqli_fetch_array($run_admin);
+        $row_admin = oci_fetch_array($run_admin);
         
-        $admin_id = $row_admin['admin_id'];
+        $admin_id = $row_admin['USER_ID'];
         
-        $admin_name = $row_admin['admin_name'];
+        $admin_name = $row_admin['USERNAME'];
         
-        $admin_email = $row_admin['admin_email'];
+        $admin_email = $row_admin['USER_EMAIL'];
         
         
         
