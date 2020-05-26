@@ -4,8 +4,6 @@ include("include/header.include.php");
 include("include/banner.include.php");
 ?>
 
-
-
 <section class="my_account_area pt--80 pb--55 bg--white">
 			<div class="container">
 				<div class="row">
@@ -21,6 +19,13 @@ include("include/banner.include.php");
 									<div class="input__box">
 										<label>Password<span>*</span></label>
 										<input type="text" name="pass" required>
+									</div>
+									<div class="input__box">
+										<label>Select the Type<span>*</span></label>
+										<select name='tradertype'>  
+                    					<option value='customer'>Customer</option>
+                    					<option value='trader'>Trader</option>
+                						</select>
 									</div>
 									<div class="form__btn">
 										<button type="submit" name="login">Login</button>
