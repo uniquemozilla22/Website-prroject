@@ -188,10 +188,18 @@ if(isset($_POST['submit'])){
 
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
+
+    $c_id = $rh['CATEGORY_ID'];
+    $cak = "select * from CATEGORY Where CATEGORY_ID=$c_id";
+    $tak = oci_parse($conn,$cak);
+    oci_execute($tak);
+    $dh = oci_fetch_array($tak);
     
-    $insert_product = "insert into products (p_cat_id,cat_id,date,product_title,product_img1,product_price,product_keywords,product_desc) values ('$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_price','$product_keywords','$product_desc')";
+    $insert_product = "insert into PRODUCT (p_cat_id,cat_id,date,product_title,product_img1,product_price,product_keywords,product_desc) values ('$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_price','$product_keywords','$product_desc')";
     
-    $run_product = mysqli_query($con,$insert_product);
+    $run_product = oci_parse($conn,$insert_product);
+
+    oci_execute($run_product);
     
     if($run_product){
         

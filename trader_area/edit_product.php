@@ -1,8 +1,8 @@
 <?php 
 
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -14,45 +14,40 @@
         
         $edit_id = $_GET['edit_product'];
         
-        $get_p = "select * from products where product_id='$edit_id'";
+        $get_p = "select * from PRODUCT where PRODUCT_ID='$edit_id'";
         
-        $run_edit = mysqli_query($con,$get_p);
+        $run_edit = oci_parse($conn,$get_p);
+
+        oci_execute($run_edit);
         
-        $row_edit = mysqli_fetch_array($run_edit);
+        $row_edit = oci_fetch_array($run_edit);
         
-        $p_id = $row_edit['product_id'];
+        $p_id = $row_edit['PRODUCT_ID'];
         
-        $p_title = $row_edit['product_title'];
+        $p_title = $row_edit['PRODUCT_NAME'];
         
-        $p_cat = $row_edit['p_cat_id'];
+        $cat = $row_edit['CATEGORY_ID'];
         
-        $cat = $row_edit['cat_id'];
+        $p_image1 = $row_edit['PRODUCT_IMAGE'];
         
-        $p_image1 = $row_edit['product_img1'];
+        $p_price = $row_edit['PRODUCT_PRICE'];
         
-        $p_price = $row_edit['product_price'];
+        $p_keywords = $row_edit['PRODUCT_KEYWORDS'];
         
-        $p_keywords = $row_edit['product_keywords'];
-        
-        $p_desc = $row_edit['product_desc'];
+        $p_desc = $row_edit['PRODUCT_DESCRIPTION'];
         
     }
         
-        $get_p_cat = "select * from product_categories where p_cat_id='$p_cat'";
         
-        $run_p_cat = mysqli_query($con,$get_p_cat);
+        $get_cat = "select * from CATEGORY where CATEGORY_ID='$cat'";
         
-        $row_p_cat = mysqli_fetch_array($run_p_cat);
+        $run_cat = oci_parse($conn,$get_cat);
         
-        $p_cat_title = $row_p_cat['p_cat_title'];
+        $row_cat = oci_fetch_array($run_cat);
+
+        oci_execute($run_cat);
         
-        $get_cat = "select * from categories where cat_id='$cat'";
-        
-        $run_cat = mysqli_query($con,$get_cat);
-        
-        $row_cat = mysqli_fetch_array($run_cat);
-        
-        $cat_title = $row_cat['cat_title'];
+        $cat_title = $row_cat['CATEGORY_NAME'];
 
 ?>
 
@@ -115,41 +110,6 @@
                        
                    </div><!-- form-group Finish -->
                    
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Product Category </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <select name="product_cat" class="form-control"><!-- form-control Begin -->
-                              
-                              <option value="<?php echo $p_cat; ?>"> <?php echo $p_cat_title; ?> </option>
-                              
-                              <?php 
-                              
-                              $get_p_cats = "select * from product_categories";
-                              $run_p_cats = mysqli_query($con,$get_p_cats);
-                              
-                              while ($row_p_cats=mysqli_fetch_array($run_p_cats)){
-                                  
-                                  $p_cat_id = $row_p_cats['p_cat_id'];
-                                  $p_cat_title = $row_p_cats['p_cat_title'];
-                                  
-                                  echo "
-                                  
-                                  <option value='$p_cat_id'> $p_cat_title </option>
-                                  
-                                  ";
-                                  
-                              }
-                              
-                              ?>
-                              
-                          </select><!-- form-control Finish -->
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -163,13 +123,14 @@
                               
                               <?php 
                               
-                              $get_cat = "select * from categories";
-                              $run_cat = mysqli_query($con,$get_cat);
+                              $get_cat = "select * from CATEGORY";
+                              $run_cat = oci_parse($con,$get_cat);
+                              oci_execute($run_cat);
                               
-                              while ($row_cat=mysqli_fetch_array($run_cat)){
+                              while ($row_cat=oci_fetch_array($run_cat)){
                                   
-                                  $cat_id = $row_cat['cat_id'];
-                                  $cat_title = $row_cat['cat_title'];
+                                  $cat_id = $row_cat['CATEGORY_ID'];
+                                  $cat_title = $row_cat['CATEGORY_NAME'];
                                   
                                   echo "
                                   
@@ -276,23 +237,24 @@
 
 if(isset($_POST['update'])){
     
-    $product_title = $_POST['product_title'];
-    $product_cat = $_POST['product_cat'];
+    $product_title = $_POST['PRODUCT_NAME'];
     $cat = $_POST['cat'];
-    $product_price = $_POST['product_price'];
-    $product_keywords = $_POST['product_keywords'];
-    $product_desc = $_POST['product_desc'];
+    $product_price = $_POST['PRODUCT_PRICE'];
+    $product_keywords = $_POST['PRODUCT_KEYWORD'];
+    $product_desc = $_POST['PRODUCT_DESCRIPTION'];
     
-    $product_img1 = $_FILES['product_img1']['name'];
+    $product_img1 = $_FILES['PRODUCT_IMAGE']['name'];
     
-    $temp_name1 = $_FILES['product_img1']['tmp_name'];
+    $temp_name1 = $_FILES['PRODUCT_IMAGE']['tmp_name'];
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
    
-    $update_product = "update products set p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_keywords='$product_keywords',product_desc='$product_desc',product_price='$product_price' where product_id='$p_id'";
+    $update_product = "update PRODUCT set CATEGORY_ID='$cat',PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORD='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price' where PRODUCT_ID='$p_id'";
     
-    $run_product = mysqli_query($con,$update_product);
+    $run_product = oci_parse($conn,$update_product);
     
+    oci_execute($run_product);
+
     if($run_product){
         
        echo "<script>alert('Your product has been updated Successfully')</script>"; 

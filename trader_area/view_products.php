@@ -1,8 +1,8 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -55,23 +55,25 @@
           
                                 $i=0;
                             
-                                $get_pro = "select * from products";
+                                $get_pro = "select * from PRODUCT";
                                 
-                                $run_pro = mysqli_query($con,$get_pro);
+                                $run_pro = oci_parse($conn,$get_pro);
           
-                                while($row_pro=mysqli_fetch_array($run_pro)){
-                                    
-                                    $pro_id = $row_pro['product_id'];
-                                    
-                                    $pro_title = $row_pro['product_title'];
-                                    
-                                    $pro_img1 = $row_pro['product_img1'];
+                                oci_execute($row_pro);
 
-                                    $pro_desc = $row_pro['product_desc'];
+                                while($row_pro=oci_fetch_array($run_pro)){
                                     
-                                    $pro_price = $row_pro['product_price'];
+                                    $pro_id = $row_pro['PRODUCT_ID'];
                                     
-                                    $pro_keywords = $row_pro['product_keywords'];
+                                    $pro_title = $row_pro['PRODUCT_NAME'];
+                                    
+                                    $pro_img1 = $row_pro['PRODUCT_IMAGE'];
+
+                                    $pro_desc = $row_pro['PRODUCT_DESCRIPTION'];
+                                    
+                                    $pro_price = $row_pro['PRODUCT_PRICE'];
+                                    
+                                    $pro_keywords = $row_pro['PRODUCT_KEYWORD'];
                                     
                                     $pro_date = $row_pro['date'];
                                     

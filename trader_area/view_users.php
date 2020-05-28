@@ -1,8 +1,8 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -52,19 +52,21 @@
           
                                 $i=0;
                             
-                                $get_users = "select * from admins";
+                                $get_users = "select * from USERA where USER_TYPE='trader'";
                                 
-                                $run_users = mysqli_query($con,$get_users);
+                                $run_users = oci_parse($conn,$get_users);
+
+                                oci_execute($run_users);
           
-                                while($row_users=mysqli_fetch_array($run_users)){
+                                while($row_users=oci_fetch_array($run_users)){
                                     
-                                    $user_id = $row_users['admin_id'];
+                                    $user_id = $row_users['USER_ID'];
                                     
-                                    $user_name = $row_users['admin_name'];
+                                    $user_name = $row_users['USERNAME'];
                                     
-                                    $user_email = $row_users['admin_email'];
+                                    $user_email = $row_users['USER_EMAIL'];
                                     
-                                    $user_age = $row_users['admin_age'];
+                                    $user_age = $row_users['USER_PHONE'];
                                     
                                     
                                     

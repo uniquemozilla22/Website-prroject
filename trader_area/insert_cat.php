@@ -1,8 +1,8 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -50,19 +50,19 @@
                     </div><!-- form-group finish -->
                     <div class="form-group"><!-- form-group begin -->
                     
-                        <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
-                        
-                            Category Description 
-                        
-                        </label><!-- control-label col-md-3 finish --> 
-                        
-                        <div class="col-md-6"><!-- col-md-6 begin -->
-                        
-                            <textarea type='text' name="cat_desc" id="" cols="30" rows="10" class="form-control"></textarea>
-                        
-                        </div><!-- col-md-6 finish -->
+                    <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
                     
-                    </div><!-- form-group finish -->
+                        Product Quantity
+                    
+                    </label><!-- control-label col-md-3 finish --> 
+                    
+                    <div class="col-md-6"><!-- col-md-6 begin -->
+                    
+                    <input value=" <?php echo $cat_desc; ?> " name="cat_desc" type="number" class="form-control">
+                    
+                    </div><!-- col-md-6 finish -->
+                
+                </div><!-- form-group finish -->
                     <div class="form-group"><!-- form-group begin -->
                     
                         <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
@@ -89,13 +89,15 @@
 
           if(isset($_POST['submit'])){
               
-              $cat_title = $_POST['cat_title'];
+              $cat_title = $_POST['CATEGORY_NAME'];
               
-              $cat_desc = $_POST['cat_desc'];
+              $cat_desc = $_POST['PRODUCT_QUANTITY'];
               
-              $insert_cat = "insert into categories (cat_title,cat_desc) values ('$cat_title','$cat_desc')";
+              $insert_cat = "insert into CATEGORY (CATEGORY_NAME,PRODUCT_QUANTITY) values ('$cat_title','$cat_desc')";
               
-              $run_cat = mysqli_query($con,$insert_cat);
+              $run_cat = oci_parse($conn,$insert_cat);
+
+              oci_execute($run_cat);
               
               if($run_cat){
                   

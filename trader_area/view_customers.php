@@ -1,6 +1,6 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
         echo "<script>window.open('login.php','_self')</script>";
         
@@ -51,19 +51,19 @@
           
                                 $i=0;
                             
-                                $get_c = "select * from customers";
+                                $get_c = "select * from USERA where USER_TYPE='customer'";
                                 
-                                $run_c = mysqli_query($con,$get_c);
+                                $run_c = oci_parse($conn,$get_c);
           
-                                while($row_c=mysqli_fetch_array($run_c)){
+                                while($row_c=oci_fetch_array($run_c)){
                                     
-                                    $c_id = $row_c['customer_id'];
+                                    $c_id = $row_c['USER_ID'];
                                     
-                                    $c_name = $row_c['customer_name'];
+                                    $c_name = $row_c['USERNAME'];
                                     
-                                    $c_age = $row_c['customer_age'];
+                                    $c_age = $row_c['USER_PHONE'];
                                     
-                                    $c_email = $row_c['customer_email'];
+                                    $c_email = $row_c['USER_EMAIL'];
                                     
                                    
                                     $i++;

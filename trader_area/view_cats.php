@@ -1,8 +1,8 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -38,8 +38,8 @@
                         <thead><!-- thead begin -->
                             <tr><!-- tr begin -->
                                 <th> Category ID </th>
-                                <th> Category Title </th>
-                                <th> Category Desc </th>
+                                <th> Category Name </th>
+                                <th> Product Quantity </th>
                                 <th> Edit Category </th>
                                 <th> Delete Category </th>
                             </tr><!-- tr finish -->
@@ -51,17 +51,19 @@
                             
                                 $i=0;
           
-                                $get_cats = "select * from categories";
+                                $get_cats = "select * from CATEGORY";
           
-                                $run_cats = mysqli_query($con,$get_cats);
+                                $run_cats = oci_parse($conn,$get_cats);
+
+                                oci_execute($run_cats);
           
-                                while($row_cats=mysqli_fetch_array($run_cats)){
+                                while($row_cats=oci_fetch_array($run_cats)){
                                     
-                                    $cat_id = $row_cats['cat_id'];
+                                    $cat_id = $row_cats['CATEGORY_ID'];
                                     
-                                    $cat_title = $row_cats['cat_title'];
+                                    $cat_title = $row_cats['CATEGORY_NAME'];
                                     
-                                    $cat_desc = $row_cats['cat_desc'];
+                                    $cat_desc = $row_cats['PRODUCT_QUANTITY'];
                                     
                                     $i++;
                             
@@ -70,7 +72,7 @@
                             <tr><!-- tr begin -->
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $cat_title; ?> </td>
-                                <td width="300"> <?php echo $cat_desc; ?> </td>
+                                <td> <?php echo $cat_desc; ?> </td>
                                 <td> 
                                     <a href="index.php?edit_cat= <?php echo $cat_id; ?> ">
                                         <i class="fa fa-pencil"></i> Edit

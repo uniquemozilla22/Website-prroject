@@ -1,8 +1,8 @@
 <?php 
 
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -72,7 +72,7 @@
 
                    <div class="form-group"><!-- form-group Begin -->
                        
-                      <label class="col-md-3 control-label"> Age </label> 
+                      <label class="col-md-3 control-label"> Contact </label> 
                       
                       <div class="col-md-6"><!-- col-md-6 Begin -->
                           
@@ -123,15 +123,17 @@
 
 if(isset($_POST['submit'])){
     
-    $user_name = $_POST['admin_name'];
-    $user_email = $_POST['admin_email'];
-    $user_pass = $_POST['admin_pass'];
-    $user_age = $_POST['admin_age'];
+    $user_name = $_POST['USERNAME'];
+    $user_email = $_POST['USER_EMAIL'];
+    $user_pass = $_POST['USER_PASSWORD'];
+    $user_age = $_POST['USER_PHONE'];
     
     
-    $insert_user = "insert into admins (admin_name,admin_email,admin_pass,admin_age) values ('$user_name','$user_email','$user_pass','$user_age')";
+    $insert_user = "insert into USERA (USERNAME,USER_EMAIL,USER_PASSWORD,USER_PHONE) values ('$user_name','$user_email','$user_pass','$user_age')";
     
-    $run_user = mysqli_query($con,$insert_user);
+    $run_user = oci_parse($conn,$insert_user);
+
+    oci_execute($run_user);
     
     if($run_user){
         
