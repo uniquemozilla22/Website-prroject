@@ -78,7 +78,7 @@ if (($row= oci_fetch_array($login_stmt))==true)
 	{
 		echo "hello";
 		echo "<script>alert('Welcome Back! You have been logged in.')</script>";
-		echo "<script>window.open('index.php?dashboard','_self')</script>";
+		echo "<script>window.open('index.php','_self')</script>";
 	}
 
 	else if($verified_password==false){

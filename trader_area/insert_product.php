@@ -1,6 +1,6 @@
 <?php 
 
-include("includes/db.php");
+include("includes/connection.php");
 
 ?>
 
@@ -78,7 +78,7 @@ include("includes/db.php");
                               <?php 
                               
                               $get_cat = "select * from categories";
-                              $run_cat = mysqli_query($con,$get_cat);
+                              $run_cat = mysqli_query($conn,$get_cat);
                               
                               while ($row_cat=mysqli_fetch_array($run_cat)){
                                   

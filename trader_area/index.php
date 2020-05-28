@@ -3,14 +3,13 @@
     session_start();
     include("includes/connection.php");
     
-    if(!isset($_SESSION['username'])){
+    if(!isset($_SESSION['name'])){
         
-        echo "hello";
         echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
         
-        $admin_session = $_SESSION['username'];
+        $admin_session = $_SESSION['name'];
         
         $get_admin = "select * from usera where USERNAME='$admin_session'";
         
@@ -30,7 +29,7 @@
         
         $get_products = "select * from products";
         
-        $run_products = mysqli_query($con,$get_products);
+        $run_products = oci_parse($con,$get_products);
         
         $count_products = mysqli_num_rows($run_products);
         
