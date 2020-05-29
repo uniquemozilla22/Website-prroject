@@ -42,7 +42,7 @@
         
         $get_customers = "select * from USERA where USER_TYPE='customer'";
         
-        $run_customers = oci_parse($connn,$get_customers);
+        $run_customers = oci_parse($conn,$get_customers);
         
         $count_customers = oci_fetch($run_customers);
         

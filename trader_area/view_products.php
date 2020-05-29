@@ -60,7 +60,7 @@
                                 
                                 $run_pro = oci_parse($conn,$get_pro);
           
-                                oci_execute($row_pro);
+                                oci_execute($run_pro);
 
                                 while($row_pro=oci_fetch_array($run_pro)){
                                     
@@ -74,9 +74,9 @@
                                     
                                     $pro_price = $row_pro['PRODUCT_PRICE'];
                                     
-                                    $pro_keywords = $row_pro['PRODUCT_KEYWORD'];
+                                    $pro_keywords = $row_pro['PRODUCT_KEYWORDS'];
                                     
-                                    $pro_date = $row_pro['date'];
+                                   // $pro_date = $row_pro['date'];
                                     
                                     $i++;
                             
@@ -89,7 +89,7 @@
                                 <td> $ <?php echo $pro_price; ?> </td>
                                 <td> <?php echo $pro_desc; ?> </td>
                                 <td> <?php echo $pro_keywords; ?> </td>
-                                <td> <?php echo $pro_date ?> </td>
+                                <td> <?php //echo $pro_date ?> </td>
                                 <td> 
                                      
                                      <a href="index.php?delete_product=<?php echo $pro_id; ?>">
