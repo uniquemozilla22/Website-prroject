@@ -1,10 +1,6 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
-        
-        echo "<script>window.open('login.php','_self')</script>";
-        
-    }else{
+   include("connection.php");
 
 ?>
    
@@ -21,7 +17,7 @@
             
         </button><!-- navbar-toggle finish -->
         
-        <a href="index.php?dashboard" class="navbar-brand" style="color: white;">Admin Area</a>
+        <a href="index.php?dashboard" class="navbar-brand" style="color: white;">Trader Area</a>
         
     </div><!-- navbar-header finish -->
     
@@ -31,7 +27,7 @@
             
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: black;"><!-- dropdown-toggle begin -->
                 
-                <i class="fa fa-user"></i> <?php echo $admin_name;  ?> <b class="caret"></b>
+                <i class="fa fa-user"></i> <?php echo $username;  ?> <b class="caret"></b>
                 
             </a><!-- dropdown-toggle finish -->
             
@@ -158,25 +154,7 @@
                 
             </li><!-- li finish -->
             
-            <li><!-- li begin -->
-                <a href="#" data-toggle="collapse" data-target="#slides" style="color: yellow;"><!-- a href begin -->
-                        
-                        <i class="fa fa-fw fa-gear"></i> Slides
-                        <i class="fa fa-fw fa-caret-down"></i>
-                        
-                </a><!-- a href finish -->
-                
-                <ul id="slides" class="collapse"><!-- collapse begin -->
-                    <li><!-- li begin -->
-                        <a href="index.php?insert_slide" style="color: white;"> Insert Slide </a>
-                    </li><!-- li finish -->
-                    <li><!-- li begin -->
-                        <a href="index.php?view_slides" style="color: white;"> View Slides </a>
-                    </li><!-- li finish -->
-                </ul><!-- collapse finish -->
-                
-            </li><!-- li finish -->
-            
+          
             <li><!-- li begin -->
                 <a href="index.php?view_customers" style="color: yellow;"><!-- a href begin -->
                     <i class="fa fa-fw fa-users"></i> View Customers
@@ -218,4 +196,4 @@
 </nav><!-- navbar navbar-inverse navbar-fixed-top finish -->
 
 
-<?php } ?>
+<?php //} ?>

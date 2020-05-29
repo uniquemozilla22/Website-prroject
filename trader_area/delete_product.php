@@ -1,8 +1,8 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -14,9 +14,11 @@
         
         $delete_id = $_GET['delete_product'];
         
-        $delete_pro = "delete from products where product_id='$delete_id'";
+        $delete_pro = "delete from PRODUCT where PRODUCT_ID='$delete_id'";
         
-        $run_delete = mysqli_query($con,$delete_pro);
+        $run_delete = oci_parse($conn,$delete_pro);
+
+        oci_execute($run_delete);
         
         if($run_delete){
             

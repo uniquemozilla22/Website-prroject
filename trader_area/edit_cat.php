@@ -14,17 +14,19 @@
         
         $edit_cat_id = $_GET['edit_cat'];
         
-        $edit_cat_query = "select * from categories where cat_id='$edit_cat_id'";
+        $edit_cat_query = "select * from CATEGORY where CATEGORY_ID='$edit_cat_id'";
         
-        $run_edit = mysqli_query($con,$edit_cat_query);
+        $run_edit = oci_parse($conn,$edit_cat_query);
         
-        $row_edit = mysqli_fetch_array($run_edit);
+        $row_edit = oci_fetch_array($run_edit);
         
-        $cat_id = $row_edit['cat_id'];
+        oci_execute($run_edit);
+
+        $cat_id = $row_edit['CATEGORY_ID'];
         
-        $cat_title = $row_edit['cat_title'];
+        $cat_title = $row_edit['CATEGORY_NAME'];
         
-        $cat_desc = $row_edit['cat_desc'];
+        $cat_desc = $row_edit['PRODUCT_QUANTITY'];
         
     }
 
@@ -74,13 +76,13 @@
                     
                         <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
                         
-                            Category Description 
+                            Product Quantity
                         
                         </label><!-- control-label col-md-3 finish --> 
                         
                         <div class="col-md-6"><!-- col-md-6 begin -->
                         
-                            <textarea type='text' name="cat_desc" class="form-control"><?php echo $cat_desc; ?></textarea>
+                        <input value=" <?php echo $cat_desc; ?> " name="cat_desc" type="number" class="form-control">
                         
                         </div><!-- col-md-6 finish -->
                     
@@ -111,14 +113,15 @@
 
           if(isset($_POST['update'])){
               
-              $cat_title = $_POST['cat_title'];
+              $cat_title = $_POST['CATEGORY_NAME'];
               
-              $cat_desc = $_POST['cat_desc'];
+              $cat_desc = $_POST['PRODUCT_QUANTITY'];
               
-              $update_cat = "update categories set cat_title='$cat_title',cat_desc='$cat_desc' where cat_id='$cat_id'";
+              $update_cat = "update CATEGORY set CATEGORY_NAME='$cat_title',PRODUCT_QUANTITY='$cat_desc' where CATEGORY_ID='$cat_id'";
               
-              $run_cat = mysqli_query($con,$update_cat);
+              $run_cat = oci_parse($conn,$update_cat);
               
+              oci_execute($run_cat)
               if($run_cat){
                   
                   echo "<script>alert('Your Category Has Been Updated')</script>";

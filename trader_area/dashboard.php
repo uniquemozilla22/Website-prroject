@@ -1,8 +1,9 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "Hello";
+        //echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -181,4 +182,4 @@
 </div><!-- row no: 3 finish -->
 
 
-<?php } ?>
+    <?php } ?>

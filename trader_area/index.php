@@ -1,47 +1,57 @@
 <?php 
-      error_reporting(0);  
+           
     session_start();
-    include("includes/db.php");
+    include("includes/connection.php");
     
-    if(!isset($_SESSION['admin_email'])){
-        
-        echo "<script>window.open('login.php','_self')</script>";
+    if(!isset($_SESSION["'admin_type'=='trader'"])){
+        echo "hello";
+       // echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
         
-        $admin_session = $_SESSION['admin_email'];
+        $admin_session = $_SESSION['admin_type'];
         
-        $get_admin = "select * from admins where admin_email='$admin_session'";
+        $get_admin = "select * from usera where USERNAME='$admin_session'";
         
-        $run_admin = mysqli_query($con,$get_admin);
+        $run_admin = oci_parse($conn,$get_admin);
+
+        oci_execute($run_admin);
         
-        $row_admin = mysqli_fetch_array($run_admin);
+        $row_admin = oci_fetch_array($run_admin);
         
-        $admin_id = $row_admin['admin_id'];
+        $admin_id = $row_admin['USER_ID'];
         
-        $admin_name = $row_admin['admin_name'];
+        $admin_name = $row_admin['USERNAME'];
         
-        $admin_email = $row_admin['admin_email'];
+        $admin_email = $row_admin['USER_EMAIL'];
         
+        $admin_address=$row_admin['USER_ADDRESS'];
+
+        $admin_contact=$row_admin['USER_PHONE'];
+
+        $admin_type=$row_admin['USER_TYPE'];
+
+        $admin_image=$row_admin['USER_IMAGE'];
+
+        $admin_about=$row_admin['USER_DESCRIPTION'];
+
+        $get_products = "select * from PRODUCT";
         
+        $run_products = oci_parse($conn,$get_products);
         
-        $get_products = "select * from products";
+        $count_products = oci_fetch($run_products);
         
-        $run_products = mysqli_query($con,$get_products);
+        $get_customers = "select * from USERA where USER_TYPE='customer'";
         
-        $count_products = mysqli_num_rows($run_products);
+        $run_customers = oci_parse($connn,$get_customers);
         
-        $get_customers = "select * from customers";
+        $count_customers = oci_fetch($run_customers);
         
-        $run_customers = mysqli_query($con,$get_customers);
+        $get_p_categories = "select * from CATEGORY";
         
-        $count_customers = mysqli_num_rows($run_customers);
+        $run_p_categories = oci_parse($conn,$get_p_categories);
         
-        $get_p_categories = "select * from product_categories";
-        
-        $run_p_categories = mysqli_query($con,$get_p_categories);
-        
-        $count_p_categories = mysqli_num_rows($run_p_categories);
+        $count_p_categories = oci_fetch($run_p_categories);
         
         
 
@@ -52,7 +62,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HomyWood Furniture Admin Area</title>
+    <title>Taste Best Trader Area</title>
     <link rel="stylesheet" href="css/bootstrap-337.min.css">
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -119,22 +129,6 @@
                 }   if(isset($_GET['delete_cat'])){
                         
                         include("delete_cat.php");
-                        
-                }   if(isset($_GET['insert_slide'])){
-                        
-                        include("insert_slide.php");
-                        
-                }   if(isset($_GET['view_slides'])){
-                        
-                        include("view_slides.php");
-                        
-                }   if(isset($_GET['delete_slide'])){
-                        
-                        include("delete_slide.php");
-                        
-                }   if(isset($_GET['edit_slide'])){
-                        
-                        include("edit_slide.php");
                         
                 }   if(isset($_GET['view_customers'])){
                         

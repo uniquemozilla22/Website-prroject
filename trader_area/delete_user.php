@@ -1,8 +1,8 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -14,10 +14,12 @@
         
         $delete_user_id = $_GET['delete_user'];
         
-        $delete_user = "delete from admins where admin_id='$delete_user_id'";
+        $delete_user = "delete from USERA where USER_TYPE='trader'";
         
-        $run_delete = mysqli_query($con,$delete_user);
+        $run_delete = oci_parse($conn,$delete_user);
         
+        oci_execute($run_delete);
+
         if($run_delete){
             
             echo "<script>alert('One of your Admins User has been Deleted')</script>";

@@ -1,8 +1,8 @@
 <?php 
     
-    if(!isset($_SESSION['admin_email'])){
+    if(!isset($_SESSION['admin_name'])){
         
-        echo "<script>window.open('login.php','_self')</script>";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -14,9 +14,11 @@
         
         $delete_cat_id = $_GET['delete_cat'];
         
-        $delete_cat = "delete from categories where cat_id='$delete_cat_id'";
+        $delete_cat = "delete from CATEGORY where CATEGORY_ID='$delete_cat_id'";
         
-        $run_delete = mysqli_query($con,$delete_cat);
+        $run_delete = oci_parse($conn,$delete_cat);
+
+        oci_execute($run_delete);
         
         if($run_delete){
             

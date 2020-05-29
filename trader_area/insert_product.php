@@ -1,6 +1,12 @@
-<?php 
+<?php
 
-include("includes/db.php");
+  if(!isset($_SESSION['admin_name'])){
+
+        echo "<script>window.open('../login.php','_self')</script>";
+
+    }else{
+include("includes/connection.php");
+}
 
 ?>
 
@@ -77,13 +83,13 @@ include("includes/db.php");
                               
                               <?php 
                               
-                              $get_cat = "select * from categories";
-                              $run_cat = mysqli_query($con,$get_cat);
+                              $get_cat = "select * from CATEGORY";
+                              $run_cat = oci_parse($conn,$get_cat);
                               
-                              while ($row_cat=mysqli_fetch_array($run_cat)){
+                              while ($row_cat=oci_fetch($run_cat)){
                                   
-                                  $cat_id = $row_cat['cat_id'];
-                                  $cat_title = $row_cat['cat_title'];
+                                  $cat_id = $row_cat['CATEGORY_ID'];
+                                  $cat_title = $row_cat['CATEGORY_NAME'];
                                   
                                   echo "
                                   
@@ -99,43 +105,7 @@ include("includes/db.php");
                           
                       </div>                      
                    </div>
-                   <div class="form-group"> 
-                       
-                      <label class="col-md-3 control-label"> Brand </label> 
-                      
-                      <div class="col-md-6"> 
-                          
-                          <select name="product_cat" class="form-control"> 
-                              
-                              <option> Select a Brand </option>
-                              
-                              <?php 
-                              
-                              $get_p_cats = "select * from product_categories";
-                              $run_p_cats = mysqli_query($con,$get_p_cats);
-                              
-                              while ($row_p_cats=mysqli_fetch_array($run_p_cats)){
-                                  
-                                  $p_cat_id = $row_p_cats['p_cat_id'];
-                                  $p_cat_title = $row_p_cats['p_cat_title'];
-                                  
-                                  echo "
-                                  
-                                  <option value='$p_cat_id'> $p_cat_title </option>
-                                  
-                                  ";
-                                  
-                              }
-                              
-                              ?>
-                              
-                          </select> 
-                          
-                      </div> 
-                       
-                   </div> 
                    
-
                    
                    <div class="form-group">                       
                       <label class="col-md-3 control-label"> Product Image 1 </label> 
@@ -218,10 +188,18 @@ if(isset($_POST['submit'])){
 
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
+
+    $c_id = $rh['CATEGORY_ID'];
+    $cak = "select * from CATEGORY Where CATEGORY_ID=$c_id";
+    $tak = oci_parse($conn,$cak);
+    oci_execute($tak);
+    $dh = oci_fetch_array($tak);
     
-    $insert_product = "insert into products (p_cat_id,cat_id,date,product_title,product_img1,product_price,product_keywords,product_desc) values ('$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_price','$product_keywords','$product_desc')";
+    $insert_product = "insert into PRODUCT (p_cat_id,cat_id,date,product_title,product_img1,product_price,product_keywords,product_desc) values ('$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_price','$product_keywords','$product_desc')";
     
-    $run_product = mysqli_query($con,$insert_product);
+    $run_product = oci_parse($conn,$insert_product);
+
+    oci_execute($run_product);
     
     if($run_product){
         
