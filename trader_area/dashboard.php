@@ -1,9 +1,10 @@
 <?php 
-    
-    if(!isset($_SESSION['admin_name'])){
+
+    session_start();
+    if($_SESSION['admin_type']!='trader'){
         
-        echo "Hello";
-        //echo "<script>window.open('../login.php','_self')</script>";
+        //echo "Hello";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 

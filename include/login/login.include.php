@@ -34,11 +34,12 @@ if (($row= oci_fetch_array($login_stmt))==true)
 	{
 		header("Location: ../index.php?sucessmessage=loginsucess");
 
-	}else if ($verified_password==true && $type=="trader")
-	{
-		echo "<script>alert('Welcome Back! You have been logged in.')</script>";
-		echo "hello";
-		//header("Location: ../trader_area/index.php");
+	}else if ($verified_password==true && $type=="trader"){
+	
+		session_start();
+		$_SESSION['admin_name']=$username;
+		$_SESSION['admin_type']=$type;
+		header("Location: ../../trader_area/dashboard.php");
 	}
 
 	else if($verified_password==false){

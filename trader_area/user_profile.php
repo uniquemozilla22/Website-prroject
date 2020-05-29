@@ -1,10 +1,11 @@
 <?php 
 
-    if(!isset($_SESSION['admin_email'])){
-        
-        echo "<script>window.open('login.php','_self')</script>";
-        
-    }else{
+session_start();
+include("includes/connection.php");
+if($_SESSION['admin_type']!='trader'){
+    echo "<script>window.open('../login.php','_self')</script>";
+    
+}else{
 
 ?>
    
@@ -14,11 +15,13 @@
         
         $edit_user = $_GET['user_profile'];
         
-        $get_user = "select * from admins where admin_id='$edit_user'";
+        $get_user = "select * from usera where USER_ID='$edit_user'";
         
-        $run_user = mysqli_query($con,$get_user);
+        $run_user = oci_parse($conn,$get_user);
         
-        $row_user = mysqli_fetch_array($run_user);
+        $row_user = oci_fetch_array($run_user);
+
+        oci_execute($run_user);
         
         $user_id = $row_user['admin_id'];
         

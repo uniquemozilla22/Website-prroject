@@ -1,10 +1,10 @@
 <?php 
-    
-    if(!isset($_SESSION['admin_name'])){
-        
-        echo "<script>window.open('login.php','_self')</script>";
-        
-    }else{
+     session_start();
+     include("includes/connection.php");
+     if($_SESSION['admin_type']!='trader'){
+         echo "<script>window.open('../login.php','_self')</script>";
+         
+     }else{
 
 ?>
 
