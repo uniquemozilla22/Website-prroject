@@ -18,44 +18,31 @@ if(isset($_POST['register'])){
 
 	// password for the backend = sabdeeka123
 
-	$emailquery="Select * from usera where email='$email' ";
+	$emailquery="Select * from usera where USER_EMAIL='$email' ";
 	$equery=oci_parse($conn,$emailquery);
 	
+	oci_execute($equery);
+	$row=oci_fetch_assoc($equery);
 
-	$emailcount=oci_num_rows($equery);
-
-	if($emailcount>0){
+	if($row==true){
 		echo "<script> alert('email already exists')</script>";
+		echo "<script>window.open('WEBSITE_PRROJECT/login.php','_self')</script>";
+
 	}else{
-		if($password === $confirm_password){
+		if($password == $confirm_password){
 
 			$confirm_password=password_hash($confirm_password, PASSWORD_DEFAULT);
 			$insertquery="INSERT INTO USERA (USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL,USER_TYPE ) VALUES('$username','$confirm_password','$contact','$address','$email','$constumer_type')";
 			$query=oci_parse($conn,$insertquery);
 			$g=oci_execute($query); 
 			echo "<script>alert('You are registered successfully.')</script>";
-
-			if($g)
-			{
-			  $to  = "uniqgaming26@gmail.com";
-			  $subject = "Confirmation";
-			  $message = 'Thank You 
-		
-		
-			  <a href="http://localhost/WEBSITE-PRROJECT/include/login/verify_customer.php?key=$to"></a>
-				';
-		
-				$head='from: ghimiresabdika343@gmail.com';
-				$z=mail($to,$subject,$message,$head);
-		
-		
-		
-			}
 			
-		else{
-			echo "Password are not matching";
+		}else{
+		echo "<script>alert('Password are not matching')</script>";
+
 		}
-	}
+
+		}
 }
-}
+
 ?>

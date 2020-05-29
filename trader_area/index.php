@@ -3,13 +3,13 @@
     session_start();
     include("includes/connection.php");
     
-    if(!isset($_SESSION['admin_name'])){
-        
-        echo "<script>window.open('../login.php','_self')</script>";
+    if(!isset($_SESSION["'admin_type'=='trader'"])){
+        echo "hello";
+       // echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
         
-        $admin_session = $_SESSION['admin_name'];
+        $admin_session = $_SESSION['admin_type'];
         
         $get_admin = "select * from usera where USERNAME='$admin_session'";
         
@@ -28,6 +28,8 @@
         $admin_address=$row_admin['USER_ADDRESS'];
 
         $admin_contact=$row_admin['USER_PHONE'];
+
+        $admin_type=$row_admin['USER_TYPE'];
 
         $admin_image=$row_admin['USER_IMAGE'];
 

@@ -37,7 +37,8 @@ if (($row= oci_fetch_array($login_stmt))==true)
 	}else if ($verified_password==true && $type=="trader")
 	{
 		echo "<script>alert('Welcome Back! You have been logged in.')</script>";
-		header("Location: ../trader_area/index.php");
+		echo "hello";
+		//header("Location: ../trader_area/index.php");
 	}
 
 	else if($verified_password==false){
