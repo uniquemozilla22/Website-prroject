@@ -37,9 +37,11 @@ if($_SESSION['admin_type']!='trader'){
         
         $user_email = $row_user['USER_EMAIL'];
         
-        $user_age = $row_user['USER_PHONE'];
+        $user_phone = $row_user['USER_PHONE'];
         
-     
+        $user_address = $row_user['USER_ADDRESS'];
+
+        $user_image = $row_user['USER_IMAGE'];
         
     }
 
@@ -99,13 +101,27 @@ if($_SESSION['admin_type']!='trader'){
                        
                       <label class="col-md-3 control-label"> E-mail </label> 
                       
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
+                    <div class="col-md-6"><!-- col-md-6 Begin -->
                           
                           <input value="<?php echo $user_email; ?>"  name="admin_email" type="text" class="form-control" required>
+                          
+                     </div><!-- col-md-6 Finish -->
+
+                     </div><!-- form-group Finish -->
+
+
+                    <div class="form-group"><!-- form-group Begin -->
+                       
+                      <label class="col-md-3 control-label"> Address </label> 
+                      
+                    <div class="col-md-6"><!-- col-md-6 Begin -->
+                          
+                    <input value="<?php echo $user_address; ?>"  name="admin_address" type="text" class="form-control" required>
                           
                       </div><!-- col-md-6 Finish -->
                        
                    </div><!-- form-group Finish -->
+                   
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -121,17 +137,40 @@ if($_SESSION['admin_type']!='trader'){
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
-                      <label class="col-md-3 control-label"> Age </label> 
+                      <label class="col-md-3 control-label"> Contact </label> 
                       
                       <div class="col-md-6"><!-- col-md-6 Begin -->
                           
-                          <input value="<?php echo $user_age; ?>"  name="admin_age" type="text" class="form-control" required>
+                          <input value="<?php echo $user_phone; ?>"  name="admin_phone" type="text" class="form-control" required>
                           
                       </div><!-- col-md-6 Finish -->
                        
                    </div><!-- form-group Finish -->
                    
                    
+                   <div class="form-group"><!-- form-group Begin -->
+
+                      <label class="col-md-3 control-label"> Image </label>
+
+                      <div class="col-md-6"><!-- col-md-6 Begin -->
+
+                          <input name="admin_image" type="file" class="form-control" required>
+
+                          <img src="trader_images/<?php echo $user_image; ?>" alt="<?php echo $user_name; ?>" width="70" height="70">
+
+                      </div><!-- col-md-6 Finish -->
+
+                   </div><!-- form-group Finish -->
+
+                   <div class="form-group">                       
+                      <label class="col-md-3 control-label"> User Description </label> 
+                      
+                      <div class="col-md-6">                        
+                          <textarea name="admin_desc" value="<?php echo $user_desc; ?>" cols="19" rows="6" class="form-control"></textarea>
+                          
+                      </div>                      
+                   </div>
+
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -160,13 +199,18 @@ if($_SESSION['admin_type']!='trader'){
 
 if(isset($_POST['update'])){
     
-    $user_name = $_POST['USERNAME'];
-    $user_email = $_POST['USER_EMAIL'];
-    $user_pass = $_POST['USER_PASSWORD'];
-    $user_age = $_POST['USER_PHONE'];
-    
-    $update_user = "update USERA set USERNAME='$user_name',USER_EMAIL='$user_email',USER_PASSWORD='$user_pass',USER_PHONE='$user_age'";
-    
+    $user_name = $_POST['admin_name'];
+    $user_email = $_POST['admin_email'];
+    $user_pass = $_POST['admin_pass'];
+    $user_contact = $_POST['admin_phone'];
+    $user_address= $_POST['admin_address'];
+    $user_desc = $_POST['admin_desc'];
+    $user_image = $_FILES['admin_image']['name'];
+    $temp_admin_image = $_FILES['admin_image']['tmp_name'];
+
+    move_uploaded_file($temp_admin_image,"trader_images/$user_image");
+
+    $update_user = "update usera set USERNAME='$user_name',USER_EMAIL='$user_email',USER_PASSWORD='$user_pass',USER_PHONE='$user_contact',USER_ADDRESS='$user_addresss',USER_DESCRIPTION='$user_desc',USER_IMAGE='$user_image' where USER_ID='$user_id'";
     $run_user = oci_parse($conn,$update_user);
 
     oci_execute($run_user);
