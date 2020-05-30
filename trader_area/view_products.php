@@ -44,7 +44,9 @@
                                 <th> Product Price: </th>
                                 <th> Product description: </th>
                                 <th> Product Keywords: </th>
-                                <th> Product Date: </th>
+                                <th> Minimum Order: </th>
+                                <th> Maximum Order: </th>
+                                <th> Allergy Information: </th>
                                 <th> Product Delete: </th>
                                 <th> Product Edit: </th>
                             </tr> 
@@ -75,8 +77,12 @@
                                     $pro_price = $row_pro['PRODUCT_PRICE'];
                                     
                                     $pro_keywords = $row_pro['PRODUCT_KEYWORDS'];
+
+                                    $min_order=$row_pro['MINIMUM_ORDER'];
+
+                                    $max_order=$row_pro['MAXIMUM_ORDER'];
                                     
-                                   // $pro_date = $row_pro['date'];
+                                   $allergy_detail=$row_pro['ALLERGY_INFORMATION'];
                                     
                                     $i++;
                             
@@ -86,10 +92,12 @@
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $pro_title; ?> </td>
                                 <td> <img src="product_images/<?php echo $pro_img1; ?>" width="60" height="60"></td>
-                                <td> $ <?php echo $pro_price; ?> </td>
+                                <td> <?php echo $pro_price; ?> </td>
                                 <td> <?php echo $pro_desc; ?> </td>
                                 <td> <?php echo $pro_keywords; ?> </td>
-                                <td> <?php //echo $pro_date ?> </td>
+                                <td> <?php echo $min_order; ?> </td>
+                                <td> <?php echo $max_order; ?> </td>
+                                <td> <?php echo $allergy_detail; ?> </td>
                                 <td> 
                                      
                                      <a href="index.php?delete_product=<?php echo $pro_id; ?>">
