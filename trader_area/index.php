@@ -37,19 +37,38 @@
         $get_products = "select * from PRODUCT";
         
         $run_products = oci_parse($conn,$get_products);
-        
+        if(!$run_products)
+        {
+                echo "An error occurred in parsing the sql string.\n"; 
+                exit; 
+        }
+
+        oci_execute($run_products);
         $count_products = oci_fetch($run_products);
         
         $get_customers = "select * from USERA where USER_TYPE='customer'";
         
         $run_customers = oci_parse($conn,$get_customers);
-        
+          if(!$run_customers)
+        {
+                echo "An error occurred in parsing the sql string.\n"; 
+                exit; 
+        }
+
+        oci_execute($run_customers);
+
         $count_customers = oci_fetch($run_customers);
         
         $get_p_categories = "select * from CATEGORY";
         
         $run_p_categories = oci_parse($conn,$get_p_categories);
-        
+        if(!$run_p_categories)
+        {
+                echo "An error occurred in parsing the sql string.\n"; 
+                exit; 
+        }
+
+        oci_execute($run_p_categories);
         $count_p_categories = oci_fetch($run_p_categories);
         
         

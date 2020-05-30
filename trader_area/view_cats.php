@@ -1,6 +1,6 @@
 <?php 
     
-    session_start();
+   // session_start();
     include("includes/connection.php");
     if($_SESSION['admin_type']!='trader'){
         echo "<script>window.open('../login.php','_self')</script>";
@@ -41,8 +41,7 @@
                                 <th> Category ID </th>
                                 <th> Category Name </th>
                                 <th> Product Quantity </th>
-                                <th> Edit Category </th>
-                                <th> Delete Category </th>
+                                
                             </tr><!-- tr finish -->
                         </thead><!-- thead finish -->
                         
@@ -64,7 +63,7 @@
                                     
                                     $cat_title = $row_cats['CATEGORY_NAME'];
                                     
-                                    $cat_desc = $row_cats['PRODUCT_QUANTITY'];
+                                    $cat_desc = $row_cats['PRODUCTS_QUANTITY'];
                                     
                                     $i++;
                             
@@ -74,16 +73,8 @@
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $cat_title; ?> </td>
                                 <td> <?php echo $cat_desc; ?> </td>
-                                <td> 
-                                    <a href="index.php?edit_cat= <?php echo $cat_id; ?> ">
-                                        <i class="fa fa-pencil"></i> Edit
-                                    </a>
-                                </td>
-                                <td> 
-                                    <a href="index.php?delete_cat= <?php echo $cat_id; ?> ">
-                                        <i class="fa fa-trash"></i> Delete
-                                    </a>
-                                </td>
+                               
+                                
                             </tr><!-- tr finish -->
                             
                             <?php } ?>

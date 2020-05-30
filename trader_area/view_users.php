@@ -1,6 +1,6 @@
 <?php 
     
-    session_start();
+   // session_start();
     include("includes/connection.php");
     if($_SESSION['admin_type']!='trader'){
         echo "<script>window.open('../login.php','_self')</script>";
@@ -80,7 +80,7 @@
                                 <td> <?php echo $user_name; ?> </td>
                                 <td> <?php echo $user_email; ?> </td>
                                 <td> <?php echo $user_age; ?></td>
-                                <td> <?php echo $user_name; ?> </td>
+                                
                                 <td>    
                                      
                                      <a href="index.php?user_profile=<?php echo $user_id; ?>">
@@ -88,6 +88,7 @@
                                         <i class="fa fa-pencil"></i> Edit
                                     
                                      </a> 
+
                                      
                                 </td>
                                 <td> 

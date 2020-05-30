@@ -1,6 +1,6 @@
 <?php 
 
-session_start();
+//session_start();
 include("includes/connection.php");
 if($_SESSION['admin_type']!='trader'){
     echo "<script>window.open('../login.php','_self')</script>";
@@ -18,20 +18,26 @@ if($_SESSION['admin_type']!='trader'){
         $get_user = "select * from usera where USER_ID='$edit_user'";
         
         $run_user = oci_parse($conn,$get_user);
-        
-        $row_user = oci_fetch_array($run_user);
+
+        if(!$run_user)
+        {
+             echo "An error occurred in parsing the sql string.\n"; 
+            exit; 
+        }
 
         oci_execute($run_user);
+
+        $row_user = oci_fetch_array($run_user);
+
+        $user_id = $row_user['USER_ID'];
         
-        $user_id = $row_user['admin_id'];
+        $user_name = $row_user['USERNAME'];
         
-        $user_name = $row_user['admin_name'];
+        $user_pass = $row_user['USER_PASSWORD'];
         
-        $user_pass = $row_user['admin_pass'];
+        $user_email = $row_user['USER_EMAIL'];
         
-        $user_email = $row_user['admin_email'];
-        
-        $user_age = $row_user['admin_age'];
+        $user_age = $row_user['USER_PHONE'];
         
      
         
@@ -154,21 +160,23 @@ if($_SESSION['admin_type']!='trader'){
 
 if(isset($_POST['update'])){
     
-    $user_name = $_POST['admin_name'];
-    $user_email = $_POST['admin_email'];
-    $user_pass = $_POST['admin_pass'];
-    $user_age = $_POST['admin_age'];
+    $user_name = $_POST['USERNAME'];
+    $user_email = $_POST['USER_EMAIL'];
+    $user_pass = $_POST['USER_PASSWORD'];
+    $user_age = $_POST['USER_PHONE'];
     
-    $update_user = "update admins set admin_name='$user_name',admin_email='$user_email',admin_pass='$user_pass',admin_age='$user_age'";
+    $update_user = "update USERA set USERNAME='$user_name',USER_EMAIL='$user_email',USER_PASSWORD='$user_pass',USER_PHONE='$user_age'";
     
-    $run_user = mysqli_query($con,$update_user);
+    $run_user = oci_parse($conn,$update_user);
+
+    oci_execute($run_user);
     
     if($run_user){
         
-        echo "<script>alert('User has been updated sucessfully')</script>";
-        echo "<script>window.open('login.php','_self')</script>";
+        //echo "<script>alert('User has been updated sucessfully')</script>";
+        //echo "<script>window.open('../login.php','_self')</script>";
         
-        session_destroy();
+       // session_destroy();
         
     }
     

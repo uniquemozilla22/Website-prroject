@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 include("includes/connection.php");
 if($_SESSION['admin_type']!='trader'){
     echo "<script>window.open('../login.php','_self')</script>";

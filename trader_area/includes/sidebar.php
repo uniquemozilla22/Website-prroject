@@ -60,15 +60,7 @@
                     </a><!-- a href finish -->
                 </li><!-- li finish -->
                 
-                <li><!-- li begin -->
-                    <a href="index.php?view_cats"><!-- a href begin -->
-                        
-                        <i class="fa fa-fw fa-gear"></i> Brands
-                        
-                        <span class="badge"><?php echo $count_p_categories; ?></span>
-                        
-                    </a><!-- a href finish -->
-                </li><!-- li finish -->
+                
                 
                 <li class="divider"></li>
                 
@@ -116,24 +108,6 @@
                 
             </li><!-- li finish -->
             
-            <li><!-- li begin -->
-                <a href="#" data-toggle="collapse" data-target="#p_cat" style="color: yellow;"><!-- a href begin -->
-                        
-                        <i class="fa fa-fw fa-edit"></i> Brands 
-                        <i class="fa fa-fw fa-caret-down"></i>
-                        
-                </a><!-- a href finish -->
-                
-                <ul id="p_cat" class="collapse"><!-- collapse begin -->
-                    <li><!-- li begin -->
-                        <a href="index.php?insert_p_cat" style="color: white;"> Insert Brand </a>
-                    </li><!-- li finish -->
-                    <li><!-- li begin -->
-                        <a href="index.php?view_p_cats" style="color: white;"> View Brands </a>
-                    </li><!-- li finish -->
-                </ul><!-- collapse finish -->
-                
-            </li><!-- li finish -->
             
             <li><!-- li begin -->
                 <a href="#" data-toggle="collapse" data-target="#cat" style="color: yellow;"><!-- a href begin -->
@@ -144,9 +118,6 @@
                 </a><!-- a href finish -->
                 
                 <ul id="cat" class="collapse"><!-- collapse begin -->
-                    <li><!-- li begin -->
-                        <a href="index.php?insert_cat" style="color: white;"> Insert Category </a>
-                    </li><!-- li finish -->
                     <li><!-- li begin -->
                         <a href="index.php?view_cats" style="color: white;"> View Categories </a>
                     </li><!-- li finish -->
@@ -171,9 +142,6 @@
                 </a><!-- a href finish -->
                 
                 <ul id="users" class="collapse"><!-- collapse begin -->
-                    <li><!-- li begin -->
-                        <a href="index.php?insert_user" style="color: white;"> Insert User </a>
-                    </li><!-- li finish -->
                     <li><!-- li begin -->
                         <a href="index.php?view_users" style="color: white;"> View Users </a>
                     </li><!-- li finish -->
