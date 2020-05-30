@@ -59,17 +59,17 @@
 
         $count_customers = oci_fetch($run_customers);
         
-        $get_p_categories = "select * from CATEGORY";
+        $get_categories = "select * from CATEGORY";
         
-        $run_p_categories = oci_parse($conn,$get_p_categories);
-        if(!$run_p_categories)
+        $run_categories = oci_parse($conn,$get_categories);
+        if(!$run_categories)
         {
                 echo "An error occurred in parsing the sql string.\n"; 
                 exit; 
         }
 
-        oci_execute($run_p_categories);
-        $count_p_categories = oci_fetch($run_p_categories);
+        oci_execute($run_categories);
+        $count_p_categories = oci_fetch($run_categories);
         
         
 
@@ -120,9 +120,9 @@
                         
                         include("insert_p_cat.php");
                         
-                }   if(isset($_GET['view_p_cats'])){
+                }   if(isset($_GET['view_cats'])){
                         
-                        include("view_p_cats.php");
+                        include("view_cats.php");
                         
                 }   if(isset($_GET['delete_p_cat'])){
                         
@@ -136,11 +136,7 @@
                         
                         include("insert_cat.php");
                         
-                }   if(isset($_GET['view_cats'])){
-                        
-                        include("view_cats.php");
-                        
-                }   if(isset($_GET['edit_cat'])){
+                }    if(isset($_GET['edit_cat'])){
                         
                         include("edit_cat.php");
                         

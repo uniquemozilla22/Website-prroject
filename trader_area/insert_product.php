@@ -137,7 +137,7 @@ if($_SESSION['admin_type']!='trader'){
                                while ($row_shop=oci_fetch($run_shop)){
                                    
                                    $shop_id = $row_shop['SHOP_ID'];
-                                   $shop_title = $row_shop['SHOP_TYPE'];
+                                   $shop_title = $row_shop['SHOP_NAME'];
                                    
                                    echo "
                                    
@@ -263,15 +263,11 @@ if(isset($_POST['submit'])){
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
 
-    $c_id = $rh['CATEGORY_ID'];
-    $cak = "select * from CATEGORY Where CATEGORY_ID=$c_id";
-    $tak = oci_parse($conn,$cak);
-    oci_execute($tak);
-    $dh = oci_fetch_array($tak);
+    
     
     $insert_product = "INSERT INTO PRODUCT (PRODUCT_NAME,PRODUCT_DESCRIPTION,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_KEYWORDS,MIN_ORDER,MAX_ORDER,ALLERGY_INFORMATION,CATEGORY_ID,SHOP_ID)
     VALUES
-    ('$product_title',' $product_desc','$product_price','$product_img1','$product_keywords','$minimum_order','$maximum_order','$allergy_info','$cat','$shop');
+    ('$product_title',' $product_desc','$product_price','$product_img1','$product_keywords','$minimum_order','$maximum_order','$allergy_info','$cat','$shop')";
     
     $run_product = oci_parse($conn,$insert_product);
 
