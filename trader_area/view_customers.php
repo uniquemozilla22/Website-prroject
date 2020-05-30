@@ -1,10 +1,10 @@
 <?php 
-    
-    if(!isset($_SESSION['admin_name'])){
-        
-        echo "<script>window.open('login.php','_self')</script>";
-        
-    }else{
+     //session_start();
+     include("includes/connection.php");
+     if($_SESSION['admin_type']!='trader'){
+         echo "<script>window.open('../login.php','_self')</script>";
+         
+     }else{
 
 ?>
 
@@ -41,7 +41,7 @@
                                 <th> Name: </th>
                                 <th> E-Mail: </th>
                                 <th>Age</th>
-                                <th> Delete: </th>
+                                
                             </tr><!-- tr finish -->
                         </thead><!-- thead finish -->
                         
@@ -54,7 +54,15 @@
                                 $get_c = "select * from USERA where USER_TYPE='customer'";
                                 
                                 $run_c = oci_parse($conn,$get_c);
-          
+
+                                if(!$run_c)
+                                {
+                                    echo "An error occurred in parsing the sql string.\n"; 
+                                    exit; 
+                                }
+
+                                oci_execute($run_c);
+
                                 while($row_c=oci_fetch_array($run_c)){
                                     
                                     $c_id = $row_c['USER_ID'];
@@ -75,15 +83,7 @@
                                 <td> <?php echo $c_name; ?> </td>
                                 <td> <?php echo $c_email; ?> </td>
                                 <td> <?php echo $c_age; ?></td>
-                                <td> 
-                                     
-                                     <a href="index.php?delete_customer=<?php echo $c_id; ?>">
-                                     
-                                        <i class="fa fa-trash-o"></i> Delete
-                                    
-                                     </a> 
-                                     
-                                </td>
+                                
                             </tr><!-- tr finish -->
                             
                             <?php } ?>

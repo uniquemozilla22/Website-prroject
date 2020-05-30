@@ -1,11 +1,11 @@
 <?php
-
-  if(!isset($_SESSION['admin_name'])){
-
-        echo "<script>window.open('../login.php','_self')</script>";
-
-    }else{
+//session_start();
 include("includes/connection.php");
+if($_SESSION['admin_type']!='trader'){
+    echo "<script>window.open('../login.php','_self')</script>";
+    
+}else{
+
 }
 
 ?>
@@ -71,7 +71,7 @@ include("includes/connection.php");
                        
                    </div> 
                    
-                                      <div class="form-group"> 
+                    <div class="form-group"> 
                        
                       <label class="col-md-3 control-label"> Category </label> 
                       
@@ -85,7 +85,12 @@ include("includes/connection.php");
                               
                               $get_cat = "select * from CATEGORY";
                               $run_cat = oci_parse($conn,$get_cat);
-                              
+                              if(!$run_cat)
+                                {
+                                echo "An error occurred in parsing the sql string.\n"; 
+                                 exit; 
+                                }
+                              oci_execute($run_cat);
                               while ($row_cat=oci_fetch($run_cat)){
                                   
                                   $cat_id = $row_cat['CATEGORY_ID'];
@@ -106,7 +111,49 @@ include("includes/connection.php");
                       </div>                      
                    </div>
                    
-                   
+                   <div class="form-group"> 
+                       
+                       <label class="col-md-3 control-label"> Shop </label> 
+                       
+                       <div class="col-md-6"> 
+                           
+                           <select name="shop" class="form-control"> 
+                               
+                               <option> Select a Shop type </option>
+                               
+                               <?php 
+                               
+                               $get_shop = "select * from SHOP";
+
+                               $run_shop = oci_parse($conn,$get_shop);
+                               
+                               if(!$run_shop)
+                                {
+                                    echo "An error occurred in parsing the sql string.\n"; 
+                                    exit; 
+                                }
+                               oci_execute($run_shop);
+
+                               while ($row_shop=oci_fetch($run_shop)){
+                                   
+                                   $shop_id = $row_shop['SHOP_ID'];
+                                   $shop_title = $row_shop['SHOP_NAME'];
+                                   
+                                   echo "
+                                   
+                                   <option value='$shop_id'> $shop_title </option>
+                                   
+                                   ";
+                                   
+                               }
+                               
+                               ?>
+                               
+                           </select>
+                           
+                       </div>                      
+                    </div>
+
                    <div class="form-group">                       
                       <label class="col-md-3 control-label"> Product Image 1 </label> 
                       
@@ -115,9 +162,7 @@ include("includes/connection.php");
                           
                       </div>                      
                    </div>
-                   
-
-                   
+                    
                    <div class="form-group">                       
                       <label class="col-md-3 control-label"> Product Price </label> 
                       
@@ -135,12 +180,39 @@ include("includes/connection.php");
                           
                       </div>                      
                    </div>
+
+                   <div class="form-group">                       
+                      <label class="col-md-3 control-label"> Maximun Order </label> 
+                      
+                      <div class="col-md-6">                        
+                          <input name="maximun_order" type="number" class="form-control" required>
+                          
+                      </div>                      
+                   </div>
                    
+                   <div class="form-group">                       
+                      <label class="col-md-3 control-label"> Minimum Order </label> 
+                      
+                      <div class="col-md-6">                        
+                          <input name="minimum_order" type="number" class="form-control" required>
+                          
+                      </div>                      
+                   </div>
+
                    <div class="form-group">                       
                       <label class="col-md-3 control-label"> Product Description </label> 
                       
                       <div class="col-md-6">                        
                           <textarea name="product_desc" cols="19" rows="6" class="form-control"></textarea>
+                          
+                      </div>                      
+                   </div>
+
+                   <div class="form-group">                       
+                      <label class="col-md-3 control-label"> Allergy Information </label> 
+                      
+                      <div class="col-md-6">                        
+                          <textarea name="allergy_info" cols="19" rows="3" class="form-control"></textarea>
                           
                       </div>                      
                    </div>
@@ -175,12 +247,14 @@ include("includes/connection.php");
 if(isset($_POST['submit'])){
     
     $product_title = $_POST['product_title'];
-    $product_cat = $_POST['product_cat'];
     $cat = $_POST['cat'];
+    $shop=$_POST['shop'];
     $product_price = $_POST['product_price'];
     $product_keywords = $_POST['product_keywords'];
     $product_desc = $_POST['product_desc'];
-    
+    $maximum_order=$_POST['maximum_order'];
+    $minimim_order=$_POST['minimum_order'];
+    $allergy_info=$_POST['allergy_info'];
     $product_img1 = $_FILES['product_img1']['name'];
     
     
@@ -189,13 +263,11 @@ if(isset($_POST['submit'])){
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
 
-    $c_id = $rh['CATEGORY_ID'];
-    $cak = "select * from CATEGORY Where CATEGORY_ID=$c_id";
-    $tak = oci_parse($conn,$cak);
-    oci_execute($tak);
-    $dh = oci_fetch_array($tak);
     
-    $insert_product = "insert into PRODUCT (p_cat_id,cat_id,date,product_title,product_img1,product_price,product_keywords,product_desc) values ('$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_price','$product_keywords','$product_desc')";
+    
+    $insert_product = "INSERT INTO PRODUCT (PRODUCT_NAME,PRODUCT_DESCRIPTION,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_KEYWORDS,MIN_ORDER,MAX_ORDER,ALLERGY_INFORMATION,CATEGORY_ID,SHOP_ID)
+    VALUES
+    ('$product_title',' $product_desc','$product_price','$product_img1','$product_keywords','$minimum_order','$maximum_order','$allergy_info','$cat','$shop')";
     
     $run_product = oci_parse($conn,$insert_product);
 

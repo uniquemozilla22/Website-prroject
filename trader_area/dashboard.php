@@ -1,9 +1,10 @@
 <?php 
-    
-    if(!isset($_SESSION['admin_name'])){
+
+  //  session_start();
+    if($_SESSION['admin_type']!='trader'){
         
-        echo "Hello";
-        //echo "<script>window.open('../login.php','_self')</script>";
+        //echo "Hello";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
 
@@ -127,7 +128,7 @@
                 </div><!-- panel-heading row finish -->
             </div><!-- panel-heading finish -->
             
-            <a href="index.php?view_p_cats"><!-- a href begin -->
+            <a href="index.php?view_cats"><!-- a href begin -->
                 <div class="panel-footer"><!-- panel-footer begin -->
                    
                     <span class="pull-left"><!-- pull-left begin -->

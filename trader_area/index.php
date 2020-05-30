@@ -1,11 +1,10 @@
-<?php 
-           
+<?php        
     session_start();
     include("includes/connection.php");
-    
-    if(!isset($_SESSION["'admin_type'=='trader'"])){
-        echo "hello";
-       // echo "<script>window.open('../login.php','_self')</script>";
+    if($_SESSION['admin_type']!='trader'){
+        
+        //echo "Hello";
+        echo "<script>window.open('../login.php','_self')</script>";
         
     }else{
         
@@ -38,20 +37,39 @@
         $get_products = "select * from PRODUCT";
         
         $run_products = oci_parse($conn,$get_products);
-        
+        if(!$run_products)
+        {
+                echo "An error occurred in parsing the sql string.\n"; 
+                exit; 
+        }
+
+        oci_execute($run_products);
         $count_products = oci_fetch($run_products);
         
         $get_customers = "select * from USERA where USER_TYPE='customer'";
         
-        $run_customers = oci_parse($connn,$get_customers);
-        
+        $run_customers = oci_parse($conn,$get_customers);
+          if(!$run_customers)
+        {
+                echo "An error occurred in parsing the sql string.\n"; 
+                exit; 
+        }
+
+        oci_execute($run_customers);
+
         $count_customers = oci_fetch($run_customers);
         
-        $get_p_categories = "select * from CATEGORY";
+        $get_categories = "select * from CATEGORY";
         
-        $run_p_categories = oci_parse($conn,$get_p_categories);
-        
-        $count_p_categories = oci_fetch($run_p_categories);
+        $run_categories = oci_parse($conn,$get_categories);
+        if(!$run_categories)
+        {
+                echo "An error occurred in parsing the sql string.\n"; 
+                exit; 
+        }
+
+        oci_execute($run_categories);
+        $count_p_categories = oci_fetch($run_categories);
         
         
 
@@ -102,9 +120,9 @@
                         
                         include("insert_p_cat.php");
                         
-                }   if(isset($_GET['view_p_cats'])){
+                }   if(isset($_GET['view_cats'])){
                         
-                        include("view_p_cats.php");
+                        include("view_cats.php");
                         
                 }   if(isset($_GET['delete_p_cat'])){
                         
@@ -118,11 +136,7 @@
                         
                         include("insert_cat.php");
                         
-                }   if(isset($_GET['view_cats'])){
-                        
-                        include("view_cats.php");
-                        
-                }   if(isset($_GET['edit_cat'])){
+                }    if(isset($_GET['edit_cat'])){
                         
                         include("edit_cat.php");
                         
