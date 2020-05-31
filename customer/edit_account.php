@@ -210,7 +210,7 @@ if(isset($_POST['update'])){
 
     move_uploaded_file($temp_customer_image,"customer_images/$customer_image");
 
-    $update_customer = "update usera set USERNAME='$customer_name',USER_EMAIL='$customer_email',USER_PASSWORD='$customer_pass',USER_PHONE='$customer_contact',USER_ADDRESS='$customer_addresss',USER_DESCRIPTION='$customer_desc',USER_IMAGE='$customer_image' where USER_ID='$customer_id' && USER_TYPE='customer'";
+    $update_customer = "update usera set USERNAME='$customer_name',USER_EMAIL='$customer_email',USER_PASSWORD='$customer_pass',USER_PHONE='$customer_contact',USER_ADDRESS='$customer_addresss',USER_DESCRIPTION='$customer_desc',USER_IMAGE='$customer_image' where USER_ID='$customer_id'";
     $run_customer = oci_parse($conn,$update_customer);
 
     oci_execute($run_customer);

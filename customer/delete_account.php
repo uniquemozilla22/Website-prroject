@@ -28,7 +28,7 @@
 if(isset($_POST['Yes'])){
     
 
-    $delete_customer = "delete from USERA where CUSTOMER_EMAIL='$customer_email' && USER_TYPE='customer'";
+    $delete_customer = "delete from USERA where USER_EMAIL='$customer_email'";
     
     $run_delete_customer = oci_parse($conn,$delete_customer);
 

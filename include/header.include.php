@@ -80,7 +80,7 @@
 										</ul>
 									</div>
 								</li>
-								<li><a href="myaccount.php">My Account</a></li>
+								<li><a href="customer/my_account.php">My Account</a></li>
 								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</nav>
@@ -123,7 +123,7 @@
 								</li>
 								<li><a href="blog.php">Blog</a>
 								</li>
-								<li><a href="myaccount.php">My Account</a>
+								<li><a href="customer/my_account.php">My Account</a>
 								</li>
 								<li><a href="contact.php">Contact</a></li>
 							</ul>

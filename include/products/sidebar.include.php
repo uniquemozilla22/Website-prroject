@@ -1,4 +1,4 @@
-div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
         	<div class="container">
         		<div class="row">
         			<div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">

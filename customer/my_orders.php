@@ -45,30 +45,25 @@
 
            <?php
 
-            $customer_session = $_SESSION['CUSTOMER_EMAIL'];
+            $customer_session = $_SESSION['USER_EMAIL'];
 
-            $get_customer = "select * from CUSTOMER where CUSTOMER_EMAIL='$customer_session'";
+            $get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
 
 
-            $run_customer = oci_parse($con,$get_customer);
+            $run_customer = oci_parse($conn,$get_customer);
 
             oci_execute($run_customer);
 
             $row_customer = oci_fetch_array($run_customer);
 
-            $customer_id = $row_customer['CUSTOMER_ID'];
+            $customer_id = $row_customer['USER_ID'];
 
-            $get_orders = "select * from CUSTOMER_ORDER where CUSTOMER_ID=$customer_id";
+            $get_orders = "select * from ORDERR where USER_ID=$customer_id";
 
 
-            $run_orders = oci_parse($con,$get_orders);
+            $run_orders = oci_parse($conn,$get_orders);
 
             oci_execute($run_orders);
-
-
-
-
-
 
             $i = 1;
 
@@ -80,11 +75,8 @@
                 $order_status = $row_all['ORDER_STATUS'];
                 $order_invoice = $row_all['ORDER_INVOICE'];
                 $order_amount = $row_all['ORDER_AMOUNT'];
-                $order_quantity = $row_all['QTY'];
+                $order_quantity = $row_all['ORDER_QUANTITY'];
                 $orderi = $row_all['PRODUCT_ID'];
-
-
-
 
                 ?>
 

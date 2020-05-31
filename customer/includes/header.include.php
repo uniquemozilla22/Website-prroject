@@ -17,11 +17,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/plugins.css">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/plugins.css">
+	<link rel="stylesheet" href="../style.css">
 	<!-- Cusom css -->
-   <link rel="stylesheet" href="css/custom.css">
+   <link rel="stylesheet" href="../css/custom.css">
 	<!-- Modernizer js -->
 	<script src="js/vendor/modernizr-3.5.0.min.js"></script>
 </head>
@@ -80,7 +80,7 @@
 										</ul>
 									</div>
 								</li>
-								<li><a href="myaccount.php">My Account</a></li>
+								<li><a href="my_account.php">My Account</a></li>
 								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</nav>
@@ -123,7 +123,7 @@
 								</li>
 								<li><a href="blog.php">Blog</a>
 								</li>
-								<li><a href="myaccount.php">My Account</a>
+								<li><a href="my_account.php">My Account</a>
 								</li>
 								<li><a href="contact.php">Contact</a></li>
 							</ul>

@@ -10,6 +10,8 @@
 				</div>
 				<!-- Start Single Tab Content -->
 				<div class="furniture--4 border--round arrows_style owl-carousel owl-theme row mt--50">
+
+				
 					<!-- Start Single Product -->
 					<div class="product product__style--3">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
@@ -20,6 +22,7 @@
 									<span class="hot-label">BEST SALLER</span>
 								</div>
 							</div>
+
 							<div class="product__content content--center">
 								<h4><a href="singleproduct.php">robin parrish</a></h4>
 								<ul class="prize d-flex">
