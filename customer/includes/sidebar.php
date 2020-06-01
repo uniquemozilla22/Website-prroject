@@ -4,21 +4,21 @@
         
         <?php 
         
-        $customer_session = $_SESSION['CUSTOMER_EMAIL'];
+        $customer_session = $_SESSION['USER_EMAIL'];
         
-        $get_customer = "select * from customer where CUSTOMER_EMAIL='$customer_session'";
+        $get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
         
-        $run_customer = oci_parse($con,$get_customer);
+        $run_customer = oci_parse($conn,$get_customer);
 
         oci_execute($run_customer);
         
         $row_customer = oci_fetch_array($run_customer);
         
-        $customer_image = $row_customer['CUSTOMER_IMAGE'];
+        $customer_image = $row_customer['USER_IMAGE'];
         
-        $customer_name = $row_customer['CUSTOMER_NAME'];
+        $customer_name = $row_customer['USERNAME'];
         
-        if(!isset($_SESSION['CUSTOMER_EMAIL'])){
+        if(!isset($_SESSION['USER_EMAIL'])){
             
         }else{
             
