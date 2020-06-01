@@ -12,10 +12,11 @@
 //include("functions/functions.php");
 //include("includes/header.php");
 ?>
-<?php>
+<?php
 include("includes/db.php");
-include("functions/functions.php");
+//include("functions/functions.php");
 include("includes/header.php");
+include("includes/banner.include.php");
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +34,12 @@ include("includes/header.php");
      
    <div id="content"><!-- #content Begin -->
        <div class="container"><!-- container Begin -->
+       <div class="col-md-12"></div>
            <div class="col-md-12"><!-- col-md-12 Begin -->
                
                <ul class="breadcrumb"><!-- breadcrumb Begin -->
                    <li>
-                       <a href="index.php">Home</a>
+                       <a href="../index.php">Home</a>
                    </li>
                    <li>
                        My Account

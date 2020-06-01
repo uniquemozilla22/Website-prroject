@@ -45,36 +45,39 @@
 
            <?php
 
-            $customer_session = $_SESSION['CUSTOMER_EMAIL'];
+            $customer_session = $_SESSION['USER_EMAIL'];
 
-            $get_customer = "select * from CUSTOMER where CUSTOMER_EMAIL='$customer_session'";
+            $get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
 
 
-            $run_customer = oci_parse($con,$get_customer);
+            $run_customer = oci_parse($conn,$get_customer);
 
             oci_execute($run_customer);
 
+            if(!$run_customer){
+                echo "Error in parsing";
+            }
+
             $row_customer = oci_fetch_array($run_customer);
 
-            $customer_id = $row_customer['CUSTOMER_ID'];
+            $customer_id = $row_customer['USER_ID'];
 
-            $get_orders = "select * from CUSTOMER_ORDER where CUSTOMER_ID=$customer_id";
+            $get_orders = "select * from ORDERR where USER_ID=$customer_id";
 
 
-            $run_orders = oci_parse($con,$get_orders);
+            $run_orders = oci_parse($conn,$get_orders);
 
             oci_execute($run_orders);
 
-
-
-
-
+            if(!$run_orders){
+                echo "Error in parsing";
+            }
 
             $i = 1;
-
+            if(!$row_all){
+                echo "Error in parsing";
+            }
              while ($row_all =oci_fetch_array($run_orders)){
-
-
                 $order_id = $row_all['ORDER_ID'];
                 $order_date = $row_all['ORDER_DATE'];
                 $order_status = $row_all['ORDER_STATUS'];
@@ -82,13 +85,7 @@
                 $order_amount = $row_all['ORDER_AMOUNT'];
                 $order_quantity = $row_all['QTY'];
                 $orderi = $row_all['PRODUCT_ID'];
-
-
-
-
                 ?>
-
-
 
             <tr><!--  tr Begin  -->
 
