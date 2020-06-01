@@ -41,7 +41,10 @@
                                 <th> No: </th>
                                 <th> User Name: </th>
                                 <th> User E-Mail: </th>
-                                <th> User Age: </th>
+                                <th> User Phone: </th>
+                                <th> User Address: </th>
+                                <th> User Image: </th>
+                                <th> User Description: </th>
                                 <th> Edit: </th>
                                 <th> Delete: </th>
                             </tr><!-- tr finish -->
@@ -67,8 +70,13 @@
                                     
                                     $user_email = $row_users['USER_EMAIL'];
                                     
-                                    $user_age = $row_users['USER_PHONE'];
+                                    $user_phone = $row_users['USER_PHONE'];
                                     
+                                    $user_address=$row_users['USER_ADDRESS'];
+
+                                    $user_img=$row_users['USER_IMAGE'];
+
+                                    $user_description=$row_users['USER_DESCRIPTION'];
                                     
                                     
                                     $i++;
@@ -79,8 +87,10 @@
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $user_name; ?> </td>
                                 <td> <?php echo $user_email; ?> </td>
-                                <td> <?php echo $user_age; ?></td>
-                                
+                                <td> <?php echo $user_phone; ?></td>
+                                <td> <?php echo $user_address; ?></td>
+                                <td> <img src="image/<?php echo $user_img; ?>" width="60" height="60"></td>
+                                <td> <?php echo $user_description; ?></td>
                                 <td>    
                                      
                                      <a href="index.php?user_profile=<?php echo $user_id; ?>">
