@@ -1,232 +1,122 @@
 <?php 
 
-//session_start();
-include("includes/connection.php");
-if($_SESSION['customer_type']!='customer'){
-    echo "<script>window.open('../login.php','_self')</script>";
-    
-}else{
+$customer_session = $_SESSION['CUSTOMER_EMAIL'];
+
+$get_customer = "select * from customer where CUSTOMER_EMAIL='$customer_session'";
+
+$run_customer = oci_parse($con,$get_customer);
+
+oci_execute($run_customer);
+
+$row_customer = oci_fetch_array($run_customer);
+
+$customer_id = $row_customer['CUSTOMER_ID'];
+
+$customer_name = $row_customer['CUSTOMER_NAME'];
+
+$customer_email = $row_customer['CUSTOMER_EMAIL'];
+
+$customer_address = $row_customer['CUSTOMER_ADDRESS'];
+
+$customer_contact = $row_customer['CUSTOMER_NUMBER'];
+
+$customer_image = $row_customer['CUSTOMER_IMAGE'];
 
 ?>
-   
-<?php 
 
-    if(isset($_GET['customer_profile'])){
-        
-        $edit_customer = $_GET['customer_profile'];
-        
-        $get_customer = "select * from usera where USER_ID='$edit_customer'";
-        
-        $run_customer = oci_parse($conn,$get_customer);
+<h1 align="center"> Edit Your Account </h1>
 
-        if(!$run_customer)
-        {
-             echo "An error occurred in parsing the sql string.\n"; 
-            exit; 
-        }
-
-        oci_execute($run_customer);
-
-        $row_customer = oci_fetch_array($run_customer);
-
-        $customer_id = $row_user['USER_ID'];
-        
-        $customer_name = $row_user['USERNAME'];
-        
-        $customer_pass = $row_user['USER_PASSWORD'];
-        
-        $customer_email = $row_user['USER_EMAIL'];
-        
-        $customer_phone = $row_user['USER_PHONE'];
-        
-        $customer_address = $row_user['USER_ADDRESS'];
-
-        $customer_image = $row_user['USER_IMAGE'];
-        
-    }
-
-?>
+<form action="" method="post" enctype="multipart/form-data"><!-- form Begin -->
     
-<div class="row"><!-- row Begin -->
-    
-    <div class="col-lg-12"><!-- col-lg-12 Begin -->
+    <div class="form-group"><!-- form-group Begin -->
         
-        <ol class="breadcrumb"><!-- breadcrumb Begin -->
+        <label> Customer Name: </label>
+        
+        <input type="text" name="c_name" class="form-control" value="<?php echo $customer_name; ?>" required>
+        
+    </div><!-- form-group Finish -->
+    
+    <div class="form-group"><!-- form-group Begin -->
+        
+        <label> Customer Email: </label>
+        
+        <input type="text" name="c_email" class="form-control" value="<?php echo $customer_email; ?>" required>
+        
+    </div><!-- form-group Finish -->
+    
+    
+    <div class="form-group"><!-- form-group Begin -->
+        
+        <label> Customer Contact: </label>
+        
+        <input type="text" name="c_contact" class="form-control" value="<?php echo $customer_contact; ?>" required>
+        
+    </div><!-- form-group Finish -->
+    
+    <div class="form-group"><!-- form-group Begin -->
+        
+        <label> Customer Address: </label>
+        
+        <input type="text" name="c_address" class="form-control" value="<?php echo $customer_address; ?>" required>
+        
+    </div><!-- form-group Finish -->
+    
+    <div class="form-group"><!-- form-group Begin -->
+        
+        <label> Customer Image: </label>
+        
+        <input type="file" name="c_image" class="form-control form-height-custom">
+        
+        <img class="img-responsive" src="customer_images/<?php echo $customer_image; ?>" alt="Customer Image">
+        
+    </div><!-- form-group Finish -->
+    
+    <div class="text-center"><!-- text-center Begin -->
+        
+        <button name="update" class="btn btn-primary"><!-- btn btn-primary Begin -->
             
-            <li class="active"><!-- active Begin -->
-                
-                <i class="fa fa-dashboard"></i> Dashboard / Edit Customer
-                
-            </li><!-- active Finish -->
+            <i class="fa fa-user-md"></i> Update Now
             
-        </ol><!-- breadcrumb Finish -->
+        </button><!-- btn btn-primary inish -->
         
-    </div><!-- col-lg-12 Finish -->
+    </div><!-- text-center Finish -->
     
-</div><!-- row Finish -->
-       
-<div class="row"><!-- row Begin -->
-    
-    <div class="col-lg-12"><!-- col-lg-12 Begin -->
-        
-        <div class="panel panel-default"><!-- panel panel-default Begin -->
-            
-           <div class="panel-heading"><!-- panel-heading Begin -->
-               
-               <h3 class="panel-title"><!-- panel-title Begin -->
-                   
-                   <i class="fa fa-money fa-fw"></i> Edit Customer
-                   
-               </h3><!-- panel-title Finish -->
-               
-           </div> <!-- panel-heading Finish -->
-           
-           <div class="panel-body"><!-- panel-body Begin -->
-               
-               <form method="post" class="form-horizontal" enctype="multipart/form-data"><!-- form-horizontal Begin -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Customer Username </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input value="<?php echo $customer_name; ?>" name="customer_name" type="text" class="form-control" required>
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> E-mail </label> 
-                      
-                    <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input value="<?php echo $customer_email; ?>"  name="customer_email" type="text" class="form-control" required>
-                          
-                     </div><!-- col-md-6 Finish -->
-
-                     </div><!-- form-group Finish -->
-
-
-                    <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Address </label> 
-                      
-                    <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                    <input value="<?php echo $customer_address; ?>"  name="customer_address" type="text" class="form-control" required>
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Password </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input value="<?php echo $customer_pass; ?>"  name="customer_pass" type="text" class="form-control" required>
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"> Contact </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input value="<?php echo $customer_phone; ?>"  name="customer_phone" type="text" class="form-control" required>
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-
-                      <label class="col-md-3 control-label"> Image </label>
-
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-
-                          <input name="admin_image" type="file" class="form-control" required>
-
-                          <img src="trader_images/<?php echo $customer_image; ?>" alt="<?php echo $customer_name; ?>" width="70" height="70">
-
-                      </div><!-- col-md-6 Finish -->
-
-                   </div><!-- form-group Finish -->
-
-                   <div class="form-group">                       
-                      <label class="col-md-3 control-label"> User Description </label> 
-                      
-                      <div class="col-md-6">                        
-                          <textarea name="customer_desc" value="<?php echo $customer_desc; ?>" cols="19" rows="6" class="form-control"></textarea>
-                          
-                      </div>                      
-                   </div>
-
-                   
-                   <div class="form-group"><!-- form-group Begin -->
-                       
-                      <label class="col-md-3 control-label"></label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <input name="update" value="Update Customer" type="submit" class="btn btn-primary form-control">
-                          
-                      </div><!-- col-md-6 Finish -->
-                       
-                   </div><!-- form-group Finish -->
-                   
-               </form><!-- form-horizontal Finish -->
-               
-           </div><!-- panel-body Finish -->
-            
-        </div><!-- canel panel-default Finish -->
-        
-    </div><!-- col-lg-12 Finish -->
-    
-</div><!-- row Finish -->
-
+</form><!-- form Finish -->
 
 <?php 
 
 if(isset($_POST['update'])){
     
-    $customer_name = $_POST['customer_name'];
-    $customer_email = $_POST['customer_email'];
-    $customer_pass = $_POST['customer_pass'];
-    $customer_contact = $_POST['customer_phone'];
-    $customer_address= $_POST['customer_address'];
-    $customer_desc = $_POST['customer_desc'];
-    $customer_image = $_FILES['customer_image']['name'];
-    $temp_customer_image = $_FILES['customer_image']['tmp_name'];
-
-    move_uploaded_file($temp_customer_image,"customer_images/$customer_image");
-
-    $update_customer = "update usera set USERNAME='$customer_name',USER_EMAIL='$customer_email',USER_PASSWORD='$customer_pass',USER_PHONE='$customer_contact',USER_ADDRESS='$customer_addresss',USER_DESCRIPTION='$customer_desc',USER_IMAGE='$customer_image' where USER_ID='$customer_id'";
-    $run_customer = oci_parse($conn,$update_customer);
+    $update_id = $customer_id;
+    
+    $c_name = $_POST['c_name'];
+    
+    $c_email = $_POST['c_email'];
+    
+    $c_address = $_POST['c_address'];
+    
+    $c_contact = $_POST['c_contact'];
+    
+    $c_image = $_FILES['c_image']['name'];
+    
+    $c_image_tmp = $_FILES['c_image']['tmp_name'];
+    
+    move_uploaded_file ($c_image_tmp,"customer_images/$c_image");
+    
+    $update_customer = "update customer set CUSTOMER_NAME='$c_name',CUSTOMER_EMAIL='$c_email',CUSTOMER_ADDRESS='$c_address',CUSTOMER_NUMBER='$c_contact',CUSTOMER_IMAGE='$c_image' where CUSTOMER_ID='$update_id' ";
+    
+    $run_customer = oci_parse($con,$update_customer);
 
     oci_execute($run_customer);
     
     if($run_customer){
         
-        //echo "<script>alert('User has been updated sucessfully')</script>";
-        //echo "<script>window.open('../login.php','_self')</script>";
+        echo "<script>alert('Your account has been updated successfully. Please login again.')</script>";
         
-       // session_destroy();
+        echo "<script>window.open('logout.php','_self')</script>";
         
     }
     
 }
 
 ?>
-
-
-<?php } ?>

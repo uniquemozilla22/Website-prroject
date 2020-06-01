@@ -1,5 +1,5 @@
 <?php
-include("includes/connection.php");
+include("includes/db.php");
  ?>
 
 <!doctype html>
@@ -105,28 +105,19 @@ include("includes/connection.php");
 <?php
 if (isset($_GET['invoice_no'])) {
     $order_invoice =$_GET['invoice_no'];
-
-  $get_c_in ="SELECT * FROM ORDERR WHERE ORDER_INVOICE ='$order_invoice'";
-
-  $run_c_in =oci_parse($conn, $get_c_in);
-
+  $get_c_in ="SELECT * FROM CUSTOMER_ORDER WHERE ORDER_INVOICE ='$order_invoice'";
+  $run_c_in =oci_parse($con, $get_c_in);
   oci_execute($run_c_in);
-
   $row_c_in =oci_fetch_array($run_c_in);
-
-  $customer_id =$row_c_in['USER_ID'];
+  $customer_id =$row_c_in['CUSTOMER_ID'];
   $ordered_date=$row_c_in['ORDER_DATE'];
 
-  $get_c_info ="SELECT * FROM USERA WHERE USER_ID='$customer_id'";
-
-  $run_c_info =oci_parse($conn, $get_c_info);
-
+  $get_c_info ="SELECT * FROM CUSTOMER WHERE CUSTOMER_ID='$customer_id'";
+  $run_c_info =oci_parse($con, $get_c_info);
   oci_execute($run_c_info);
-
   $row_c_info =oci_fetch_array($run_c_info);
-
-  $c_name =$row_c_info['USERNAME'];
-  $c_email=$row_c_info['USER_EMAIL'];
+  $c_name =$row_c_info['CUSTOMER_NAME'];
+  $c_email=$row_c_info['CUSTOMER_EMAIL'];
 
 
 
@@ -200,26 +191,19 @@ if (isset($_GET['invoice_no'])) {
 
 
 $total=0;
-  $get_info_invoice ="SELECT * FROM ORDERR WHERE ORDER_INVOICE='$order_invoice'";
-
-  $run_info_invoice=oci_parse($conn, $get_info_invoice);
-
+  $get_info_invoice ="SELECT * FROM CUSTOMER_ORDER WHERE ORDER_INVOICE='$order_invoice'";
+  $run_info_invoice=oci_parse($con, $get_info_invoice);
   oci_execute($run_info_invoice);
-
   while($row_info_invoice=oci_fetch_array($run_info_invoice)){
-    $id_c_invoice =$row_info_invoice['PRODUCT_ID'];
-
-    $product_qty=$row_info_invoice['QTY'];
+  $id_c_invoice =$row_info_invoice['PRODUCT_ID'];
+ $product_qty=$row_info_invoice['QTY'];
 
   $get_info_product ="SELECT * FROM PRODUCT WHERE PRODUCT_ID='$id_c_invoice'";
-
-  $run_info_product=oci_parse($conn, $get_info_product);
-
+  $run_info_product=oci_parse($con, $get_info_product);
   oci_execute($run_info_product);
 
   while($row_info_product=oci_fetch_array($run_info_product)){
-
-  $product_name =$row_info_product['PRODUCT_NAME'];
+  $product_name =$row_info_product['PRODUCT_TITLE'];
   $product_price=$row_info_product['PRODUCT_PRICE'];
 
       $subtotal=$product_price*$product_qty;

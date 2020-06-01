@@ -1,14 +1,3 @@
-<?php 
-    
-    //session_start();
-    include("includes/connection.php");
-    if($_SESSION['customer_type']!='customer'){
-        echo "<script>window.open('../login.php','_self')</script>";
-        
-    }else{
-
-?>
-
 <center><!-- center Begin -->
     
     <h1> Are you sure you want to delete your account? </h1>
@@ -23,14 +12,16 @@
     
 </center><!-- center Finish -->
 
+
 <?php 
-    $customer_email = $_SESSION['USER_EMAIL'];
+
+$c_email = $_SESSION['CUSTOMER_EMAIL'];
+
 if(isset($_POST['Yes'])){
     
-
-    $delete_customer = "delete from USERA where USER_EMAIL='$customer_email'";
+    $delete_customer = "delete from customer where CUSTOMER_EMAIL='$c_email'";
     
-    $run_delete_customer = oci_parse($conn,$delete_customer);
+    $run_delete_customer = oci_parse($con,$delete_customer);
 
     oci_execute($run_delete_customer);
     
@@ -51,6 +42,5 @@ if(isset($_POST['No'])){
     echo "<script>window.open('my_account.php?my_orders','_self')</script>";
     
 }
-?>
 
-<?php } ?>
+?>

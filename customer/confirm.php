@@ -1,13 +1,12 @@
 <?php
-    $active='Products';
-    include("includes/header.include.php");
-    include("includes/banner.include.php");
+    $active='Shop';
+    include("includes/header.php");
     
 
     ?>
 
    <div id="content"><!-- #content Begin -->
-       
+       <div class="container"><!-- container Begin -->
            <div class="col-md-12"><!-- col-md-12 Begin -->
                
                <ul class="breadcrumb"><!-- breadcrumb Begin -->
@@ -21,11 +20,11 @@
                
            </div><!-- col-md-12 Finish -->
            
-           <div class="col-md-6"><!-- col-md-3 Begin -->
+           <div class="col-md-3"><!-- col-md-3 Begin -->
    
    <?php 
     
-    include("includes/sidebar.include.php");
+    include("includes/sidebar.php");
     
     ?>
                
@@ -111,12 +110,12 @@
                
            </div><!-- col-md-9 Finish -->
            
-       
+       </div><!-- container Finish -->
    </div><!-- #content Finish -->
    
    <?php 
     
-    include("includes/footer.include.php");
+    include("includes/footer.php");
     
     ?>
     
