@@ -61,6 +61,16 @@
             </li>
             
             
+            <li class="<?php if(isset($_GET['pay_offline'])){ echo "active"; } ?>">
+                
+                <a href="my_account.php?pay_offline">
+                    
+                    <i class="fa fa-list"></i> Pay Offline
+                    
+                </a>
+                
+            </li>
+
             
             <li class="<?php if(isset($_GET['edit_account'])){ echo "active"; } ?>">
                 

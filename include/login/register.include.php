@@ -37,6 +37,23 @@ if(isset($_POST['register'])){
 			$g=oci_execute($query); 
 			echo "<script>alert('You are registered successfully.')</script>";
 			
+
+			if($g)
+    {
+      $to  = $c_email;
+      $subject = "Confirmation";
+      $message = 'Thank You 
+
+
+      <a href="http://localhost/mainproject/verify.php?key=$to"></a>
+        ';
+
+        $head='from: tastebest@gmail.com';
+        $z=mail($to,$subject,$message,$head);
+
+
+
+    }
 		}else{
 		echo "<script>alert('Password are not matching')</script>";
 
