@@ -1,3 +1,5 @@
+
+
 <center><!--  center Begin  -->
 
     <h1> My Orders </h1>
@@ -64,7 +66,6 @@
 
             $get_orders = "select * from ORDERR where USER_ID=$customer_id";
 
-
             $run_orders = oci_parse($conn,$get_orders);
 
             oci_execute($run_orders);
@@ -74,9 +75,7 @@
             }
 
             $i = 1;
-            if(!$row_all){
-                echo "Error in parsing";
-            }
+        
              while ($row_all =oci_fetch_array($run_orders)){
                 $order_id = $row_all['ORDER_ID'];
                 $order_date = $row_all['ORDER_DATE'];

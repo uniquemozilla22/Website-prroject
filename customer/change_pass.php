@@ -42,9 +42,11 @@
 
 <?php
 
+
+
 if(isset($_POST['submit'])){
 
-    $c_email = $_SESSION['CUSTOMER_EMAIL'];
+    $c_email = $_SESSION['USER_EMAIL'];
 
     $c_old_pass = $_POST['old_pass'];
 
@@ -52,11 +54,15 @@ if(isset($_POST['submit'])){
 
     $c_new_pass_again = $_POST['new_pass_again'];
 
-    $sel_c_old_pass = "select * from customer where CUSTOMER_PASSWORD='$c_old_pass'";
+    $sel_c_old_pass = "select * from USERA where USER_PASSWORD='$c_old_pass'";
 
-    $run_c_old_pass = oci_parse($con,$sel_c_old_pass);
+    $run_c_old_pass = oci_parse($conn,$sel_c_old_pass);
 
     oci_execute($run_c_old_pass);
+
+    if(!$run_c_old_pass){
+        echo "Error while parsing";
+    }
 
     $check_c_old_pass = oci_fetch_array($run_c_old_pass);
 
