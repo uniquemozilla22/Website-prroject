@@ -5,6 +5,7 @@
 
 include("../connection.php");
 
+
 if(isset($_POST['login'])){
 $user = $_POST['username'];
 $pass = $_POST['pass'];
@@ -26,13 +27,18 @@ if (($row= oci_fetch_array($login_stmt))==true)
 {
 	$username = $row['USERNAME'];
 	$password = $row ['USER_PASSWORD'];
+	$user_status =$row['USER_STATUS'];
 
+	
 	$verified_password= password_verify($pass,$password);
 	echo $verified_password;
 
+	if ($user_status=="verified")
+	{
+		
 	if ($verified_password==true && $type=="customer")
 	{
-		header("Location: ../index.php?sucessmessage=loginsucess");
+		header("Location: ../index.php?loginsucess=1");
 
 	}else if ($verified_password==true && $type=="trader"){
 	
@@ -43,15 +49,47 @@ if (($row= oci_fetch_array($login_stmt))==true)
 	}
 
 	else if($verified_password==false){
-		echo "invalid password";
+		header("Location: ../../login.php?onlypasswordwrong=1");
 
 	}	  
 	else {
-		echo "Login Credentials are wrong";
-	}
-	
-}
 
+		header("Location: ../../login.php?emailpasswordwrong=1");
+	}
+
+	}
+	else{
+		
+		?>
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP VERification</title>
+    <link rel="stylesheet" href="otp.css">
+</head>
+<body>
+    <div class="prompt">
+        Enter the code generated on your mobile device below to log in!
+    </div>
+    
+    <form method="post" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off" action="verify_customer.php">
+        <input type="text" id="digit-1" name="digit" />
+		<button type="submit" name="otpsubmit">Submit OTP</button>
+    </form>
+
+    <script src="otp.js"></script>
+</body>
+</html>
+
+
+	<?php 
+}
+}
+else{
+	header("location: ../../login.php?invalidemail=1");
+}
 }
 
 ?> 

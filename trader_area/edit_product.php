@@ -1,6 +1,6 @@
 <?php 
 
-//session_start();
+session_start();
 include("includes/connection.php");
 if($_SESSION['admin_type']!='trader'){
     echo "<script>window.open('../login.php','_self')</script>";
@@ -148,51 +148,6 @@ if($_SESSION['admin_type']!='trader'){
                       </div><!-- col-md-6 Finish -->
                        
                    </div><!-- form-group Finish -->
-
-                   
-                   <div class="form-group"> 
-                       
-                       <label class="col-md-3 control-label"> Shop </label> 
-                       
-                       <div class="col-md-6"> 
-                           
-                           <select name="shop" class="form-control"> 
-                               
-                               <option> Select a Shop type </option>
-                               
-                               <?php 
-                               
-                               $get_shop = "select * from SHOP";
-
-                               $run_shop = oci_parse($conn,$get_shop);
-                               
-                               if(!$run_shop)
-                                {
-                                    echo "An error occurred in parsing the sql string.\n"; 
-                                    exit; 
-                                }
-                               oci_execute($run_shop);
-
-                               while ($row_shop=oci_fetch($run_shop)){
-                                   
-                                   $shop_id = $row_shop['SHOP_ID'];
-                                   $shop_title = $row_shop['SHOP_NAME'];
-                                   
-                                   echo "
-                                   
-                                   <option value='$shop_id'> $shop_title </option>
-                                   
-                                   ";
-                                   
-                               }
-                               
-                               ?>
-                               
-                           </select>
-                           
-                       </div>                      
-                    </div>
-
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -250,34 +205,6 @@ if($_SESSION['admin_type']!='trader'){
                       </div><!-- col-md-6 Finish -->
                        
                    </div><!-- form-group Finish -->
-
-                   <div class="form-group">                       
-                      <label class="col-md-3 control-label"> Maximun Order </label> 
-                      
-                      <div class="col-md-6">                        
-                          <input name="maximun_order" type="number" class="form-control" required>
-                          
-                      </div>                      
-                   </div>
-
-                   <div class="form-group">                       
-                      <label class="col-md-3 control-label"> Minimum Order </label> 
-                      
-                      <div class="col-md-6">                        
-                          <input name="minimum_order" type="number" class="form-control" required>
-                          
-                      </div>                      
-                   </div>
-
-                   <div class="form-group">                       
-                      <label class="col-md-3 control-label"> Allergy Information </label> 
-                      
-                      <div class="col-md-6">                        
-                          <textarea name="allergy_info" cols="19" rows="3" class="form-control"></textarea>
-                          
-                      </div>                      
-                   </div>
-                   
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -313,11 +240,9 @@ if(isset($_POST['update'])){
     
     $product_title = $_POST['PRODUCT_NAME'];
     $cat = $_POST['cat'];
-    $shop=$_POST['shop'];
     $product_price = $_POST['PRODUCT_PRICE'];
     $product_keywords = $_POST['PRODUCT_KEYWORD'];
     $product_desc = $_POST['PRODUCT_DESCRIPTION'];
-    
     
     $product_img1 = $_FILES['PRODUCT_IMAGE']['name'];
     
