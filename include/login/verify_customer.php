@@ -31,7 +31,19 @@ if (isset($_POST['otpsubmit'])) {
 				}
 				
 				oci_execute($uquery);
-				header('location: ../../login.php?loginSucess=1');
+
+				if ($row['USER_TYPE']=='trader')
+				{
+					session_start();
+						$_SESSION['admin_name']=$username;
+						$_SESSION['admin_type']=$type;
+						header("Location: ../../trader_area/index.php?dashboard");
+				}
+				else{
+					header('location: ../../login.php?loginSucess=1');
+
+				}
+				
 				
 			}
 			else{
