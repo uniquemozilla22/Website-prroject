@@ -25,8 +25,7 @@ if(isset($_POST['register'])){
 	$row=oci_fetch_assoc($equery);
 
 	if($row==true){
-		echo "<script> alert('email already exists')</script>";
-		echo "<script>window.open('WEBSITE_PRROJECT/login.php','_self')</script>";
+		header("location: ../../login.php?erroremailalreadyexists=1");
 
 	}else{
 		if($password == $confirm_password){
@@ -35,27 +34,35 @@ if(isset($_POST['register'])){
 			$insertquery="INSERT INTO USERA (USERNAME, USER_PASSWORD, USER_PHONE, USER_ADDRESS, USER_EMAIL,USER_TYPE ) VALUES('$username','$confirm_password','$contact','$address','$email','$constumer_type')";
 			$query=oci_parse($conn,$insertquery);
 			$g=oci_execute($query); 
-			echo "<script>alert('You are registered successfully.')</script>";
+			
 			
 
 			if($g)
-    {
-      $to  = $c_email;
-      $subject = "Confirmation";
-      $message = 'Thank You 
+    		{
+				echo "<script>alert('You are registered successfully.')</script>";
+      $to  = $email;
+	  $subject = "Email Verification OTP";
+	  $random_number =rand(1, 10000);
+	  $message = $random_number;
 
+        $head='From: uniq.funkii@gmail.com';
+		$z=mail($to,$subject,$message,$head);
+		if ($z){
+			$query = "UPDATE USERA SET USER_STATUS='$random_number' WHERE USER_EMAIL='$email'";
+			
+			$qry = oci_parse($conn, $query);
+			oci_execute($qry);
 
-      <a href="http://localhost/mainproject/verify.php?key=$to"></a>
-        ';
+			header("location: ../../login.php?registeredandemailsent=1");
+		}
+		else {
+			header("location: ../../login.php?registeredandemailnotsent=1");
+		}
+		
 
-        $head='from: tastebest@gmail.com';
-        $z=mail($to,$subject,$message,$head);
-
-
-
-    }
+    		}
 		}else{
-		echo "<script>alert('Password are not matching')</script>";
+			header("location: ../../login.php?passworddidnotmatch=1");
 
 		}
 
