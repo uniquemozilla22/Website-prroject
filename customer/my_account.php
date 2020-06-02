@@ -34,7 +34,7 @@ include("includes/banner.include.php");
      
    <div id="content"><!-- #content Begin -->
        <div class="container"><!-- container Begin -->
-       <div class="col-md-12"></div>
+       
            <div class="col-md-12"><!-- col-md-12 Begin -->
                
                <ul class="breadcrumb"><!-- breadcrumb Begin -->
