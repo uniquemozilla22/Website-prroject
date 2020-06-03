@@ -122,43 +122,45 @@ if($_SESSION['admin_type']!='trader'){
                    </div><!-- form-group Finish -->
                    
                    
-                   <div class="form-group"><!-- form-group Begin -->
+                   <div class="form-group"> 
                        
-                      <label class="col-md-3 control-label"> Category </label> 
-                      
-                      <div class="col-md-6"><!-- col-md-6 Begin -->
-                          
-                          <select name="cat" class="form-control"><!-- form-control Begin -->
-                              
-                              <option value="<?php echo $cat; ?>"> <?php echo $cat_title; ?> </option>
-                              
-                              <?php 
-                              
-                              $get_cat = "select * from CATEGORY";
-                              $run_cat = oci_parse($con,$get_cat);
-                              oci_execute($run_cat);
-                              
-                              while ($row_cat=oci_fetch_array($run_cat)){
-                                  
-                                  $cat_id = $row_cat['CATEGORY_ID'];
-                                  $cat_title = $row_cat['CATEGORY_NAME'];
-                                  
-                                  echo "
-                                  
-                                  <option value='$cat_id'> $cat_title </option>
-                                  
-                                  ";
-                                  
-                              }
-                              
-                              ?>
-                              
-                          </select><!-- form-control Finish -->
-                          
-                      </div><!-- col-md-6 Finish -->
+                       <label class="col-md-3 control-label"> Category </label> 
                        
-                   </div><!-- form-group Finish -->
-
+                       <div class="col-md-6"> 
+                           
+                           <select name="cat" class="form-control"> 
+                               
+                               <option disabled selected hidden> Select a Category </option>
+                               
+                               <?php 
+                               
+                               $get_cat = "select * from CATEGORY";
+                               $run_cat = oci_parse($conn,$get_cat);
+                               if(!$run_cat)
+                                 {
+                                 echo "An error occurred in parsing the sql string.\n"; 
+                                  exit; 
+                                 }
+                               oci_execute($run_cat);
+                               while ($row_cat=oci_fetch_array($run_cat)){
+                                   
+                                   $cat_id = $row_cat['CATEGORY_ID'];
+                                   $cat_title = $row_cat['CATEGORY_NAME'];
+                                   
+                                   echo "
+                                   
+                                   <option value='$cat_id'> $cat_title </option>
+                                   
+                                   ";
+                                   
+                               }
+                               
+                               ?>
+                               
+                           </select>
+                           
+                       </div>                      
+                    </div>
                    
                    <div class="form-group"> 
                        
@@ -168,7 +170,7 @@ if($_SESSION['admin_type']!='trader'){
                            
                            <select name="shop" class="form-control"> 
                                
-                               <option> Select a Shop type </option>
+                               <option  disabled selected hidden> Select a Shop type </option>
                                
                                <?php 
                                
@@ -183,7 +185,7 @@ if($_SESSION['admin_type']!='trader'){
                                 }
                                oci_execute($run_shop);
 
-                               while ($row_shop=oci_fetch($run_shop)){
+                               while ($row_shop=oci_fetch_array($run_shop)){
                                    
                                    $shop_id = $row_shop['SHOP_ID'];
                                    $shop_title = $row_shop['SHOP_NAME'];
@@ -265,7 +267,7 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> Maximun Order </label> 
                       
                       <div class="col-md-6">                        
-                          <input name="maximun_order" type="number" class="form-control" required>
+                          <input name="maximum_order" type="number" class="form-control" required>
                           
                       </div>                      
                    </div>
@@ -345,7 +347,7 @@ if(isset($_POST['update'])){
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
    
-    $update_product = "update PRODUCT set CATEGORY_ID='$cat',PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORD='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_infor' where PRODUCT_ID='$p_id'";
+    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCTS_KEYWORD='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
     
     $run_product = oci_parse($conn,$update_product);
     
