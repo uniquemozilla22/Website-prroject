@@ -78,9 +78,9 @@
                                     
                                     $pro_keywords = $row_pro['PRODUCT_KEYWORDS'];
 
-                                    $min_order=$row_pro['MINIMUM_ORDER'];
+                                    $min_order=$row_pro['MIN_ORDER'];
 
-                                    $max_order=$row_pro['MAXIMUM_ORDER'];
+                                    $max_order=$row_pro['MAX_ORDER'];
                                     
                                    $allergy_detail=$row_pro['ALLERGY_INFORMATION'];
                                     

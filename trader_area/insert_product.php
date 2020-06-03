@@ -6,8 +6,6 @@ if($_SESSION['admin_type']!='trader'){
     
 }else{
 
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +50,7 @@ if($_SESSION['admin_type']!='trader'){
                    <i class="fa fa-money fa-fw"></i> Insert Product 
                    
                </h3> 
+             
                
            </div>  
            
@@ -79,7 +78,7 @@ if($_SESSION['admin_type']!='trader'){
                           
                           <select name="cat" class="form-control"> 
                               
-                              <option> Select a Category </option>
+                              <option disabled selected hidden> Select a Category </option>
                               
                               <?php 
                               
@@ -91,7 +90,7 @@ if($_SESSION['admin_type']!='trader'){
                                  exit; 
                                 }
                               oci_execute($run_cat);
-                              while ($row_cat=oci_fetch($run_cat)){
+                              while ($row_cat=oci_fetch_array($run_cat)){
                                   
                                   $cat_id = $row_cat['CATEGORY_ID'];
                                   $cat_title = $row_cat['CATEGORY_NAME'];
@@ -119,7 +118,7 @@ if($_SESSION['admin_type']!='trader'){
                            
                            <select name="shop" class="form-control"> 
                                
-                               <option> Select a Shop type </option>
+                               <option disabled selected hidden> Select a Shop type </option>
                                
                                <?php 
                                
@@ -134,7 +133,7 @@ if($_SESSION['admin_type']!='trader'){
                                 }
                                oci_execute($run_shop);
 
-                               while ($row_shop=oci_fetch($run_shop)){
+                               while ($row_shop=oci_fetch_array($run_shop)){
                                    
                                    $shop_id = $row_shop['SHOP_ID'];
                                    $shop_title = $row_shop['SHOP_NAME'];
@@ -185,7 +184,7 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> Maximun Order </label> 
                       
                       <div class="col-md-6">                        
-                          <input name="maximun_order" type="number" class="form-control" required>
+                          <input name="maximum_order" type="number" class="form-control" required>
                           
                       </div>                      
                    </div>
@@ -253,7 +252,7 @@ if(isset($_POST['submit'])){
     $product_keywords = $_POST['product_keywords'];
     $product_desc = $_POST['product_desc'];
     $maximum_order=$_POST['maximum_order'];
-    $minimim_order=$_POST['minimum_order'];
+    $minimum_order=$_POST['minimum_order'];
     $allergy_info=$_POST['allergy_info'];
     $product_img1 = $_FILES['product_img1']['name'];
     
@@ -275,11 +274,14 @@ if(isset($_POST['submit'])){
     
     if($run_product){
         
-        echo "<script>alert('Product has been inserted sucessfully')</script>";
-        echo "<script>window.open('insert_product.php','_self')</script>";
+        echo "<script>alert('Your product has been inserted Successfully')</script>"; 
+        
+        echo "<script>window.open('index.php?insert_product','_self')</script>"; 
+         
         
     }
+   
     
 }
-
+}
 ?>
