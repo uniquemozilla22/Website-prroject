@@ -1,6 +1,4 @@
 <?php 
-
-session_start();
 include("includes/connection.php");
 if($_SESSION['admin_type']!='trader'){
     echo "<script>window.open('../login.php','_self')</script>";
@@ -36,6 +34,12 @@ if($_SESSION['admin_type']!='trader'){
         $p_keywords = $row_edit['PRODUCT_KEYWORDS'];
         
         $p_desc = $row_edit['PRODUCT_DESCRIPTION'];
+
+        $max_order=$row_edit['MAX_ORDER'];
+
+        $min_order=$row_edit['MIN_ORDER'];
+
+        $allergy_information=$row_edit['ALLERGY_INFORMATION'];
         
     }
         
@@ -44,9 +48,15 @@ if($_SESSION['admin_type']!='trader'){
         
         $run_cat = oci_parse($conn,$get_cat);
         
+        oci_execute($run_cat);
+
+        if(!$run_cat){
+            echo "Error while parsing";
+        }
+
         $row_cat = oci_fetch_array($run_cat);
 
-        oci_execute($run_cat);
+        
         
         $cat_title = $row_cat['CATEGORY_NAME'];
 
@@ -57,7 +67,7 @@ if($_SESSION['admin_type']!='trader'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Insert Products </title>
+    <title> Edit Products </title>
 </head>
 <body>
     
@@ -89,7 +99,7 @@ if($_SESSION['admin_type']!='trader'){
                
                <h3 class="panel-title"><!-- panel-title Begin -->
                    
-                   <i class="fa fa-money fa-fw"></i> Insert Product 
+                   <i class="fa fa-money fa-fw"></i> Edit Product 
                    
                </h3><!-- panel-title Finish -->
                
@@ -148,6 +158,51 @@ if($_SESSION['admin_type']!='trader'){
                       </div><!-- col-md-6 Finish -->
                        
                    </div><!-- form-group Finish -->
+
+                   
+                   <div class="form-group"> 
+                       
+                       <label class="col-md-3 control-label"> Shop </label> 
+                       
+                       <div class="col-md-6"> 
+                           
+                           <select name="shop" class="form-control"> 
+                               
+                               <option> Select a Shop type </option>
+                               
+                               <?php 
+                               
+                               $get_shop = "select * from SHOP";
+
+                               $run_shop = oci_parse($conn,$get_shop);
+                               
+                               if(!$run_shop)
+                                {
+                                    echo "An error occurred in parsing the sql string.\n"; 
+                                    exit; 
+                                }
+                               oci_execute($run_shop);
+
+                               while ($row_shop=oci_fetch($run_shop)){
+                                   
+                                   $shop_id = $row_shop['SHOP_ID'];
+                                   $shop_title = $row_shop['SHOP_NAME'];
+                                   
+                                   echo "
+                                   
+                                   <option value='$shop_id'> $shop_title </option>
+                                   
+                                   ";
+                                   
+                               }
+                               
+                               ?>
+                               
+                           </select>
+                           
+                       </div>                      
+                    </div>
+
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -205,6 +260,34 @@ if($_SESSION['admin_type']!='trader'){
                       </div><!-- col-md-6 Finish -->
                        
                    </div><!-- form-group Finish -->
+
+                   <div class="form-group">                       
+                      <label class="col-md-3 control-label"> Maximun Order </label> 
+                      
+                      <div class="col-md-6">                        
+                          <input name="maximun_order" type="number" class="form-control" required>
+                          
+                      </div>                      
+                   </div>
+
+                   <div class="form-group">                       
+                      <label class="col-md-3 control-label"> Minimum Order </label> 
+                      
+                      <div class="col-md-6">                        
+                          <input name="minimum_order" type="number" class="form-control" required>
+                          
+                      </div>                      
+                   </div>
+
+                   <div class="form-group">                       
+                      <label class="col-md-3 control-label"> Allergy Information </label> 
+                      
+                      <div class="col-md-6">                        
+                          <textarea name="allergy_info" cols="19" rows="3" class="form-control"></textarea>
+                          
+                      </div>                      
+                   </div>
+                   
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -238,11 +321,23 @@ if($_SESSION['admin_type']!='trader'){
 
 if(isset($_POST['update'])){
     
-    $product_title = $_POST['PRODUCT_NAME'];
+    $product_title = $_POST['product_title'];
+
     $cat = $_POST['cat'];
-    $product_price = $_POST['PRODUCT_PRICE'];
-    $product_keywords = $_POST['PRODUCT_KEYWORD'];
-    $product_desc = $_POST['PRODUCT_DESCRIPTION'];
+
+    $shop=$_POST['shop'];
+
+    $product_price = $_POST['product_price'];
+
+    $product_keywords = $_POST['product_keywords'];
+
+    $product_desc = $_POST['product_desc'];
+
+    $maximum_order=$_POST['maximum_order'];
+
+    $minimim_order=$_POST['minimum_order'];
+
+    $allergy_info=$_POST['allergy_info'];
     
     $product_img1 = $_FILES['PRODUCT_IMAGE']['name'];
     
@@ -250,7 +345,7 @@ if(isset($_POST['update'])){
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
    
-    $update_product = "update PRODUCT set CATEGORY_ID='$cat',PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORD='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price' where PRODUCT_ID='$p_id'";
+    $update_product = "update PRODUCT set CATEGORY_ID='$cat',PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORD='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_infor' where PRODUCT_ID='$p_id'";
     
     $run_product = oci_parse($conn,$update_product);
     
