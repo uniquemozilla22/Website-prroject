@@ -11,7 +11,7 @@ $user = $_POST['username'];
 $pass = $_POST['pass'];
 $type= $_POST['tradertype'];
 
-$sql_login = "SELECT * FROM USERA WHERE USERNAME='$user'"; 
+$sql_login = "SELECT * FROM USERA WHERE USERNAME='$user' OR USER_EMAIL ='$user'"; 
 
 $login_stmt = oci_parse($conn, $sql_login);
 
@@ -38,7 +38,7 @@ if (($row= oci_fetch_array($login_stmt))==true)
 		
 	if ($verified_password==true && $type=="customer")
 	{
-		header("Location: ../index.php?loginsucess=1");
+		header("Location: ../../index.php?loginsucess=1");
 
 	}else if ($verified_password==true && $type=="trader"){
 	
