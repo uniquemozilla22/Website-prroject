@@ -98,7 +98,7 @@ if (isset($_GET['invalidemail']))
 											<span>Remember me</span>
 										</label>
 									</div>
-									<a class="forget_pass" href="#">Lost your password?</a>
+									<a class="forget_pass" href="include/login/forgetpass.include.php">Lost your password?</a>
 								</div>
 							</form>
 						</div>
