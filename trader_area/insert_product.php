@@ -181,6 +181,15 @@ if($_SESSION['admin_type']!='trader'){
                    </div>
 
                    <div class="form-group">                       
+                      <label class="col-md-3 control-label"> Product Status </label> 
+                      
+                      <div class="col-md-6">                        
+                          <input name="product_status" type="text" class="form-control" required>
+                          
+                      </div>                      
+                   </div>
+
+                   <div class="form-group">                       
                       <label class="col-md-3 control-label"> Maximun Order </label> 
                       
                       <div class="col-md-6">                        
@@ -202,7 +211,7 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> Product Description </label> 
                       
                       <div class="col-md-6">                        
-                          <textarea name="product_desc" cols="19" rows="6" class="form-control"></textarea>
+                          <textarea name="product_desc" cols="19" rows="6" type="text" class="form-control"></textarea>
                           
                       </div>                      
                    </div>
@@ -211,7 +220,7 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> Allergy Information </label> 
                       
                       <div class="col-md-6">                        
-                          <textarea name="allergy_info" cols="19" rows="3" class="form-control"></textarea>
+                          <textarea name="allergy_info" cols="19" rows="3" type="text" class="form-control"></textarea>
                           
                       </div>                      
                    </div>
@@ -250,6 +259,7 @@ if(isset($_POST['submit'])){
     $shop=$_POST['shop'];
     $product_price = $_POST['product_price'];
     $product_keywords = $_POST['product_keywords'];
+    $product_status = $_POST['product_status'];
     $product_desc = $_POST['product_desc'];
     $maximum_order=$_POST['maximum_order'];
     $minimum_order=$_POST['minimum_order'];
@@ -264,9 +274,9 @@ if(isset($_POST['submit'])){
 
     
     
-    $insert_product = "INSERT INTO PRODUCT (PRODUCT_NAME,PRODUCT_DESCRIPTION,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_KEYWORDS,MIN_ORDER,MAX_ORDER,ALLERGY_INFORMATION,CATEGORY_ID,SHOP_ID)
+    $insert_product = "INSERT INTO PRODUCT (PRODUCT_NAME,PRODUCT_DESCRIPTION,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_KEYWORDS,PRODUCT_STATUS, MIN_ORDER,MAX_ORDER,ALLERGY_INFORMATION,CATEGORY_ID,SHOP_ID)
     VALUES
-    ('$product_title',' $product_desc','$product_price','$product_img1','$product_keywords','$minimum_order','$maximum_order','$allergy_info','$cat','$shop')";
+    ('$product_title',' $product_desc','$product_price','$product_img1','$product_keywords','$product_status','$minimum_order','$maximum_order','$allergy_info','$cat','$shop')";
     
     $run_product = oci_parse($conn,$insert_product);
 
