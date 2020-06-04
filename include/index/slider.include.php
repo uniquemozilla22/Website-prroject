@@ -8,8 +8,8 @@
 	            			<div class="slider__content">
 		            			<div class="contentbox">
 		            				<h2>Buy <span>your </span></h2>
-		            				<h2>favourite <span>Book </span></h2>
-		            				<h2>from <span>Here </span></h2>
+		            				<h2>Next <span>Fresh </span></h2>
+		            				<h2>Item <span>Here </span></h2>
 				                   	<a class="shopbtn" href="#">shop now</a>
 		            			</div>
 	            			</div>
@@ -25,9 +25,9 @@
 	            		<div class="col-lg-12">
 	            			<div class="slider__content">
 		            			<div class="contentbox">
-		            				<h2>Buy <span>your </span></h2>
-		            				<h2>favourite <span>Book </span></h2>
-		            				<h2>from <span>Here </span></h2>
+		            				<h2>Provide <span>your </span></h2>
+		            				<h2>Family <span>With </span></h2>
+		            				<h2>healthy <span>Food </span></h2>
 				                   	<a class="shopbtn" href="#">shop now</a>
 		            			</div>
 	            			</div>

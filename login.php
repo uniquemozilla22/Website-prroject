@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include("include/connection.php");
 include("include/header.include.php");
@@ -48,6 +49,12 @@ if (isset($_GET['invalidemail']))
 	$lmessage="Invalid username";
 }
 
+if(isset($_GET['loginSucess']))
+{
+	session_start();
+	$_SESSION['userid']=$_GET['loginSucess'];
+}
+
 ?>
 
 <section class="my_account_area pt--80 pb--55 bg--white">
@@ -65,9 +72,12 @@ if (isset($_GET['invalidemail']))
 							?> </p>
 
 							<?php
-							if(isset($_GET['loginSucess']))
+							if (isset($_SESSION['customer_id']) || isset($_SESSION['admin_id']))
 							{
-								echo "<p style='background-color:green ; text-align:center ; padding:30px; color :white'> You can continue to shop </p>";
+								echo "<p style='background-color:green ; text-align:center ; padding:10px; color :white'> You can continue to shop </p>";
+								echo "<button style='background-color:red ; text-align:center ; padding:10px; color :white' > Logout</button>";
+								
+							
 							}
 							else{
 								

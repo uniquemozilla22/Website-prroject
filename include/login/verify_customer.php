@@ -21,6 +21,11 @@ if (isset($_POST['otpsubmit'])) {
 
 		if (($row= oci_fetch_array($qry))==true)
 			{
+				$username=$row['USERNAME'];
+				$type=$row['USER_TYPE'];
+				$userid=$row['USER_ID'];
+
+
 				$stmt = "UPDATE USERA SET USER_STATUS ='verified' WHERE USER_STATUS='$enteredOTP'";
 
 				$uquery = oci_parse($conn, $stmt);
@@ -35,12 +40,18 @@ if (isset($_POST['otpsubmit'])) {
 				if ($row['USER_TYPE']=='trader')
 				{
 					session_start();
-						$_SESSION['admin_name']=$username;
-						$_SESSION['admin_type']=$type;
-						header("Location: ../../trader_area/index.php?dashboard");
+					$_SESSION['admin_name']=$username;
+					$_SESSION['admin_id']=$userid;
+					$_SESSION['admin_type']=$type;
+					header("Location: ../../trader_area/index.php?dashboard");
 				}
 				else{
-					header('location: ../../login.php?loginSucess=1');
+
+					session_start();
+					$_SESSION['customer_name']=$username;
+					$_SESSION['customer_id']=$userid;
+					$_SESSION['customer_type']=$type;
+					header("location: ../../index.php?loginSucess='$userid'");
 
 				}
 				

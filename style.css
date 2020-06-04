@@ -1102,11 +1102,11 @@ Elements Styles
   border: 1px solid #3cc8df;
   color: #3cc8df; }
 .slider--15.slide__arrow01.owl-theme .owl-nav [class*="owl-"] {
-  border: 1px solid #000;
-  color: #000; }
-.brown__nav.slide__arrow01.owl-theme .owl-nav [class*="owl-"]:hover {
   border: 1px solid #ce7852;
   color: #ce7852; }
+.brown__nav.slide__arrow01.owl-theme .owl-nav [class*="owl-"]:hover {
+  border: 1px solid #fff;
+  color: #fff; }
 .footer__turquoise .owl-theme .owl-nav [class*="owl-"]:hover {
   color: #3cc8df; }
 .arrows_style:hover .owl-nav div {
@@ -1876,7 +1876,7 @@ Header Styles
     .mainmenu__nav .meninmenu li a {
 	  align-items: center;
 	  align-self: stretch;
-	  color: #333;
+	  color: #e59285;
 	  display: flex;
 	  font-size: 14px;
 	  font-weight: 600;
@@ -1884,7 +1884,7 @@ Header Styles
 	  text-transform: uppercase;
 	  transition: all 0.4s ease 0s;
 	}
-		.mainmenu__nav .meninmenu li a:hover{color: #e59285;}
+		.mainmenu__nav .meninmenu li a:hover{color: #fff;}
 		.is-sticky .mainmenu__nav .meninmenu li a {
 		  color: #fff;
 		}
@@ -3024,7 +3024,7 @@ h3.widget-title-modal {
   font-size: 60px;
 }
 .slide .slider__content h2 {
-  color: #3c3c3c;
+  color: #fff;
   font-size: 68px;
   font-family: poppins;
   font-weight: 700;
