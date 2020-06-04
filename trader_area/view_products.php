@@ -1,3 +1,4 @@
+
 <?php 
     
    // session_start();
@@ -44,6 +45,7 @@
                                 <th> Product Price: </th>
                                 <th> Product description: </th>
                                 <th> Product Keywords: </th>
+                                <th> Product Status: </th>
                                 <th> Minimum Order: </th>
                                 <th> Maximum Order: </th>
                                 <th> Allergy Information: </th>
@@ -78,6 +80,8 @@
                                     
                                     $pro_keywords = $row_pro['PRODUCT_KEYWORDS'];
 
+                                    $pro_status = $row_pro['PRODUCT_STATUS'];
+
                                     $min_order=$row_pro['MIN_ORDER'];
 
                                     $max_order=$row_pro['MAX_ORDER'];
@@ -95,6 +99,7 @@
                                 <td> <?php echo $pro_price; ?> </td>
                                 <td> <?php echo $pro_desc; ?> </td>
                                 <td> <?php echo $pro_keywords; ?> </td>
+                                <td> <?php echo $pro_status; ?> </td>
                                 <td> <?php echo $min_order; ?> </td>
                                 <td> <?php echo $max_order; ?> </td>
                                 <td> <?php echo $allergy_detail; ?> </td>
