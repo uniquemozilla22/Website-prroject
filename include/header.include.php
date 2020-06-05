@@ -116,7 +116,17 @@
 								</li>
 								<li class="drop"><a href="blog.php">Blog</a>
 								</li>
-								<li><a href="customer/my_account.php">My Account</a></li>
+								<?php
+								if (isset( $_SESSION['customer_id'] )|| isset( $_SESSION['admin_id']) )
+
+								{
+									echo "<li><a href='customer/my_account.php'>My Account</a></li>";
+								}
+
+
+
+?>
+								
 								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</nav>
