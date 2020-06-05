@@ -89,6 +89,7 @@
 								?>
         						</ul>
         					</aside>
+							
         				
         	
         					
@@ -111,11 +112,7 @@
 	        					<div class="row">
 
 								<?php
-								if (isset($_GET['pageno'])) {
-									$pageno = $_GET['pageno'];
-								} else {
-									$pageno = 1;
-								}
+							
 
 
 
