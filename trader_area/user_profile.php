@@ -41,8 +41,6 @@ if($_SESSION['admin_type']!='trader'){
         
         $user_address = $row_user['USER_ADDRESS'];
 
-        $user_description = $row_user['USER_DESCRIPTION'];
-
         $user_image = $row_user['USER_IMAGE'];
         
     }
@@ -168,7 +166,7 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> User Description </label> 
                       
                       <div class="col-md-6">                        
-                          <textarea name="admin_desc" value="<?php echo $user_description; ?>" cols="19" rows="6" class="form-control"></textarea>
+                          <textarea name="admin_desc" value="<?php echo $user_desc; ?>" cols="19" rows="6" class="form-control"></textarea>
                           
                       </div>                      
                    </div>
@@ -212,15 +210,15 @@ if(isset($_POST['update'])){
 
     move_uploaded_file($temp_admin_image,"trader_images/$user_image");
 
-    $update_user = "update usera set USERNAME='$user_name',USER_EMAIL='$user_email',USER_PASSWORD='$user_pass',USER_PHONE='$user_contact',USER_ADDRESS='$user_address',USER_DESCRIPTION='$user_desc',USER_IMAGE='$user_image' where USER_ID='$user_id'";
+    $update_user = "update usera set USERNAME='$user_name',USER_EMAIL='$user_email',USER_PASSWORD='$user_pass',USER_PHONE='$user_contact',USER_ADDRESS='$user_addresss',USER_DESCRIPTION='$user_desc',USER_IMAGE='$user_image' where USER_ID='$user_id'";
     $run_user = oci_parse($conn,$update_user);
 
     oci_execute($run_user);
     
     if($run_user){
         
-        echo "<script>alert('User has been updated sucessfully')</script>";
-        echo "<script>window.open('index.php?view_users','_self')</script>"; 
+        //echo "<script>alert('User has been updated sucessfully')</script>";
+        //echo "<script>window.open('../login.php','_self')</script>";
         
        // session_destroy();
         

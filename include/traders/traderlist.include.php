@@ -45,7 +45,11 @@
 	        									<li class="old__prize">$220.00</li>
 	        								</ul>
 	        								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
-	        								
+	        								<ul class="cart__action d-flex">
+	        									<li class="cart"><a href="cart.php">Add to cart</a></li>
+	        									<li class="wishlist"><a href="cart.php"></a></li>
+	        									<li class="compare"><a href="cart.php"></a></li>
+	        								</ul>
 
 	        							</div>
 	        						</div>

@@ -46,39 +46,75 @@
 								<li class="drop"><a href="products.php">Products</a>
 									<div class="megamenu mega03" style="width:auto;">
 										<ul class="item item03">
-											<li class="title">Products Layout</li>
-											<li><a href="products.php">Products Grid</a></li>
-											<li><a href="products.php">Single Product</a></li>
+											<li class="title">SHOPS</li>
+
+											<?php
+
+								$sql_login = "	SELECT * FROM  SHOP"; 
+
+								$login_stmt = oci_parse($conn, $sql_login);
+
+								if(!$login_stmt)
+								{
+									echo "An error occurred in parsing the sql string.\n"; 
+									exit; 
+								}
+
+								oci_execute($login_stmt);
+								while ($row = oci_fetch_assoc($login_stmt))
+								{
+									
+									$SHOPID = $row['SHOP_ID'];
+									$SHOP_NAME= $row['SHOP_NAME'];
+
+									echo "
+									<li><a href='products.php?shop=$SHOPID'>$SHOP_NAME</a></li>
+									
+									";
+								
+								
+								}
+									
+
+								?>
 										</ul>
 										<ul class="item item03">
-											<li class="title">Bargain Books</li>
-											<li><a href="products.php">Bargain Bestsellers</a></li>
-											<li><a href="products.php">Activity Kits</a></li>
-											<li><a href="products.php">B&N Classics</a></li>
-											<li><a href="products.php">Books Under $5</a></li>
-											<li><a href="products.php">Bargain Books</a></li>
+											<li class="title">Categories</li>
+											<?php
+
+								$sql_login = "	SELECT * FROM  CATEGORY C"; 
+
+								$login_stmt = oci_parse($conn, $sql_login);
+
+								if(!$login_stmt)
+								{
+									echo "An error occurred in parsing the sql string.\n"; 
+									exit; 
+								}
+
+								oci_execute($login_stmt);
+								while ($row = oci_fetch_assoc($login_stmt))
+								{
+									
+									$category = $row['CATEGORY_ID'];
+									$category_name= $row['CATEGORY_NAME'];
+
+									echo "
+									<li><a href='products.php?category=$category'>$category_name</a></li>
+									
+									";
+								
+								
+								}
+									
+
+								?>
 										</ul>
 									</div>
 								</li>
 								<li class="drop"><a href="traders.php">Traders</a>
-									<div class="megamenu mega03" style="width:auto;">
-										<ul class="item item03">
-											<li class="title">Categories</li>
-											<li><a href="traders.php">Meat</a></li>
-											<li><a href="traders.php">Fruits</a></li>
-											<li><a href="traders.php">Vegetables</a></li>
-											<li><a href="traders.php">Eggs</a></li>
-											
-										</ul>
-									</div>
 								</li>
 								<li class="drop"><a href="blog.php">Blog</a>
-									<div class="megamenu dropdown">
-										<ul class="item item01">
-											<li><a href="blog.php">Blog Page</a></li>
-											<li><a href="blog.php">Blog Details</a></li>
-										</ul>
-									</div>
 								</li>
 								<?php
 								if (isset( $_SESSION['customer_id'] )|| isset( $_SESSION['admin_id']) )

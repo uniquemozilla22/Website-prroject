@@ -89,7 +89,7 @@
                                 <td> <?php echo $user_email; ?> </td>
                                 <td> <?php echo $user_phone; ?></td>
                                 <td> <?php echo $user_address; ?></td>
-                                <td> <img src="trader_images/<?php echo $user_img; ?>" width="60" height="60"></td>
+                                <td> <img src="image/<?php echo $user_img; ?>" width="60" height="60"></td>
                                 <td> <?php echo $user_description; ?></td>
                                 <td>    
                                      

@@ -69,7 +69,7 @@ if ($row = oci_fetch_assoc($login_stmt))
 								<div class='product-reviews-summary d-flex'>
 									<ul class='rating-summary d-flex'>
 									";
-									for ($i=0;$i<=$rating;$i++){
+									for ($i=1;$i<=$rating;$i++){
 										echo"
 										<li class='on'><i class='fa fa-star-o'></i></li>";
 									}
@@ -167,7 +167,7 @@ if ($row = oci_fetch_assoc($login_stmt))
 											<span>Ratings ( of 5) </span>
 											<ul class='rating d-flex'>
 											";
-											for ($i=0;$i<$rating;$i++){
+											for ($i=1;$i<=$rating;$i++){
 												echo"
 												<li><i class='zmdi zmdi-star'></i></li>";
 											}
