@@ -41,6 +41,8 @@ if($_SESSION['admin_type']!='trader'){
         
         $user_address = $row_user['USER_ADDRESS'];
 
+        $user_description = $row_user['USER_DESCRIPTION'];
+
         $user_image = $row_user['USER_IMAGE'];
         
     }
@@ -166,7 +168,7 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> User Description </label> 
                       
                       <div class="col-md-6">                        
-                          <textarea name="admin_desc" value="<?php echo $user_desc; ?>" cols="19" rows="6" class="form-control"></textarea>
+                          <textarea name="admin_desc" value="<?php echo $user_description; ?>" cols="19" rows="6" class="form-control"></textarea>
                           
                       </div>                      
                    </div>
