@@ -8,7 +8,7 @@ if(!isset($_SESSION['CUSTOMER_EMAIL'])){
     
 }else{
 
-include("includes/db.php");
+include("includes/connection.php");
 include("functions/functions.php");
 
 ?>
