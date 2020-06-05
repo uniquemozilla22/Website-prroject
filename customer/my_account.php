@@ -1,22 +1,26 @@
 <?php 
 
-//session_start();
+session_start();
 
-//if(!isset($_SESSION['CUSTOMER_EMAIL'])){
+if (!isset( $_SESSION['customer_id'] )|| !isset( $_SESSION['admin_id']) )
+{
     
-   // echo "<script>window.open('../checkout.php','_self')</script>";
+    echo "<script>window.open('../checkout.php','_self')</script>";
     
-//}else{
+}else{
+    if (isset($_SESSION['admin_id'])){
 
-//include("includes/db.php");
-//include("functions/functions.php");
-//include("includes/header.php");
-?>
-<?php
+        $id=$_SESSION['admin_id'];
+
+    }else if((isset($_SESSION['customer_id']))){
+
+        $id=$_SESSION['customer_id'];
+    }
 include("includes/db.php");
-//include("functions/functions.php");
-include("includes/header.php");
-include("includes/banner.include.php");
+include("functions/functions.php");
+
+if(isset($id)){
+
 ?>
 
 <!DOCTYPE html>
@@ -121,4 +125,5 @@ include("includes/banner.include.php");
     
 </body>
 </html>
-<?php// } ?>
+<?php } ?>
+<?php } ?>

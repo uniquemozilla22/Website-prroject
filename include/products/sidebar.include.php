@@ -14,7 +14,7 @@
 
 ?>
 
-<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+<div class="page-shop-sidebar left--sidebar bg-white section-padding--lg">
         	<div class="container">
         		<div class="row">
         			<div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
@@ -90,46 +90,6 @@
         						</ul>
         					</aside>
         				
-        					<aside class="wedget__categories poroduct--tag">
-        						<h3 class="wedget__title">Product Tags</h3>
-        						<ul>
-								<?php
-
-								$sql_login = "	SELECT * FROM  PRODUCT"; 
-
-								$login_stmt = oci_parse($conn, $sql_login);
-
-								if(!$login_stmt)
-								{
-									echo "An error occurred in parsing the sql string.\n"; 
-									exit; 
-								}
-
-								oci_execute($login_stmt);
-								while ($row = oci_fetch_assoc($login_stmt))
-								{
-									$productkey= $row['PRODUCT_KEYWORDS'];
-									$productkey_array= explode(" ",$productkey);
-
-									foreach($productkey_array as $pa)
-									{
-										
-											echo "
-									<li><a href='sidebar.include.php?search=$pa'>$pa</a></li>
-									
-									";
-									
-									
-
-									}
-								
-								
-								}
-									
-
-								?>
-        						</ul>
-        					</aside>
         					
         				</div>
         			</div>
@@ -161,7 +121,7 @@
 
 								<?php
 
-$sql_login = "SELECT * FROM PRODUCT p , REVIEW r where p.REVIEW_ID = R.REVIEW_ID"; 
+$sql_login = "SELECT * FROM PRODUCT p , REVIEW r"; 
 
 $login_stmt = oci_parse($conn, $sql_login);
 
@@ -199,7 +159,7 @@ while (($row= oci_fetch_array($login_stmt))==true)
 	<!-- Start Single Product -->
 	<div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
 		<div class='product__thumb'>
-			<a class='first__img' href='singleproduct.php?productdisplay=$productid'><img src='images/books/$productimage' alt='$productname'></a>											
+			<a class='first__img' href='singleproduct.php?productdisplay=$productid'><img src='trader_area/product_images/$productimage' alt='$productname'></a>											
 			<div class='hot__box'>
 				<span class='hot-label'>$productstatus
 				</span>
