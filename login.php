@@ -5,6 +5,11 @@ include("include/connection.php");
 include("include/header.include.php");
 include("include/banner.include.php");
 
+if (isset($_GET['logout']))
+{
+	$lmessage="User has logged out.";
+}
+
 if (isset($_GET['erroremailalreadyexists']))
 {
 	$message="Email is taken already. Please use another Email Address";
@@ -75,9 +80,16 @@ if(isset($_GET['loginSucess']))
 							if (isset($_SESSION['customer_id']) || isset($_SESSION['admin_id']))
 							{
 								echo "<p style='background-color:green ; text-align:center ; padding:10px; color :white'> You can continue to shop </p>";
-								echo "<button style='background-color:red ; text-align:center ; padding:10px; color :white' > Logout</button>";
+
+								echo "
+								<form action='include/logout.include.php' method='POST'>
 								
-							
+								<button style='background-color:red ; text-align:center ; padding:10px; color :white' name='logout' > Logout</button>
+								
+								</form>
+
+								";
+								
 							}
 							else{
 								
