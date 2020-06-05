@@ -77,7 +77,6 @@ if($_SESSION['admin_type']!='trader'){
         
         $shop_title = $row_shop['SHOP_NAME'];
 
-
         $get_review = "select * from REVIEW where REVIEW_ID='$review'";
         
         $run_review = oci_parse($conn,$get_shop);
@@ -90,7 +89,9 @@ if($_SESSION['admin_type']!='trader'){
 
         $row_review = oci_fetch_array($run_review);
         
-        $review_title = $row_shop['REVIEW_COMMENT'];
+       // $review_title = $row_shop['SHOP_NAME'];
+
+
 
 ?>
 
@@ -238,48 +239,7 @@ if($_SESSION['admin_type']!='trader'){
                        </div>                      
                     </div>
                     
-                    <div class="form-group"> 
-                       
-                       <label class="col-md-3 control-label"> Review </label> 
-                       
-                       <div class="col-md-6"> 
-                           
-                           <select name="review" class="form-control"> 
-                               
-                           <option value="<?php echo $review; ?>"> <?php echo $review_title; ?> </option>
-                               
-                               <?php 
-                               
-                               $get_shop = "select * from REVIEW";
-
-                               $run_shop = oci_parse($conn,$get_shop);
-                               
-                               if(!$run_shop)
-                                {
-                                    echo "An error occurred in parsing the sql string.\n"; 
-                                    exit; 
-                                }
-                               oci_execute($run_shop);
-
-                               while ($row_shop=oci_fetch_array($run_shop)){
-                                   
-                                   $review_id = $row_shop['REVIEW_ID'];
-                                   $review_title = $row_shop['REVIEW_COMMENT'];
-                                   
-                                   echo "
-                                   
-                                   <option value='$review_id'> $review_title </option>
-                                   
-                                   ";
-                                   
-                               }
-                               
-                               ?>
-                               
-                           </select>
-                           
-                       </div>                      
-                    </div>
+                   
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -291,7 +251,7 @@ if($_SESSION['admin_type']!='trader'){
                           
                           <br>
                           
-                          <img width="70" height="70" src="product_images/<?php echo $p_image1; ?>" alt="<?php echo $p_image1; ?>">
+                          <img width="70" height="70" src="product_images/<?php echo $p_image1; ?>"  alt="<?php echo $p_image1; ?>">
                           
                       </div><!-- col-md-6 Finish -->
                        
@@ -309,6 +269,15 @@ if($_SESSION['admin_type']!='trader'){
                       </div><!-- col-md-6 Finish -->
                        
                    </div><!-- form-group Finish -->
+
+                   <div class="form-group">                       
+                      <label class="col-md-3 control-label"> Quality out of 5 </label> 
+                      
+                      <div class="col-md-6">                        
+                          <input name="quality" type="number" min='1' max='5' class="form-control" value="<?php echo $review; ?>" required>
+                          
+                      </div>  
+                      </div><!-- form-group Finish -->
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -406,7 +375,7 @@ if(isset($_POST['update'])){
 
     $shop=$_POST['shop'];
 
-    $review=$_POST['review'];
+    $review=$_POST['quality'];
 
     $product_price = $_POST['product_price'];
 
@@ -420,13 +389,13 @@ if(isset($_POST['update'])){
 
     $allergy_info=$_POST['allergy_info'];
     
-    $product_img1 = $_FILES['PRODUCT_IMAGE']['name'];
+    $product_img1 = $_FILES['product_img1']['name'];
     
-    $temp_name1 = $_FILES['PRODUCT_IMAGE']['tmp_name'];
+    $temp_name1 = $_FILES['product_img1']['tmp_name'];
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
    
-    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop',REVIEW_ID='$review', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCTS_KEYWORD='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
+    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop',REVIEW_ID='$review', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORDS='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
     
     $run_product = oci_parse($conn,$update_product);
     

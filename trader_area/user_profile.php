@@ -42,6 +42,8 @@ if($_SESSION['admin_type']!='trader'){
         $user_address = $row_user['USER_ADDRESS'];
 
         $user_image = $row_user['USER_IMAGE'];
+
+        $user_desc = $row_user['USER_DESCRIPTION'];
         
     }
 
@@ -166,7 +168,11 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> User Description </label> 
                       
                       <div class="col-md-6">                        
-                          <textarea name="admin_desc" value="<?php echo $user_desc; ?>" cols="19" rows="6" class="form-control"></textarea>
+                          <textarea name="admin_desc"  cols="19" rows="6" class="form-control">
+
+                          <?php echo $user_desc; ?>
+                          
+                          </textarea>
                           
                       </div>                      
                    </div>
@@ -210,7 +216,7 @@ if(isset($_POST['update'])){
 
     move_uploaded_file($temp_admin_image,"trader_images/$user_image");
 
-    $update_user = "update usera set USERNAME='$user_name',USER_EMAIL='$user_email',USER_PASSWORD='$user_pass',USER_PHONE='$user_contact',USER_ADDRESS='$user_addresss',USER_DESCRIPTION='$user_desc',USER_IMAGE='$user_image' where USER_ID='$user_id'";
+    $update_user = "update usera set USERNAME='$user_name',USER_EMAIL='$user_email',USER_PASSWORD='$user_pass',USER_PHONE='$user_contact',USER_ADDRESS='$user_address',USER_DESCRIPTION='$user_desc',USER_IMAGE='$user_image' where USER_ID='$user_id'";
     $run_user = oci_parse($conn,$update_user);
 
     oci_execute($run_user);
