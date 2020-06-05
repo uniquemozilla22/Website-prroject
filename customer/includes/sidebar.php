@@ -3,10 +3,11 @@
     <div class="panel-heading"><!--  panel-heading  Begin  -->
         
         <?php 
+        include("db.php");
         
-        $customer_session = $_SESSION['USER_EMAIL'];
+        $customer_session = $_SESSION['customer_id'] ||  $_SESSION['admin_id'];
         
-        $get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
+        $get_customer = "select * from USERA where USER_ID='$customer_session'";
         
         $run_customer = oci_parse($conn,$get_customer);
 

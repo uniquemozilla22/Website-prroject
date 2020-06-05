@@ -9,7 +9,6 @@ include("../connection.php");
 if(isset($_POST['login'])){
 $user = $_POST['username'];
 $pass = $_POST['pass'];
-$type= $_POST['tradertype'];
 
 $sql_login = "SELECT * FROM USERA WHERE USERNAME='$user' OR USER_EMAIL ='$user'"; 
 
@@ -26,24 +25,28 @@ oci_execute($login_stmt);
 if (($row= oci_fetch_array($login_stmt))==true)
 {
 	$username = $row['USERNAME'];
+	$userid = $row['USER_ID'];
 	$password = $row ['USER_PASSWORD'];
 	$user_status =$row['USER_STATUS'];
-
-	
+	$type=$row['USER_TYPE'];
 	$verified_password= password_verify($pass,$password);
-	echo $verified_password;
 
 	if ($user_status=="verified")
 	{
 		
 	if ($verified_password==true && $type=="customer")
 	{
-		header("Location: ../../index.php?loginsucess=1");
+		session_start();
+		$_SESSION['customer_name']=$username;
+		$_SESSION['customer_id']=$userid;
+		$_SESSION['customer_type']=$type;
+		header("Location: ../../index.php?loginSucess='$userid'");
 
 	}else if ($verified_password==true && $type=="trader"){
 	
 		session_start();
 		$_SESSION['admin_name']=$username;
+		$_SESSION['admin_id']=$userid;
 		$_SESSION['admin_type']=$type;
 		header("Location: ../../trader_area/index.php?dashboard");
 	}
