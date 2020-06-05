@@ -43,7 +43,7 @@
 									$category_name= $row['CATEGORY_NAME'];
 
 									echo "
-									<li><a href='sidebar.include.php?category=$category'>$category_name</a></li>
+									<li><a href='products.php?category=$category'>$category_name</a></li>
 									
 									";
 								
@@ -78,7 +78,7 @@
 									$SHOP_NAME= $row['SHOP_NAME'];
 
 									echo "
-									<li><a href='sidebar.include.php?shop=$SHOPID'>$SHOP_NAME</a></li>
+									<li><a href='products.php?shop=$SHOPID'>$SHOP_NAME</a></li>
 									
 									";
 								
@@ -89,6 +89,7 @@
 								?>
         						</ul>
         					</aside>
+							
         				
         					
         				</div>
@@ -119,7 +120,7 @@
 	        				<div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
 	        					<div class="row">
 
-								<?php
+							<?php
 
 $sql_login = "SELECT * FROM PRODUCT p , REVIEW r"; 
 
