@@ -21,6 +21,11 @@
 		                        </div>
         					</div>
         				</div>
+
+
+						<?php
+						
+						?>
         				<div class="tab__container">
 	        				<div class="shop-grid tab-pane fade show active" id="nav-list" role="tabpanel">
 	        					<div class="list__view__wrapper">

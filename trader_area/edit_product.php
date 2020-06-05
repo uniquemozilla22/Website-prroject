@@ -26,6 +26,10 @@ if($_SESSION['admin_type']!='trader'){
         $p_title = $row_edit['PRODUCT_NAME'];
         
         $cat = $row_edit['CATEGORY_ID'];
+
+        $shop = $row_edit['SHOP_ID'];
+
+        $review = $row_edit['REVIEW_ID'];
         
         $p_image1 = $row_edit['PRODUCT_IMAGE'];
         
@@ -56,9 +60,37 @@ if($_SESSION['admin_type']!='trader'){
 
         $row_cat = oci_fetch_array($run_cat);
 
-        
-        
         $cat_title = $row_cat['CATEGORY_NAME'];
+
+
+        $get_shop = "select * from SHOP where SHOP_ID='$shop'";
+        
+        $run_shop = oci_parse($conn,$get_shop);
+        
+        oci_execute($run_shop);
+
+        if(!$run_shop){
+            echo "Error while parsing";
+        }
+
+        $row_shop = oci_fetch_array($run_shop);
+        
+        $shop_title = $row_shop['SHOP_NAME'];
+
+
+        $get_review = "select * from REVIEW where REVIEW_ID='$review'";
+        
+        $run_review = oci_parse($conn,$get_shop);
+        
+        oci_execute($run_review);
+
+        if(!$run_review){
+            echo "Error while parsing";
+        }
+
+        $row_review = oci_fetch_array($run_review);
+        
+        $review_title = $row_shop['REVIEW_COMMENT'];
 
 ?>
 
@@ -128,9 +160,10 @@ if($_SESSION['admin_type']!='trader'){
                        
                        <div class="col-md-6"> 
                            
-                           <select name="cat" class="form-control"> 
+                           <select name="cat" class="form-control" > 
                                
-                               <option disabled selected hidden> Select a Category </option>
+                           <option value="<?php echo $cat; ?>"> <?php echo $cat_title; ?> </option>
+                              
                                
                                <?php 
                                
@@ -170,7 +203,7 @@ if($_SESSION['admin_type']!='trader'){
                            
                            <select name="shop" class="form-control"> 
                                
-                               <option  disabled selected hidden> Select a Shop type </option>
+                           <option value="<?php echo $shop; ?>"> <?php echo $shop_title; ?> </option>
                                
                                <?php 
                                
@@ -204,7 +237,49 @@ if($_SESSION['admin_type']!='trader'){
                            
                        </div>                      
                     </div>
+                    
+                    <div class="form-group"> 
+                       
+                       <label class="col-md-3 control-label"> Review </label> 
+                       
+                       <div class="col-md-6"> 
+                           
+                           <select name="review" class="form-control"> 
+                               
+                           <option value="<?php echo $review; ?>"> <?php echo $review_title; ?> </option>
+                               
+                               <?php 
+                               
+                               $get_shop = "select * from REVIEW";
 
+                               $run_shop = oci_parse($conn,$get_shop);
+                               
+                               if(!$run_shop)
+                                {
+                                    echo "An error occurred in parsing the sql string.\n"; 
+                                    exit; 
+                                }
+                               oci_execute($run_shop);
+
+                               while ($row_shop=oci_fetch_array($run_shop)){
+                                   
+                                   $review_id = $row_shop['REVIEW_ID'];
+                                   $review_title = $row_shop['REVIEW_COMMENT'];
+                                   
+                                   echo "
+                                   
+                                   <option value='$review_id'> $review_title </option>
+                                   
+                                   ";
+                                   
+                               }
+                               
+                               ?>
+                               
+                           </select>
+                           
+                       </div>                      
+                    </div>
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -229,7 +304,7 @@ if($_SESSION['admin_type']!='trader'){
                       
                       <div class="col-md-6"><!-- col-md-6 Begin -->
                           
-                          <input name="product_price" type="text" class="form-control" required value="<?php echo $p_price; ?>">
+                          <input name="product_price" type="text" class="form-control"  value="<?php echo $p_price; ?>" required>
                           
                       </div><!-- col-md-6 Finish -->
                        
@@ -241,7 +316,7 @@ if($_SESSION['admin_type']!='trader'){
                       
                       <div class="col-md-6"><!-- col-md-6 Begin -->
                           
-                          <input name="product_keywords" type="text" class="form-control" required value="<?php echo $p_keywords; ?>">
+                          <input name="product_keywords" type="text" class="form-control"  value="<?php echo $p_keywords; ?>" required">
                           
                       </div><!-- col-md-6 Finish -->
                        
@@ -267,7 +342,7 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> Maximun Order </label> 
                       
                       <div class="col-md-6">                        
-                          <input name="maximum_order" type="number" class="form-control" required>
+                          <input name="maximum_order" type="number" class="form-control" value="<?php echo $max_order; ?>" required>
                           
                       </div>                      
                    </div>
@@ -276,7 +351,7 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> Minimum Order </label> 
                       
                       <div class="col-md-6">                        
-                          <input name="minimum_order" type="number" class="form-control" required>
+                          <input name="minimum_order" type="number" class="form-control" value="<?php echo $min_order;?>"  required>
                           
                       </div>                      
                    </div>
@@ -285,7 +360,9 @@ if($_SESSION['admin_type']!='trader'){
                       <label class="col-md-3 control-label"> Allergy Information </label> 
                       
                       <div class="col-md-6">                        
-                          <textarea name="allergy_info" cols="19" rows="3" class="form-control"></textarea>
+                          <textarea name="allergy_info" cols="19" rows="3" class="form-control">
+                          <?php echo $allergy_information; ?>
+                          </textarea>
                           
                       </div>                      
                    </div>
@@ -329,6 +406,8 @@ if(isset($_POST['update'])){
 
     $shop=$_POST['shop'];
 
+    $review=$_POST['review'];
+
     $product_price = $_POST['product_price'];
 
     $product_keywords = $_POST['product_keywords'];
@@ -347,7 +426,7 @@ if(isset($_POST['update'])){
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
    
-    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCTS_KEYWORD='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
+    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop',REVIEW_ID='$review', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCTS_KEYWORD='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
     
     $run_product = oci_parse($conn,$update_product);
     

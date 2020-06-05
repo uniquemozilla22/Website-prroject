@@ -2,17 +2,17 @@
 
 
  <?php
-if (!isset($_GET['productdisplay']))
+if (!isset($_GET['productdi']))
 {
 	echo "<h1> Please select a product</h1>";
 }
 else{
 
 
-	$productid=$_GET['productdisplay'];
+	$productid=$_GET['productdi'];
 
 
-	$sql_login = "	SELECT * FROM PRODUCT p , REVIEW r , CATEGORY C, USERA u where p.PRODUCT_ID = R.PRODUCT_ID AND r.USER_ID = u.USER_ID AND p.CATEGORY_ID = C.CATEGORY_ID AND p.PRODUCT_ID = $productid"; 
+	$sql_login = "	SELECT * FROM PRODUCT p  , CATEGORY C where  p.CATEGORY_ID = C.CATEGORY_ID AND p.PRODUCT_ID = $productid"; 
 
 $login_stmt = oci_parse($conn, $sql_login);
 
@@ -42,11 +42,6 @@ if ($row = oci_fetch_assoc($login_stmt))
 	$shopid=$row['SHOP_ID'];
 	$userid=$row['USER_ID'];
 	$discountid= $row['DISCOUNT_ID'];
-	$rating = $row['RATING_REVIEW'];
-	$reviewcomment=$row['REVIEW_COMMENT'];
-	$username=$row['USERNAME'];
-	$reviewtime=$row['REVIEW_TIME'];
-
 
 
 	echo " <div class='maincontent bg--white pt--80 pb--55'>
@@ -66,16 +61,7 @@ if ($row = oci_fetch_assoc($login_stmt))
 						<div class='col-lg-6 col-12'>
 							<div class='product__info__main'>
 								<h1>$productname</h1>
-								<div class='product-reviews-summary d-flex'>
-									<ul class='rating-summary d-flex'>
-									";
-									for ($i=1;$i<=$rating;$i++){
-										echo"
-										<li class='on'><i class='fa fa-star-o'></i></li>";
-									}
-									echo"
-									</ul>
-								</div>
+								
 								<div class='price-box'>
 									<span>$ $productprice</span>
 								</div>
@@ -124,7 +110,7 @@ if ($row = oci_fetch_assoc($login_stmt))
 								<?php
 
 								
-	$sql_login_stmt = "	SELECT * FROM PRODUCT p , REVIEW r , CATEGORY C, USERA u where p.PRODUCT_ID = R.PRODUCT_ID AND r.USER_ID = u.USER_ID AND p.CATEGORY_ID = C.CATEGORY_ID AND p.PRODUCT_ID = $productid"; 
+	$sql_login_stmt = "	SELECT * FROM PRODUCT p , REVIEW r ,  USERA u where p.PRODUCT_ID = R.PRODUCT_ID AND r.USER_ID = u.USER_ID  AND p.PRODUCT_ID = $productid"; 
 
 	$login_stmt = oci_parse($conn, $sql_login_stmt);
 	
@@ -149,7 +135,6 @@ if ($row = oci_fetch_assoc($login_stmt))
 		$maximumorder = $row['MAX_ORDER'];
 		$allergy =$row['ALLERGY_INFORMATION'];
 		$category = $row['CATEGORY_ID'];
-		$category_name= $row['CATEGORY_NAME'];
 		$orderid=$row['ORDER_ID'];
 		$shopid=$row['SHOP_ID'];
 		$userid=$row['USER_ID'];
@@ -226,7 +211,7 @@ if (isset($_POST['reviewsubmit'])){
 	$t=time();
 	$date = date("Y-m-d",$t);
 	
-	$idp=$_GET['productdisplay'];
+	$idp=$_GET['productdi'];
 
 	
 	if (isset($_SESSION['customer_id']))
@@ -248,7 +233,7 @@ if (isset($_POST['reviewsubmit'])){
 	else if (isset($_SESSION['admin_id']))
 	{
 		$admin=$_SESSION['admin_id'];
-		$qry= "INSERT INTO REVIEW(REVIEW_ID,REVIEW_COMMENT,RATING_REVIEW,REVIEW_TIME,USER_ID,PRODUCT_ID) VALUES	(5,$ratings_comment,$ratings,SYSDATE,$admin,$idp)";
+		$qry= "INSERT INTO REVIEW(REVIEW_ID,REVIEW_COMMENT,RATING_REVIEW,REVIEW_TIME,USER_ID,PRODUCT_ID) VALUES	(null,'$ratings_comment','$ratings',SYSDATE,'$admin','$idp')";
 
 		$login_stmt = oci_parse($conn, $qry);
 

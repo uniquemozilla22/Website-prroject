@@ -119,7 +119,7 @@
 		if (isset($_GET['category']))
 		{
 	$CID=$_GET['category'];
-	$sql_login = "SELECT DISTINCT * FROM PRODUCT p , REVIEW r where p.REVIEW_ID = R.REVIEW_ID AND CATEGORY_ID = $CID ";
+	$sql_login = "SELECT  * FROM PRODUCT p , REVIEW r where p.REVIEW_ID = R.REVIEW_ID AND CATEGORY_ID = $CID ";
 	$login_stmt = oci_parse($conn, $sql_login);
 
 		if(!$login_stmt)
@@ -131,8 +131,8 @@
 oci_execute($login_stmt);
 while (($row= oci_fetch_array($login_stmt))==true)
 {
-	$productname = $row['PRODUCT_NAME'];
 	$productid = $row['PRODUCT_ID'];
+	$productname = $row['PRODUCT_NAME'];
 	$productdesc = $row ['PRODUCT_DESCRIPTION'];
 	$productstatus =$row['PRODUCT_STATUS'];
 	$productimage= $row['PRODUCT_IMAGE'];
@@ -146,8 +146,6 @@ while (($row= oci_fetch_array($login_stmt))==true)
 	$shopid=$row['SHOP_ID'];
 	$userid=$row['USER_ID'];
 	$discountid= $row['DISCOUNT_ID'];
-	$rating = $row['RATING_REVIEW'];
-	$reviewcomment=$row['REVIEW_COMMENT'];
 
 
 	echo "
@@ -155,7 +153,7 @@ while (($row= oci_fetch_array($login_stmt))==true)
 	<!-- Start Single Product -->
 	<div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
 	<div class='product__thumb'>
-		<a class='first__img' href='singleproduct.php?productdisplay=$productid'><img src='images/books/$productimage' alt='$productname'></a>											
+		<a class='first__img' href='singleproduct.php?productdi=$productid'><img src='trader_area/product_images/$productimage' alt='$productname'></a>											
 		<div class='hot__box'>
 			<span class='hot-label'>$productstatus
 			</span>
@@ -174,16 +172,6 @@ while (($row= oci_fetch_array($login_stmt))==true)
 									</ul>
 								</div>
 							</div>
-		<div class='product__hover--content'>
-			<ul class='rating d-flex'>
-			";
-			for ($i=0;$i<$rating;$i++){
-				echo"
-				<li class='on'><i class='fa fa-star-o'></i></li>";
-			}
-			echo"
-			</ul>
-		</div>
 	</div>
 	</div>
 	<!-- End Single Product -->
@@ -199,7 +187,7 @@ while (($row= oci_fetch_array($login_stmt))==true)
 else if (isset($_GET['shop']))
 {
 $CID=$_GET['shop'];
-$sql_login = "SELECT DISTINCT * FROM PRODUCT p , REVIEW r where p.REVIEW_ID = R.REVIEW_ID AND SHOP_ID = $CID ";
+$sql_login = "SELECT  * FROM PRODUCT p , REVIEW r where p.REVIEW_ID = R.REVIEW_ID AND SHOP_ID = $CID ";
 $login_stmt = oci_parse($conn, $sql_login);
 
 if(!$login_stmt)
@@ -209,66 +197,55 @@ exit;
 }
 
 oci_execute($login_stmt);
+
 while (($row= oci_fetch_array($login_stmt))==true)
 {
-$productname = $row['PRODUCT_NAME'];
-$productid = $row['PRODUCT_ID'];
-$productdesc = $row ['PRODUCT_DESCRIPTION'];
-$productstatus =$row['PRODUCT_STATUS'];
-$productimage= $row['PRODUCT_IMAGE'];
-$productprice=$row['PRODUCT_PRICE'];
-$productkeywords= $row['PRODUCT_KEYWORDS'];
-$minimumorder= $row['MIN_ORDER'];
-$maximumorder = $row['MAX_ORDER'];
-$allergy =$row['ALLERGY_INFORMATION'];
-$category = $row['CATEGORY_ID'];
-$orderid=$row['ORDER_ID'];
-$shopid=$row['SHOP_ID'];
-$userid=$row['USER_ID'];
-$discountid= $row['DISCOUNT_ID'];
-$rating = $row['RATING_REVIEW'];
-$reviewcomment=$row['REVIEW_COMMENT'];
+	$productid = $row['PRODUCT_ID'];
+	$productname = $row['PRODUCT_NAME'];
+	$productdesc = $row ['PRODUCT_DESCRIPTION'];
+	$productstatus =$row['PRODUCT_STATUS'];
+	$productimage= $row['PRODUCT_IMAGE'];
+	$productprice=$row['PRODUCT_PRICE'];
+	$productkeywords= $row['PRODUCT_KEYWORDS'];
+	$minimumorder= $row['MIN_ORDER'];
+	$maximumorder = $row['MAX_ORDER'];
+	$allergy =$row['ALLERGY_INFORMATION'];
+	$category = $row['CATEGORY_ID'];
+	$orderid=$row['ORDER_ID'];
+	$shopid=$row['SHOP_ID'];
+	$userid=$row['USER_ID'];
+	$discountid= $row['DISCOUNT_ID'];
 
 
-echo "
+	echo "
 
-<!-- Start Single Product -->
-<div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
-<div class='product__thumb'>
-<a class='first__img' href='singleproduct.php?productdisplay=$productid'><img src='images/books/$productimage' alt='$productname'></a>											
-<div class='hot__box'>
-	<span class='hot-label'>$productstatus
-	</span>
-</div>
-</div>
-<div class='product__content content--center'>
-<h4><a href='singleproduct.php'>$productname</a></h4>
-<ul class='prize d-flex'>
-	<li>$ $productprice</li>
-</ul>
-<div class='action'>
-						<div class='actions_inner'>
-							<ul class='add_to_links'>
-								<li><a class='cart' href='cart.php'><i class='bi bi-shopping-bag4'></i></a></li>
-								<li><a class='compare' href='singleproduct.php?productdisplay=$productid'><i class='bi bi-heart-beat'></i></a></li>
-							</ul>
-						</div>
-					</div>
-<div class='product__hover--content'>
-	<ul class='rating d-flex'>
+	<!-- Start Single Product -->
+	<div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
+	<div class='product__thumb'>
+		<a class='first__img' href='singleproduct.php?productdi=$productid'><img src='trader_area/product_images/$productimage' alt='$productname'></a>											
+		<div class='hot__box'>
+			<span class='hot-label'>$productstatus
+			</span>
+		</div>
+	</div>
+	<div class='product__content content--center'>
+		<h4><a href='singleproduct.php'>$productname</a></h4>
+		<ul class='prize d-flex'>
+			<li>$ $productprice</li>
+		</ul>
+		<div class='action'>
+								<div class='actions_inner'>
+									<ul class='add_to_links'>
+										<li><a class='cart' href='cart.php'><i class='bi bi-shopping-bag4'></i></a></li>
+										<li><a class='compare' href='singleproduct.php?productdisplay=$productid'><i class='bi bi-heart-beat'></i></a></li>
+									</ul>
+								</div>
+							</div>
+	</div>
+	</div>
+	<!-- End Single Product -->
+
 	";
-	for ($i=0;$i<$rating;$i++){
-		echo"
-		<li class='on'><i class='fa fa-star-o'></i></li>";
-	}
-	echo"
-	</ul>
-</div>
-</div>
-</div>
-<!-- End Single Product -->
-
-";
 
 
 }
@@ -276,7 +253,7 @@ echo "
 
 }
 else{
-	$sql_login = "SELECT DISTINCT * FROM PRODUCT p , REVIEW r where p.REVIEW_ID = R.REVIEW_ID"; 
+	$sql_login = "SELECT  * FROM PRODUCT"; 
 
 	$login_stmt = oci_parse($conn, $sql_login);
 
@@ -290,8 +267,8 @@ else{
 
 	while (($row= oci_fetch_array($login_stmt))==true)
 	{
-		$productname = $row['PRODUCT_NAME'];
 		$productid = $row['PRODUCT_ID'];
+		$productname = $row['PRODUCT_NAME'];
 		$productdesc = $row ['PRODUCT_DESCRIPTION'];
 		$productstatus =$row['PRODUCT_STATUS'];
 		$productimage= $row['PRODUCT_IMAGE'];
@@ -305,8 +282,6 @@ else{
 		$shopid=$row['SHOP_ID'];
 		$userid=$row['USER_ID'];
 		$discountid= $row['DISCOUNT_ID'];
-		$rating = $row['RATING_REVIEW'];
-		$reviewcomment=$row['REVIEW_COMMENT'];
 
 
 		echo "
@@ -314,7 +289,7 @@ else{
 		<!-- Start Single Product -->
 		<div class='product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12'>
 		<div class='product__thumb'>
-			<a class='first__img' href='singleproduct.php?productdisplay=$productid'><img src='images/books/$productimage' alt='$productname'></a>											
+			<a class='first__img' href='singleproduct.php?productdi=$productid'><img src='trader_area/product_images/$productimage' alt='$productname'></a>											
 			<div class='hot__box'>
 				<span class='hot-label'>$productstatus
 				</span>
@@ -333,16 +308,6 @@ else{
 										</ul>
 									</div>
 								</div>
-			<div class='product__hover--content'>
-				<ul class='rating d-flex'>
-				";
-				for ($i=0;$i<$rating;$i++){
-					echo"
-					<li class='on'><i class='fa fa-star-o'></i></li>";
-				}
-				echo"
-				</ul>
-			</div>
 		</div>
 		</div>
 		<!-- End Single Product -->
