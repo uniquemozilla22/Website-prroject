@@ -1,4 +1,6 @@
-<?php include("include/connection.php"); ?>
+<?php
+include('connection.php');
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
