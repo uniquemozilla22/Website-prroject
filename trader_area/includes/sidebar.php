@@ -27,7 +27,7 @@
             
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: black;"><!-- dropdown-toggle begin -->
                 
-                <i class="fa fa-user"></i> <?php echo $admin_name;  ?> <b class="caret"></b>
+                <i class="fa fa-user"></i> <?php echo $_SESSION['admin_name'];  ?> <b class="caret"></b>
                 
             </a><!-- dropdown-toggle finish -->
             

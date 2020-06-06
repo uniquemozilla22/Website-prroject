@@ -11,11 +11,12 @@
 ?>
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <ol class="breadcrumb">
             <li class="active">
                 
                 <i class="fa fa-dashboard"></i> Dashboard / View Products
+                <a href="../index.php" class="btn btn-warning">Visit Website</a>
                 
             </li>
         </ol>
@@ -59,8 +60,18 @@
                             <?php 
           
                                 $i=0;
-                            
+
+                                $trader_id= $_SESSION['admin_id'];
+                                $trader_name= $_SESSION['admin_name'];
+
+                            if($trader_name!='trader')
+                            {
+                                $get_pro = "select * from PRODUCT where USER_ID='$trader_id'";
+                            }
+                            else{
+                                
                                 $get_pro = "select * from PRODUCT";
+                            }
                                 
                                 $run_pro = oci_parse($conn,$get_pro);
           
