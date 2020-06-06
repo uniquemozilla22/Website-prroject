@@ -14,11 +14,11 @@
         			<div class="col-lg-4 col-md-4 col-sm-6 col-12">
         				<div class="wn__team">
         					<div class="thumb">
-        						<img src="images/about/team/1.jpg" alt="Team images">
+        						<img src="images/team/rohit.jpg" alt="Team images">
         					</div>
         					<div class="content text-center">
-        						<h4>JOHN SMITH</h4>
-        						<p>Manager</p>
+        						<h4>rohit raj pandey</h4>
+        						<p>PROJECT MANAGER</p>
         						<ul class="team__social__net">
         							<li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
         							<li><a href="#"><i class="icon-social-tumblr icons"></i></a></li>
@@ -34,11 +34,11 @@
         			<div class="col-lg-4 col-md-4 col-sm-6 col-12">
         				<div class="wn__team">
         					<div class="thumb">
-        						<img src="images/about/team/2.jpg" alt="Team images">
+        						<img src="images/team/yogesh.jpg" alt="Team images">
         					</div>
         					<div class="content text-center">
-        						<h4>ALICE KIM</h4>
-        						<p>Co-Founder</p>
+        						<h4>Yogesh Bhattarai</h4>
+        						<p>LEADER, WEBSITE SPECIALIST</p>
         						<ul class="team__social__net">
         							<li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
         							<li><a href="#"><i class="icon-social-tumblr icons"></i></a></li>
@@ -54,11 +54,11 @@
         			<div class="col-lg-4 col-md-4 col-sm-6 col-12">
         				<div class="wn__team">
         					<div class="thumb">
-        						<img src="images/about/team/3.jpg" alt="Team images">
+        						<img src="images/team/sabdeeka.jpg" alt="Team images">
         					</div>
         					<div class="content text-center">
-        						<h4>VICTORIA DOE</h4>
-        						<p>Marketer</p>
+        						<h4>Sabdeeka Ghimire</h4>
+        						<p>BACK END SPECIALIST</p>
         						<ul class="team__social__net">
         							<li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
         							<li><a href="#"><i class="icon-social-tumblr icons"></i></a></li>
@@ -76,11 +76,11 @@
         			<div class="col-lg-4 col-md-4 col-sm-6 col-12">
         				<div class="wn__team">
         					<div class="thumb">
-        						<img src="images/about/team/1.jpg" alt="Team images">
+        						<img src="images/team/ashish.jpg" alt="Team images">
         					</div>
         					<div class="content text-center">
-        						<h4>JOHN SMITH</h4>
-        						<p>Manager</p>
+        						<h4>ASHISH PANDEY</h4>
+        						<p>DATABASE SPECIALIST</p>
         						<ul class="team__social__net">
         							<li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
         							<li><a href="#"><i class="icon-social-tumblr icons"></i></a></li>
@@ -96,11 +96,11 @@
         			<div class="col-lg-4 col-md-4 col-sm-6 col-12">
         				<div class="wn__team">
         					<div class="thumb">
-        						<img src="images/about/team/2.jpg" alt="Team images">
+        						<img src="images/team/aditya.jpg" alt="Team images">
         					</div>
         					<div class="content text-center">
-        						<h4>ALICE KIM</h4>
-        						<p>Co-Founder</p>
+        						<h4>ADITYA BIKRAM SHAH</h4>
+        						<p>RESOURCE MANAGER </p>
         						<ul class="team__social__net">
         							<li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
         							<li><a href="#"><i class="icon-social-tumblr icons"></i></a></li>
@@ -116,11 +116,32 @@
         			<div class="col-lg-4 col-md-4 col-sm-6 col-12">
         				<div class="wn__team">
         					<div class="thumb">
-        						<img src="images/about/team/3.jpg" alt="Team images">
+        						<img src="images/team/shivam.jpg" alt="Team images" >
         					</div>
         					<div class="content text-center">
-        						<h4>VICTORIA DOE</h4>
-        						<p>Marketer</p>
+        						<h4>SHIVAM SHAH</h4>
+        						<p>CONTENT WRITER</p>
+        						<ul class="team__social__net">
+        							<li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
+        							<li><a href="#"><i class="icon-social-tumblr icons"></i></a></li>
+        							<li><a href="#"><i class="icon-social-facebook icons"></i></a></li>
+        							<li><a href="#"><i class="icon-social-linkedin icons"></i></a></li>
+        							<li><a href="#"><i class="icon-social-pinterest icons"></i></a></li>
+        						</ul>
+        					</div>
+        				</div>
+        			</div>
+        			<!-- End Single Team -->
+
+					<!-- Start Single Team -->
+        			<div class="col-lg-4 col-md-4 col-sm-6 col-12">
+        				<div class="wn__team">
+        					<div class="thumb">
+        						<img src="images/team/garima.jpg" alt="Team images">
+        					</div>
+        					<div class="content text-center">
+        						<h4>GARIMA JOSHI</h4>
+        						<p>GHRAPHICS DESIGNER</p>
         						<ul class="team__social__net">
         							<li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
         							<li><a href="#"><i class="icon-social-tumblr icons"></i></a></li>

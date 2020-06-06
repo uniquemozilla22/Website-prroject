@@ -8,9 +8,9 @@
 							<div class="footer__widget footer__menu">
 								<div class="ft__logo">
 									<a href="index.php">
-										<img src="images/logo/3.png" alt="logo">
+										<img src="images/logo/3.png" alt="logo" width="20%">
 									</a>
-									<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered duskam alteration variations of passages</p>
+									<p>Taste best is operational in more than thousand additional major cities in various countries around the world. This website enables clients to choose their preferred foods from local restraunts and deliver food the clients’ place in the shortest possible time. This website accepts credit debit and cash on delivery methods. In early 2019, Taste best expanded into general product deliveries, under the brand name taste best stores. This site covers all the best online food sellers that are spread all over the area.</p>
 								</div>
 								<div class="footer__content">
 									<ul class="social__net social__net--2 d-flex justify-content-center">
@@ -21,12 +21,19 @@
 										<li><a href="#"><i class="bi bi-youtube"></i></a></li>
 									</ul>
 									<ul class="mainmenu d-flex justify-content-center">
-										<li><a href="index.php">Trending</a></li>
-										<li><a href="index.php">Best Seller</a></li>
-										<li><a href="index.php">All Product</a></li>
-										<li><a href="index.php">Wishlist</a></li>
-										<li><a href="index.php">Blog</a></li>
-										<li><a href="index.php">Contact</a></li>
+										<li><a href="traders.php">Traders</a></li>
+										<li><a href="about.php">About</a></li>
+										<li><a href="products.php">Products</a></li>
+										<?php
+										if (isset($_SESSION['customer_name'])|| isset($_SESSION['admin_name']) )
+										{
+											echo '<li><a href="include/logout.include.php">Logout</a></li>';	
+										}
+										else{
+											echo '
+											<li><a href="login.php">Login</a></li>';
+										}
+										?>
 									</ul>
 								</div>
 							</div>
@@ -39,16 +46,12 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-12">
 							<div class="copyright">
-								<div class="copy__right__inner text-left">
+								<div class="copy__right__inner text-right">
 									<p>Copyright <i class="fa fa-copyright"></i> <a href="">Team 2</a> All Rights Reserved</p>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-12">
-							<div class="payment text-right">
-								<img src="images/icons/payment.png" alt="" />
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
