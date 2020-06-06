@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("include/header.include.php");
 include("include/banner.include.php");
 include("include/cart/cartcontent.include.php");
