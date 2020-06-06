@@ -1,4 +1,4 @@
-<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+
         	<div class="container">			
         			<div class="col-lg-9 col-12 order-1 order-lg-2">
         				<div class="row">
@@ -31,18 +31,19 @@
 
 						<?php
 
-						$sql_login = "SELECT  * FROM USERA where USER_TYPE='trader';
+						$sql_login = "SELECT  * FROM USERA where USER_TYPE='trader'";
 
 						$login_stmt = oci_parse($conn, $sql_login);
 					
 							if(!$login_stmt)
 							{
-						echo "An error occurred in parsing the sql string.\n"; 
-						exit; 
+							echo "An error occurred in parsing the sql"; 
+							exit; 
 							}
 					
 						oci_execute($login_stmt);
-					while (($row= oci_fetch_array($login_stmt)==true)
+
+					while (($row= oci_fetch_array($login_stmt))==true)
 					{
 						$userid = $row['USER_ID'];
 						$username = $row['USERNAME'];
@@ -50,23 +51,24 @@
 						$usercontact=$row['USER_PHONE'];
 						$useraddress=$row['USER_ADDRESS'];
 						$userdesc = $row['USER_DESCRIPTION'];
-						$usertype =$row['PRODUCT_STATUS'];
-						$userimage= $row['PRODUCT_IMAGE'];
+						$usertype =$row['USER_TYPE'];
+						$userimage= $row['USER_IMAGE'];
 						$customerrid=$row['CUSTOMER_ID'];
 						$traderid=$row['TRADER_ID'];
 						$admintype=$row['ADMIN_TYPE'];
 						$discountid= $row['DISCOUNT_ID'];
+
+						
 						
 						echo "
-						
 	        						<!-- Start Single Product -->
-	        						<div class="list__view">
-	        							<div class="thumb">
-										a class='first__img' href='traders.php?userdi=$userid'><img src='trader_area/trader_images/$userimage' alt='$username'></a>											
-	        								//<a class="second__img animation1" href="singleproduct.php"><img src="images/product/2.jpg" alt="product images"></a>
+	        						<div class='list__view'>
+	        							<div class='thumb'>
+										<a class='first__img' href='traders.php?traderdisplay=$userid'><img src='trader_area/trader_images/$userimage' alt='$username'></a>
+	        							<a class='second__img animation1' href='singleproduct.php'><img src='images/product/2.jpg' alt='product images'></a>
 	        							</div>
-	        							<div class="content">
-	        								<h2><a href="trader.php">$username</a></h2>
+	        							<div class='content'>
+	        								<h2><a href='trader.php'>$username</a></h2>
 											<p>$userdesc</p>
 	        								
 	        							</div>
@@ -74,6 +76,7 @@
 									<!-- End Single Product -->
 									
 									";
+									}?>
 							
 	        					</div>
 	        				</div>
