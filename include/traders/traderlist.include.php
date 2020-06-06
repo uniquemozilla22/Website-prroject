@@ -1,26 +1,7 @@
-<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg" style='background-color:RGB(209, 201, 201);'>
         	<div class="container">			
         			<div class="col-lg-9 col-12 order-1 order-lg-2">
-        				<div class="row">
-        					<div class="col-lg-12">
-								<div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
-									<div class="shop__list nav justify-content-center" role="tablist">
-			                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
-			                        </div>
-			                        <div class="orderby__wrapper">
-			                        	<span>Sort By</span>
-			                        	<select class="shot__byselect">
-			                        		<option>Default sorting</option>
-			                        		<option>HeadPhone</option>
-			                        		<option>Furniture</option>
-			                        		<option>Jewellery</option>
-			                        		<option>Handmade</option>
-			                        		<option>Kids</option>
-			                        	</select>
-			                        </div>
-		                        </div>
-        					</div>
-        				</div>
+        				
 
 
 						<?php
@@ -58,18 +39,18 @@
 	        					<div class='list__view__wrapper'>
 	        						<!-- Start Single Product -->
 	        						<div class='list__view'>
-	        							<div class='thumb'>
-											<img src='trader_area/trader_images/$userimage' alt='$userimage' style='width:700;'>
+	        							<div class='thumb'  >
+											<img src='trader_area/trader_images/$userimage' alt='$userimage'  style='margin:20px;'>
 											
 										</div>
 			
 										
 	        							<div class='content'>
-	        								<h2>$username</h2>
+	        								<h2 style='color:RGB(240, 123, 65);'>$username</h2>
 	        								
-	        								<h2>$useremail</h2>
-											<h2>$usercontact</h2>
-	        								<p>$userdesc</p>
+	        								<h4>Email: $useremail</h4>
+											<h4>Contact: $usercontact</h4>
+	        								<p style='font-size:15px;'>$userdesc</p>
 	        								
 
 										</div>
