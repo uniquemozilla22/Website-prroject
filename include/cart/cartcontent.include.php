@@ -62,9 +62,7 @@ if(!$cart_SELECT){
 
 oci_execute($cart_SELECT);
 
-$row=oci_fetch_assoc($cart_SELECT);
-
-if($row==false)
+if(oci_num_rows($cart_SELECT)<1)
 {
 
     $i_query ="INSERT INTO CART VALUES (null,0,'$userid')";
@@ -80,7 +78,8 @@ oci_execute($cart_created);
 echo"<h3> Enjoy your shop </h3>";
 
 }
-else if($row==true)
+
+while($row=oci_fetch_array($cart_SELECT))
 {
   
     $product_id=$row['PRODUCT_ID'];
@@ -131,6 +130,9 @@ else if($row==true)
    
     
 }
+
+
+
 
 
 
