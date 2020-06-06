@@ -14,7 +14,7 @@
 
 ?>
 
-<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+<div class="page-shop-sidebar left--sidebar section-padding--lg" style="background-color:RGB(209, 201, 201);">
         	<div class="container">
         		<div class="row">
         			<div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
@@ -107,7 +107,7 @@
 		                        </div>
         					</div>
         				</div>
-        				<div class="tab__container">
+        				<div class="tab__container" >
 	        				<div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
 	        					<div class="row">
 

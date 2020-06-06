@@ -11,7 +11,7 @@
 ?>
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active">
                 

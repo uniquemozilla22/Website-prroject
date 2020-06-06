@@ -28,6 +28,7 @@ if($_SESSION['admin_type']!='trader'){
             <li class="active"> 
                 
                 <i class="fa fa-dashboard"></i> Dashboard / Insert Products
+                <a href="../index.php" class="btn btn-warning">Visit Website</a>
                 
             </li> 
             
