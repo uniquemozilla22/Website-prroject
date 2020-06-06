@@ -69,7 +69,7 @@ while (($row= oci_fetch_array($login_stmt))==true)
 									<div class='actions_inner'>
 										<ul class='add_to_links'>
 											<li><a class='cart' href='cart.php'><i class='bi bi-shopping-bag4'></i></a></li>
-											<li><a class='compare' href='singleproduct.php?productdisplay=$productid'><i class='bi bi-heart-beat'></i></a></li>
+											<li><a class='compare' href='index.php?wishadd=$productid'><i class='bi bi-heart-beat'></i></a></li>
 										</ul>
 									</div>
 								</div>
