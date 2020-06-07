@@ -1,6 +1,6 @@
 <?php 
 
-$customer_session = $_SESSION['USER_EMAIL'];
+$customer_session = $_SESSION['customer_id'];
 
 $get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
 

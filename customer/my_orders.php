@@ -47,7 +47,7 @@
 
            <?php
 
-            $customer_session = $_SESSION['USER_EMAIL'];
+            $customer_session = $_SESSION['customer_id'];
 
             $get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
 
@@ -68,11 +68,13 @@
 
             $run_orders = oci_parse($conn,$get_orders);
 
-            oci_execute($run_orders);
-
             if(!$run_orders){
                 echo "Error in parsing";
             }
+            
+            oci_execute($run_orders);
+
+           
 
             $i = 1;
         
