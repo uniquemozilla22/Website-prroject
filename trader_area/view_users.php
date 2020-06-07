@@ -15,6 +15,7 @@
             <li class="active"><!-- active begin -->
                 
                 <i class="fa fa-dashboard"></i> Dashboard / View Users
+                <a href="../index.php" class="btn btn-warning">Visit Website</a>
                 
             </li><!-- active finish -->
         </ol><!-- breadcrumb finish -->
