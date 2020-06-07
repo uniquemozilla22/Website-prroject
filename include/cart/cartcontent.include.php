@@ -40,6 +40,7 @@ else if (isset($_SESSION['admin_id']))
 }
 
 $dis_price=0;
+$coupon_code=0;
 ?>
 
 <div class='cart-main-area section-padding--lg bg--white'>

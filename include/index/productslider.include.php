@@ -1,6 +1,6 @@
 <?php
-
-$sql_login = "SELECT * FROM PRODUCT"; 
+$traderid="";
+$sql_login = "SELECT * FROM PRODUCT where "; 
 
 $login_stmt = oci_parse($conn, $sql_login);
 

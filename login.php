@@ -97,7 +97,7 @@ if(isset($_GET['loginSucess']))
 
 							?>
 							<form action="include/login/login.include.php" method="POST" enctype="multipart/form-data">
-								<div class="account__form" >
+								<div class="account__form">
 									<div class="input__box">
 										<label>Username or email address <span>*</span></label>
 										<input type="text" name="username" required>
