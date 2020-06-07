@@ -1,8 +1,11 @@
 <?php 
 
+include('includes/db.php');
+
+
 $customer_session = $_SESSION['customer_id'];
 
-$get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
+$get_customer = "select * from USERA where USER_ID='$customer_session'";
 
 $run_customer = oci_parse($conn,$get_customer);
 
@@ -30,11 +33,18 @@ $customer_address = $row_customer['USER_ADDRESS'];
 
 $customer_image = $row_customer['USER_IMAGE'];
 
+$customer_desc = $row_customer['USER_DESCRIPTION'];
+
+$admin_type=$row_customer['ADMIN_TYPE'];
+
+$discount_id=$row_customer['DISCOUNT_ID'];
+
+
 ?>
 
 <h1 align="center"> Edit Your Account </h1>
 
-<form method="post" class="form-horizontal" enctype="multipart/form-data"><!-- form-horizontal Begin -->
+<form method="post" class="form-horizontal" action="" enctype="multipart/form-data"><!-- form-horizontal Begin -->
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -105,7 +115,7 @@ $customer_image = $row_customer['USER_IMAGE'];
 
                       <div class="col-md-6"><!-- col-md-6 Begin -->
 
-                          <input name="c_image" type="file" class="form-control" required>
+                          <input name="c_image" type="file" class="form-control" >
 
                           <img src="trader_images/<?php echo $customer_image; ?>" alt="<?php echo $customer_name; ?>" width="70" height="70">
 
@@ -143,39 +153,42 @@ $customer_image = $row_customer['USER_IMAGE'];
 
 if(isset($_POST['update'])){
     
-    $update_id = $customer_id;
-    
-    $c_name = $_POST['c_name'];
-    
-    $c_email = $_POST['c_email'];
-    
-    $c_address = $_POST['c_address'];
+    //$update_id = $customer_id;
 
-    $c_pass = $_POST['c_pass'];
+    $user_name = $_POST['c_name'];
     
-    $c_contact = $_POST['c_contact'];
+    $user_email = $_POST['c_email'];
+    
+    $user_address = $_POST['c_address'];
 
-    $c_desc = $_POST['c_desc'];
+    $user_pass = $_POST['c_pass'];
     
-    $c_image = $_FILES['c_image']['name'];
+    $user_contact = $_POST['c_phone'];
+
+    $user_desc = $_POST['c_desc'];
     
-    $c_image_tmp = $_FILES['c_image']['tmp_name'];
+    $user_image = $_FILES['c_image']['name'];
+    
+    $user_image_tmp = $_FILES['c_image']['tmp_name'];
     
     move_uploaded_file ($c_image_tmp,"customer_images/$c_image");
     
-    $update_customer = "update USERA set USERNAME='$c_name',USER_EMAIL='$c_email',USER_PASSWORD='$c_pass',USER_ADDRESS='$c_address',USER_PHONE='$c_contact',USER_IMAGE='$c_image', ,USER_DESCRIPTION='$c_desc' where USER_ID='$update_id' ";
+    $update_customer= "UPDATE USERA SET USERNAME='$user_name',USER_EMAIL='$user_email',USER_PASSWORD='$user_password',USER_PHONE='$user_contact',USER_ADDRESS='$user_address',USER_DESCRIPTION='$user_desc', USER_IMAGE='$user_image' where USER_ID='$customer_id'";
     
     $run_customer = oci_parse($conn,$update_customer);
 
     oci_execute($run_customer);
     
-    if($run_customer){
+        if(!$run_customer){
+            echo "<script>alert('Your account has not been updated successfully. Please login again.')</script>";
+        
+        }
         
         echo "<script>alert('Your account has been updated successfully. Please login again.')</script>";
         
-        echo "<script>window.open('logout.php','_self')</script>";
+        echo "<script>window.open('my_account.php','_self')</script>";
         
-    }
+    
     
 }
 

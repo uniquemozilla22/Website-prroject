@@ -15,11 +15,11 @@
 
 <?php 
 
-$c_email = $_SESSION['customer_id'];
+$c_id = $_SESSION['customer_id'];
 
 if(isset($_POST['Yes'])){
     
-    $delete_customer = "delete from USERA where USER_EMAIL='$c_email'";
+    $delete_customer = "delete from USERA where USER_ID='$c_id'";
     
     $run_delete_customer = oci_parse($conn,$delete_customer);
 

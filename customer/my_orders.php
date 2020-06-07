@@ -68,13 +68,11 @@
 
             $run_orders = oci_parse($conn,$get_orders);
 
+            oci_execute($run_orders);
+
             if(!$run_orders){
                 echo "Error in parsing";
             }
-            
-            oci_execute($run_orders);
-
-           
 
             $i = 1;
         
