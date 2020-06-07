@@ -6,6 +6,28 @@ if (isset($_GET['itemadded']))
     $cart_message="Your item has been added to cart";
 }
 
+if (isset($_GET['productidremove'])){
+
+    $p_id=$_GET['productidremove'];
+
+    $query="DELETE FROM CART_PRODUCT WHERE PRODUCT_ID ='$p_id'";
+
+    $parsing_query = oci_parse($conn,$query);
+
+    if (!$parsing_query)
+    {
+        echo "Item not deleted because of sql error";
+    }
+    oci_execute($parsing_query); 
+
+    $cart_message= "Your item has been removed";  
+
+}
+if(isset($_GET['itemalreadyoncart']))
+{
+    $cart_message="Your item is already on the cart";
+}
+
 include("include/connection.php");
 
     if (isset($_SESSION['customer_id']))
@@ -51,7 +73,6 @@ else if (isset($_SESSION['admin_id']))
 
                                     
 <?php
-
 $S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid'";
 
 $cart_SELECT= oci_parse($conn,$S_query);
@@ -61,23 +82,7 @@ if(!$cart_SELECT){
 }
 
 oci_execute($cart_SELECT);
-
-if(oci_num_rows($cart_SELECT)<1)
-{
-
-    $i_query ="INSERT INTO CART VALUES (null,0,'$userid')";
-
-$cart_created= oci_parse($conn,$i_query);
-
-if(!$cart_created){
-    echo "cart not created for your ID";
-}
-
-oci_execute($cart_created);
-
-echo"<h3> Enjoy your shop </h3>";
-
-}
+$total_price=0;
 
 while($row=oci_fetch_array($cart_SELECT))
 {
@@ -114,14 +119,16 @@ while($row=oci_fetch_array($cart_SELECT))
     $discountid= $row['DISCOUNT_ID'];
     
 
+    
+    $total_price +=$productprice;
     echo"
     <tr>
     <td class='product-thumbnail'><a href='#'><img src='images/product/sm-3/1.jpg' alt='$productname'></a></td>
     <td class='product-name'><a href='#'>'$productname'</a></td>
     <td class='product-price'><span class='amount'>$ $productprice</span></td>
     <td class='product-quantity'><input type='number' value='1'></td>
-    <td class='product-subtotal'>$165.00</td>
-    <td class='product-remove'><a href='#'> X</a></td>
+    <td class='product-subtotal'>$$total_price</td>
+    <td class='product-remove'><a href='cart.php?productidremove=$product_id'> X</a></td>
     </tr>
     ";
     }
@@ -162,7 +169,7 @@ while($row=oci_fetch_array($cart_SELECT))
                                     <li>Sub Total</li>
                                 </ul>
                                 <ul class="cart__total__tk">
-                                    <li>$70</li>
+                                    <li>$<?php echo $total_price; ?></li>
                                     <li>$70</li>
                                 </ul>
                             </div>
