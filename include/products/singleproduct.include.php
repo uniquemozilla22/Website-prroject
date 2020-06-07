@@ -1,7 +1,7 @@
  <!-- Start main Content -->
 
-
  <?php
+
 if (!isset($_GET['productdi']))
 {
 	echo "<h1> Please select a product</h1>";
@@ -71,12 +71,17 @@ if ($row = oci_fetch_assoc($login_stmt))
 								<div class='product__overview'>
 								<p><strong>Persons who cannot have the product : $allergy</strong></p>
 								</div>
+
+								<div class='product__overview'>
+								<p> GET DISCOUNT ON COUPON CODE <strong>HIGH_DISCOUNT</strong></p>
+								</div>
 								<div class='box-tocart d-flex'>
 									<span>Qty</span>
-									<form action ='' method='post'>
+									<form action ='include/products/singlecartadder.include.php' method='get '>
 									<input id='qty' class='input-text qty' name='qty' max='$maximumorder' min='$minimumorder' value='$minimumorder' title='Qty' type='number'>
+									<input name='proid' type='number' value ='$productid' style='display:none'>
 									<div class='addtocart__actions'>
-										<button class='tocart' type='submit' title='Add to Cart'>Add to Cart</button>
+										<button class='tocart' name= 'addsubmit' type='submit' value ='1' title='Add to cart'>Add to cart</button>
 									</div>
 									</form>
 									<div class='product-addto-links clearfix'>
@@ -94,7 +99,12 @@ if ($row = oci_fetch_assoc($login_stmt))
 					</div>
 				</div>
 
-				";}
+				";
+			
+			
+			}
+
+				
 				?>
 
 				<div class='product__info__detailed'>
@@ -177,7 +187,7 @@ if ($row = oci_fetch_assoc($login_stmt))
 								<form action ='' method='post'>
 								<div class='review_form_field'>
 									<div class='input__box'>
-										<span>Summary</span>
+										<span>Rating</span>
 										<input id='qty' class='input-text qty' name='rating' max='5' min='1' value='1' title='Qty' type='number'>										
 									</div>
 									<div class='input__box'>

@@ -14,7 +14,7 @@
 
 ?>
 
-<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg" style='background-color:RGB(201, 190, 185);'>
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
         	<div class="container">
         		<div class="row">
         			<div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
@@ -166,8 +166,8 @@
 							<div class='action'>
 													<div class='actions_inner'>
 														<ul class='add_to_links'>
-															<li><a class='cart' href='cart.php'><i class='bi bi-shopping-bag4'></i></a></li>
-															<li><a class='compare' href='singleproduct.php?productdisplay=$productid'><i class='bi bi-heart-beat'></i></a></li>
+															<li><a class='cart' href='include/cart/cartadder.include.php?productid=$productid'><i class='bi bi-shopping-bag4'></i></a></li>
+															<li><a class='compare' href='index.php?wishadd=$productid'><i class='bi bi-heart-beat'></i></a></li>
 														</ul>
 													</div>
 												</div>
@@ -231,12 +231,12 @@ while (($row= oci_fetch_array($login_stmt))==true)
 			<li>$ $productprice</li>
 		</ul>
 		<div class='action'>
-								<div class='actions_inner'>
-									<ul class='add_to_links'>
-										<li><a class='cart' href='cart.php'><i class='bi bi-shopping-bag4'></i></a></li>
-										<li><a class='compare' href='singleproduct.php?productdisplay=$productid'><i class='bi bi-heart-beat'></i></a></li>
-									</ul>
-								</div>
+		<div class='actions_inner'>
+		<ul class='add_to_links'>
+			<li><a class='cart' href='include/cart/cartadder.include.php?productid=$productid'><i class='bi bi-shopping-bag4'></i></a></li>
+			<li><a class='compare' href='index.php?wishadd=$productid'><i class='bi bi-heart-beat'></i></a></li>
+		</ul>
+	</div>
 							</div>
 	</div>
 	</div>
@@ -300,12 +300,12 @@ while (($row= oci_fetch_array($login_stmt))==true)
 			<li>$ $productprice</li>
 		</ul>
 		<div class='action'>
-								<div class='actions_inner'>
-									<ul class='add_to_links'>
-										<li><a class='cart' href='cart.php'><i class='bi bi-shopping-bag4'></i></a></li>
-										<li><a class='compare' href='singleproduct.php?productdisplay=$productid'><i class='bi bi-heart-beat'></i></a></li>
-									</ul>
-								</div>
+		<div class='actions_inner'>
+		<ul class='add_to_links'>
+			<li><a class='cart' href='include/cart/cartadder.include.php?productid=$productid'><i class='bi bi-shopping-bag4'></i></a></li>
+			<li><a class='compare' href='index.php?wishadd=$productid'><i class='bi bi-heart-beat'></i></a></li>
+		</ul>
+	</div>
 							</div>
 	</div>
 	</div>
@@ -367,12 +367,12 @@ else{
 				<li>$ $productprice</li>
 			</ul>
 			<div class='action'>
-									<div class='actions_inner'>
-										<ul class='add_to_links'>
-											<li><a class='cart' href='cart.php'><i class='bi bi-shopping-bag4'></i></a></li>
-											<li><a class='compare' href='singleproduct.php?productdisplay=$productid'><i class='bi bi-heart-beat'></i></a></li>
-										</ul>
-									</div>
+			<div class='actions_inner'>
+			<ul class='add_to_links'>
+				<li><a class='cart' href='include/cart/cartadder.include.php?productid=$productid'><i class='bi bi-shopping-bag4'></i></a></li>
+				<li><a class='compare' href='index.php?wishadd=$productid'><i class='bi bi-heart-beat'></i></a></li>
+			</ul>
+		</div>
 								</div>
 		</div>
 		</div>

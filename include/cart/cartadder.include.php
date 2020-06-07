@@ -7,6 +7,16 @@ session_start();
     if (isset($_GET['productid']))
     {
         $productid=$_GET['productid'];
+
+
+        if (isset($_GET['quantity']))
+        {
+            $productquantity=$_GET['quantity'];
+        }
+        else{
+            $productquantity=1;
+        }
+
     if (isset($_SESSION['customer_id']))
     {
         $userid= $_SESSION['customer_id'];
@@ -16,7 +26,7 @@ session_start();
         $userid=$_SESSION['admin_id'];
     }
     
-    $checkerquery="SELECT * FROM CART_PRODUCT CP , CART C WHERE PRODUCT_ID = '$productid'";
+    $checkerquery="SELECT * FROM CART_PRODUCT CP , CART C WHERE CP.PRODUCT_ID = '$productid'";
 
     $cheparse=oci_parse($conn,$checkerquery);
 
@@ -27,11 +37,25 @@ session_start();
     oci_execute($cheparse);
 
     $row=oci_fetch_assoc($cheparse);
-
-
     if ($row==true)
     {
+        $proq=$row['PRODUCT_QUANTITY'];
+        if($proq==$productquantity){
         header("location: ../../cart.php?itemalreadyoncart=1");
+    }
+        else{
+            $Uquery="UPDATE CART_PRODUCT SET PRODUCT_QUANTITY='$productquantity' WHERE PRODUCT_ID='$productid'";
+            $Uparse=oci_parse($conn,$Uquery);
+
+    if (!$Uparse)
+    {
+        echo "add selection not done";
+    }
+    oci_execute($Uparse);
+
+    header("location: ../../cart.php?itemalreadyoncartbutquantityupdated=1");
+    
+        }
     }
     else{
         
@@ -49,7 +73,7 @@ session_start();
         {
             $cart_id=$row['CART_ID'];
     
-            $inserting_query= "INSERT INTO CART_PRODUCT VALUES('$cart_id','$productid')";
+            $inserting_query= "INSERT INTO CART_PRODUCT(CART_ID,PRODUCT_ID,PRODUCT_QUANTITY) VALUES('$cart_id','$productid','$productquantity')";
     
             $insert_parse=oci_parse($conn,$inserting_query);
     
@@ -57,9 +81,14 @@ session_start();
         {
             echo "add insertion not done";
         }
-        oci_execute($insert_parse);
-    
+        $exec=oci_execute($insert_parse);
+
+        if ($exec)
+        {
         header("location: ../../cart.php?itemadded=1");
+
+        }
+    
         }
 
     }

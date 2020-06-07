@@ -6,6 +6,7 @@ if (isset($_GET['itemadded']))
     $cart_message="Your item has been added to cart";
 }
 
+
 if (isset($_GET['productidremove'])){
 
     $p_id=$_GET['productidremove'];
@@ -26,6 +27,10 @@ if (isset($_GET['productidremove'])){
 if(isset($_GET['itemalreadyoncart']))
 {
     $cart_message="Your item is already on the cart";
+}
+if(isset($_GET['itemalreadyoncartbutquantityupdated']))
+{
+    $cart_message="Your item was already on the cart but the quantity is updated";
 }
 
 include("include/connection.php");
@@ -91,6 +96,7 @@ while($row=oci_fetch_array($cart_SELECT))
 {
   
     $product_id=$row['PRODUCT_ID'];
+    $product_quantity=$row['PRODUCT_QUANTITY'];
 
     $select_query="SELECT * FROM PRODUCT WHERE PRODUCT_ID='$product_id'";
 
@@ -122,15 +128,16 @@ while($row=oci_fetch_array($cart_SELECT))
     $discountid= $row['DISCOUNT_ID'];
     
 
+    $de=$productprice*$product_quantity;
     
-    $total_price +=$productprice;
+    $total_price +=$de;
     echo"
     <tr>
     <td class='product-thumbnail'><a href='#'><img src='images/product/sm-3/1.jpg' alt='$productname'></a></td>
-    <td class='product-name'><a href='#'>'$productname'</a></td>
+    <td class='product-name'><a href='singleproduct.php?productdi=$product_id'>'$productname'</a></td>
     <td class='product-price'><span class='amount'>$ $productprice</span></td>
-    <td class='product-quantity'><input type='number' value='$minimumorder' min='$minimumorder' max='$maximumorder' name ='quantity'></td>
-    <td class='product-subtotal'>$$total_price</td>
+    <td class='product-quantity'><span class='amount'>$product_quantity</span></td></td>
+    <td class='product-subtotal'>$$de</td>
     <td class='product-remove'><a href='cart.php?productidremove=$product_id'> X</a></td>
     </tr>
     ";

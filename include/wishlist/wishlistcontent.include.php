@@ -67,6 +67,7 @@ if (isset($_GET['itemdeleted'])){
             <td class='product-name'><a href='singleproduct.php?productdi=$product_id'>$product_name</a></td>
             <td class='product-price'><span class='amount'>$product_rate</span></td>
             <td class='product-stock-status'><span class='wishlist-in-stock'> $statuspro</span></td>
+            <td class='product-add-to-cart'><a href='include/cart/cartadder.include.php?productid=$product_id'> Add to Cart</a></td>
         </tr>";
 
         }

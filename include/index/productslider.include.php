@@ -1,6 +1,7 @@
 <?php
-$traderid="";
-$sql_login = "SELECT * FROM PRODUCT where "; 
+$i=rand(29,31);
+$sql_login = "SELECT * FROM PRODUCT where USER_ID='$i'"; 
+
 
 $login_stmt = oci_parse($conn, $sql_login);
 
@@ -12,13 +13,29 @@ if(!$login_stmt)
 
 oci_execute($login_stmt);
 
+$query="SELECT * FROM USERA WHERE USER_ID = '$i'";
+
+$sle = oci_parse($conn, $query);
+
+if(!$sle)
+{
+    echo "An error occurred in parsing the sql string.\n"; 
+    exit; 
+}
+
+oci_execute($sle);
+
+$name_fetch= oci_fetch_assoc($sle);
+
+$traderName= $name_fetch['USERNAME'];
+
 echo " 
 <section class='wn__product__area brown--color pt--80  pb--30'>
 			<div class='container'>
 				<div class='row'>
 					<div class='col-lg-12'>
 						<div class='section__title text-center'>
-							<h2 class='title__be--2'>Trader's<span class='color--theme'> Name</span></h2>
+							<h2 class='title__be--2'>Trader :<span class='color--theme'> $traderName</span></h2>
 							<p>There will be some description about the trader and above will be the name of trader.</p>
 						</div>
 					</div>
@@ -52,7 +69,7 @@ while (($row= oci_fetch_array($login_stmt))==true)
 					<div class='product product__style--3'>
 						<div class='col-lg-3 col-md-4 col-sm-6 col-12'>
 							<div class='product__thumb'>
-								<a class='first__img' href='singleproduct.php?productdisplay=$productid'><img src='images/books/1.jpg	' alt='$productname'></a>
+								<a class='first__img' href='singleproduct.php?productdi=$productid'><img src='images/books/1.jpg	' alt='$productname'></a>
 								<div class='hot__box'>
 									<span class='hot-label'>$productstatus</span>
 								</div>

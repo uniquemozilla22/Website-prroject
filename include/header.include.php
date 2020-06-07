@@ -168,12 +168,8 @@
 									echo "
 									<li><a href='products.php?category=$category'>$category_name</a></li>
 									
-									";
-								
-								
+									";								
 								}
-									
-
 								?>
 										</ul>
 								</li>

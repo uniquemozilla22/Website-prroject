@@ -15,7 +15,7 @@
 
 <?php 
 
-$c_email = $_SESSION['customer_id'];
+$c_email = $_SESSION['USER_EMAIL'];
 
 if(isset($_POST['Yes'])){
     

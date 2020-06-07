@@ -1,11 +1,13 @@
 <?php 
 
 session_start();
-include("includes/db.php");
-include("includes/header.php");
-include("includes/banner.include.php");
 
-if(isset( $_SESSION['customer_id'] )|| isset( $_SESSION['admin_id']) ){
+if (!isset( $_SESSION['customer_id'] )|| !isset( $_SESSION['admin_id']) )
+{
+    
+    echo "<script>window.open('../checkout.php','_self')</script>";
+    
+}else{
     if (isset($_SESSION['admin_id'])){
 
         $id=$_SESSION['admin_id'];
@@ -14,8 +16,8 @@ if(isset( $_SESSION['customer_id'] )|| isset( $_SESSION['admin_id']) ){
 
         $id=$_SESSION['customer_id'];
     }
-
-
+include("includes/db.php");
+include("functions/functions.php");
 
 if(isset($id)){
 
@@ -124,4 +126,4 @@ if(isset($id)){
 </body>
 </html>
 <?php } ?>
-<?php }?>
+<?php } ?>
