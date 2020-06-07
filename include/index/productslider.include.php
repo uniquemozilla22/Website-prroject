@@ -13,7 +13,7 @@ if(!$login_stmt)
 oci_execute($login_stmt);
 
 echo " 
-<section class='wn__product__area brown--color pt--80  pb--30' style='background-color:RGB(209, 201, 201);'>
+<section class='wn__product__area brown--color pt--80  pb--30'>
 			<div class='container'>
 				<div class='row'>
 					<div class='col-lg-12'>

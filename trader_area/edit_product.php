@@ -371,8 +371,6 @@ if(isset($_POST['update'])){
     
     $product_title = $_POST['product_title'];
 
-    $user_id=$_POST['admin_id'];
-
     $cat = $_POST['cat'];
 
     $shop=$_POST['shop'];
@@ -397,7 +395,7 @@ if(isset($_POST['update'])){
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
    
-    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop',REVIEW_ID='$review', USER_ID='$user_id', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORDS='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
+    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop',REVIEW_ID='$review', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORDS='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
     
     $run_product = oci_parse($conn,$update_product);
     

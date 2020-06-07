@@ -38,6 +38,8 @@ else if (isset($_SESSION['admin_id']))
 {
     $userid=$_SESSION['admin_id'];
 }
+
+$dis_price=0;
 ?>
 
 <div class='cart-main-area section-padding--lg bg--white'>
@@ -47,7 +49,7 @@ else if (isset($_SESSION['admin_id']))
                     <div class='section__title text-center'>
 							<h2 class='title__be--2'>Your <span class='color--theme'> Cart</span></h2>
 						</div>
-                        <form action='#'> 
+                        <form action='cart.php' method="POST"> 
                             <?php
                             if(isset($cart_message))
                             {
@@ -126,7 +128,7 @@ while($row=oci_fetch_array($cart_SELECT))
     <td class='product-thumbnail'><a href='#'><img src='images/product/sm-3/1.jpg' alt='$productname'></a></td>
     <td class='product-name'><a href='#'>'$productname'</a></td>
     <td class='product-price'><span class='amount'>$ $productprice</span></td>
-    <td class='product-quantity'><input type='number' value='1'></td>
+    <td class='product-quantity'><input type='number' value='$minimumorder' min='$minimumorder' max='$maximumorder' name ='quantity'></td>
     <td class='product-subtotal'>$$total_price</td>
     <td class='product-remove'><a href='cart.php?productidremove=$product_id'> X</a></td>
     </tr>
@@ -145,6 +147,37 @@ while($row=oci_fetch_array($cart_SELECT))
 
 ?>
 
+<?php
+
+if(isset($_POST['couponsubmit'])){
+
+    $coupon_code= $_POST['couponcode'];
+
+    $query = "SELECT * FROM DISCOUNT WHERE DISCOUNT_NAME='$coupon_code'";
+
+    $dis_parse = oci_parse($conn,$query);
+
+    if (!$dis_parse)
+    {
+        echo "discount sql not run";
+    }
+    oci_execute($dis_parse);
+  
+    if (($dis_row=oci_fetch_assoc($dis_parse))==true){
+        $dis_per=$dis_row['DISCOUNT_PERCENTAGE'];
+
+        $dis_pers= $dis_per * $total_price;
+        echo $dis_pers;
+        $dis_price=$dis_pers/100;
+        echo $dis_price;
+
+    }else 
+    {
+        header("location: cart.php?discountnotavailable=1");
+    }
+}
+
+?>
                                        
                                     </tbody>
                                 </table>
@@ -152,8 +185,10 @@ while($row=oci_fetch_array($cart_SELECT))
                         </form> 
                         <div class="cartbox__btn">
                             <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
-                                <li><a href="#">Coupon Code</a></li>
-                                <li><a href="#">Apply Code</a></li>
+                            <form action="cart.php" method="post" class="d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                                <li><input type="text" placeholder="Coupon Code" name="couponcode" style="padding:15px;"></a></li>
+                                <li><button type="submit" name ="couponsubmit" style="padding:15px;">Apply Code</button></li>
+                                </form>
                                 <li><a href="#">Update Cart</a></li>
                                 <li><a href="#">Check Out</a></li>
                             </ul>
@@ -166,16 +201,16 @@ while($row=oci_fetch_array($cart_SELECT))
                             <div class="cartbox-total d-flex justify-content-between">
                                 <ul class="cart__total__list">
                                     <li>Cart total</li>
-                                    <li>Sub Total</li>
+                                    <li>Discount Added <strong>(<?php echo $coupon_code; ?>)</strong></li>
                                 </ul>
                                 <ul class="cart__total__tk">
                                     <li>$<?php echo $total_price; ?></li>
-                                    <li>$70</li>
+                                    <li>$<?php echo $dis_price; ?></li>
                                 </ul>
                             </div>
                             <div class="cart__total__amount">
                                 <span>Grand Total</span>
-                                <span>$140</span>
+                                <span>$<?php echo $discounted_price=$total_price-$dis_price; ?></span>
                             </div>
                         </div>
                     </div>
@@ -183,3 +218,5 @@ while($row=oci_fetch_array($cart_SELECT))
             </div>  
         </div>
         <!-- cart-main-area end -->
+
+        
