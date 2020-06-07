@@ -15,7 +15,6 @@
             <li>
                 
                 <i class="fa fa-dashboard"></i> Dashboard / View Categories
-                <a href="../index.php" class="btn btn-warning">Visit Website</a>
                 
             </li>
         </ol><!-- breadcrumb finish -->
