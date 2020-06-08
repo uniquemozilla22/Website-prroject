@@ -45,7 +45,7 @@ while($row=oci_fetch_array($cart_SELECT))
 
     oci_execute($parsing_cart_showing);
 
-    if (($row=oci_fetch_assoc($parsing_cart_showing))==true)
+    if (($row=oci_fetch_array($parsing_cart_showing))==true)
     {
         $productname = $row['PRODUCT_NAME'];
 	$productid = $row['PRODUCT_ID'];
@@ -70,22 +70,57 @@ while($row=oci_fetch_array($cart_SELECT))
     }
 }
 ?>
-<div class="container">
-<div class="row justify-content-center">
-<div class="col-lg-6 px-4 pb-4">
- <h4 class="text-center text-info p-2" >Complete Your Order!</h4>
- <div class="jumbotron p-3 mb-2 text-center">
- <h6><b>Product(s)  :</b><?php</h6>
- </div>
-</div>
-</div>
-</div>
+        
+        <div class="container">
+        <div class="row justify-content-center">
+        <div class="col-lg-6 px-4 pb-4" id="order">
+        <h4 class="text-center text-info p-2"  >Complete Your Order!</h4>
+        <div class="jumbotron p-3 mb-2 text-center" style='background-color:RGB(201, 190, 185);'>
+        <h6 class="lead"><b>Product(s)  :</b><?php echo $productname?></h6>
+        <h6 class="lead"><b>Delivery Charge:</b> Free</h6>
+        <h5><b>Total Amount Payable:  </b><?php echo number_format($total_price,2)?></h5>
+        </div>
+
+        <form action="" method="post" id="placeOrder">
+        <input type="hidden" name="products" value="<?php $productname;?>">
+        <input type="hidden" name="grand_total" value="<?php $total_price;?>">
+            <div class="form-group">
+            <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+            </div>
+
+            <div class="form-group">
+            <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+            </div>
+
+            <div class="form-group">
+            <input type="tel" name="phone" class="form-control" placeholder="Enter Phone" required>
+            </div>
+
+            <div class="form-group">
+            <textarea name="address" cols="19" rows="3" class="form-control" placeholder="Enter Delivery Address Here...."> </textarea>           
+            </div>
+
+            <h6 class="text-center lead">Select Payment Mode</h6>
+            <div class="form-group">
+            <select name="pmode" class="form-control">
+            <option value="" selected disabled>-Select Payment Mode-</option>
+            <option value="cod" >-Cash On Delivery-</option>
+            <option value="netbanking" >-Net Banking-</option>
+            <option value="cards" >-Debit/Credit Card-</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" name="submit" value="Place Order" class="btn btn-danger btn-block">
+            </div>
+
+        </div>
+        </div>
+        </div>
+        
 
 
 
 
-<?php echo $total_price; 
 
-
-?>
 
