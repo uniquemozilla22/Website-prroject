@@ -69,7 +69,7 @@ while (($row= oci_fetch_array($login_stmt))==true)
 					<div class='product product__style--3'>
 						<div class='col-lg-3 col-md-4 col-sm-6 col-12'>
 							<div class='product__thumb'>
-								<a class='first__img' href='singleproduct.php?productdi=$productid'><img src='images/books/1.jpg	' alt='$productname'></a>
+								<a class='first__img' href='singleproduct.php?productdi=$productid'><img src='trader_area/product_images/$productimage	' alt='$productname'></a>
 								<div class='hot__box'>
 									<span class='hot-label'>$productstatus</span>
 								</div>
