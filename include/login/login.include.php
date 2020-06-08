@@ -48,7 +48,7 @@ if (($row= oci_fetch_array($login_stmt))==true)
 		$_SESSION['admin_name']=$username;
 		$_SESSION['admin_id']=$userid;
 		$_SESSION['admin_type']=$type;
-		header("Location: ../../trader_area/index.php?dashboard");
+		header("Location: ../../trader_area/index.php?dashboard==1&&user_profile=$userid");
 	}
 
 	else if($verified_password==false){

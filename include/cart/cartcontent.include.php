@@ -10,8 +10,10 @@ if (isset($_GET['itemadded']))
 if (isset($_GET['productidremove'])){
 
     $p_id=$_GET['productidremove'];
+    
+    $c_id=$_GET['cart'];
 
-    $query="DELETE FROM CART_PRODUCT WHERE PRODUCT_ID ='$p_id'";
+    $query="DELETE FROM CART_PRODUCT WHERE PRODUCT_ID ='$p_id' and CART_ID ='$c_id'";
 
     $parsing_query = oci_parse($conn,$query);
 
@@ -81,7 +83,7 @@ $coupon_code=0;
 
                                     
 <?php
-$S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid'";
+$S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE USER_ID='$userid'";
 
 $cart_SELECT= oci_parse($conn,$S_query);
 
@@ -97,8 +99,9 @@ while($row=oci_fetch_array($cart_SELECT))
   
     $product_id=$row['PRODUCT_ID'];
     $product_quantity=$row['PRODUCT_QUANTITY'];
+    $cart_id_show=$row['CART_ID'];
 
-    $select_query="SELECT * FROM PRODUCT WHERE PRODUCT_ID='$product_id'";
+    $select_query="SELECT * FROM PRODUCT WHERE PRODUCT_ID='$product_id' and CART_ID ='$cart_id_show'";
 
     $parsing_cart_showing=oci_parse($conn,$select_query);
 
@@ -138,7 +141,7 @@ while($row=oci_fetch_array($cart_SELECT))
     <td class='product-price'><span class='amount'>$ $productprice</span></td>
     <td class='product-quantity'><span class='amount'>$product_quantity</span></td></td>
     <td class='product-subtotal'>$$de</td>
-    <td class='product-remove'><a href='cart.php?productidremove=$product_id'> X</a></td>
+    <td class='product-remove'><a href='cart.php?productidremove=$product_id&cart=$cart_id_show'> X</a></td>
     </tr>
     ";
     }

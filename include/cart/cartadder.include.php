@@ -26,7 +26,7 @@ session_start();
         $userid=$_SESSION['admin_id'];
     }
     
-    $checkerquery="SELECT * FROM CART_PRODUCT CP , CART C WHERE CP.PRODUCT_ID = '$productid'";
+    $checkerquery="SELECT * FROM CART_PRODUCT CP , CART C WHERE CP.PRODUCT_ID = '$productid' and c.USER_ID='$userid'";
 
     $cheparse=oci_parse($conn,$checkerquery);
 
@@ -40,11 +40,12 @@ session_start();
     if ($row==true)
     {
         $proq=$row['PRODUCT_QUANTITY'];
+        $cart = $row['CART_ID'];
         if($proq==$productquantity){
         header("location: ../../cart.php?itemalreadyoncart=1");
     }
         else{
-            $Uquery="UPDATE CART_PRODUCT SET PRODUCT_QUANTITY='$productquantity' WHERE PRODUCT_ID='$productid'";
+            $Uquery="UPDATE CART_PRODUCT SET PRODUCT_QUANTITY='$productquantity' WHERE PRODUCT_ID='$productid' AND CART_ID = '$cart'";
             $Uparse=oci_parse($conn,$Uquery);
 
     if (!$Uparse)
