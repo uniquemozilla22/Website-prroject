@@ -13,7 +13,7 @@ if (isset($_GET['productidremove'])){
     
     $c_id=$_GET['cart'];
 
-    $query="DELETE FROM CART_PRODUCT WHERE PRODUCT_ID ='$p_id' and CART_ID ='$c_id'";
+    $query="DELETE FROM CART_PRODUCT WHERE PRODUCT_ID ='$p_id' and CART_ID = $c_id";
 
     $parsing_query = oci_parse($conn,$query);
 
@@ -83,7 +83,7 @@ $coupon_code=0;
 
                                     
 <?php
-$S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE USER_ID='$userid'";
+$S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid'";
 
 $cart_SELECT= oci_parse($conn,$S_query);
 
@@ -99,9 +99,10 @@ while($row=oci_fetch_array($cart_SELECT))
   
     $product_id=$row['PRODUCT_ID'];
     $product_quantity=$row['PRODUCT_QUANTITY'];
+
     $cart_id_show=$row['CART_ID'];
 
-    $select_query="SELECT * FROM PRODUCT WHERE PRODUCT_ID='$product_id' and CART_ID ='$cart_id_show'";
+    $select_query="SELECT * FROM PRODUCT WHERE PRODUCT_ID='$product_id'";
 
     $parsing_cart_showing=oci_parse($conn,$select_query);
 

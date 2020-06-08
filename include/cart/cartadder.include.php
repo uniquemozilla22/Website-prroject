@@ -26,7 +26,7 @@ session_start();
         $userid=$_SESSION['admin_id'];
     }
     
-    $checkerquery="SELECT * FROM CART_PRODUCT CP , CART C WHERE CP.PRODUCT_ID = '$productid' and c.USER_ID='$userid'";
+    $checkerquery="SELECT * FROM CART_PRODUCT CP , CART C WHERE cp.CART_ID = C.CART_ID AND CP.PRODUCT_ID = '$productid' and c.USER_ID='$userid'";
 
     $cheparse=oci_parse($conn,$checkerquery);
 
