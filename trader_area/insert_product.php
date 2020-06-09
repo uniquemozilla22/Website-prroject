@@ -28,6 +28,7 @@ if($_SESSION['admin_type']!='trader'){
             <li class="active"> 
                 
                 <i class="fa fa-dashboard"></i> Dashboard / Insert Products
+                <a href="../index.php" class="btn btn-warning">Visit Website</a>
                 
             </li> 
             
@@ -270,7 +271,7 @@ if(isset($_POST['submit'])){
     $shop=$_POST['shop'];
     $review=$_POST['quality'];
     $product_price = $_POST['product_price'];
-    $product_keywords = $_POST['product_keywords'];
+    $product_keywords = strtoupper($_POST['product_keywords']);
     $product_status = $_POST['product_status'];
     $product_desc = $_POST['product_desc'];
     $maximum_order=$_POST['maximum_order'];

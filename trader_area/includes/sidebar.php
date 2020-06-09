@@ -2,6 +2,8 @@
     
    include("connection.php");
 
+   $admin_name=$_SESSION['admin_name'];
+   $admin_id= $_SESSION['admin_id'];
 ?>
    
 <nav class="navbar navbar-inverse navbar-fixed-top" style="background:#008060;"><!-- navbar navbar-inverse navbar-fixed-top begin -->
