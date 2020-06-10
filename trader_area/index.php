@@ -70,8 +70,19 @@
 
         oci_execute($run_categories);
         $count_p_categories = oci_fetch($run_categories);
+
+        $get_shop = "select * from SHOP";
         
-        
+        $run_shop = oci_parse($conn,$get_shop);
+        if(!$run_shop)
+        {
+                echo "An error occurred in parsing the sql string.\n"; 
+                exit; 
+        }
+
+        oci_execute($run_shop);
+      
+            
 
 ?>
 
@@ -124,7 +135,12 @@
                         
                         include("view_cats.php");
                         
-                }   if(isset($_GET['delete_p_cat'])){
+                } if(isset($_GET['view_shops'])){
+                        
+                        include("view_shops.php");
+                        
+                } 
+                if(isset($_GET['delete_p_cat'])){
                         
                         include("delete_p_cat.php");
                         

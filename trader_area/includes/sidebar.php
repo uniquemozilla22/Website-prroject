@@ -126,6 +126,22 @@
                 </ul><!-- collapse finish -->
                 
             </li><!-- li finish -->
+
+            <li><!-- li begin -->
+                <a href="#" data-toggle="collapse" data-target="#shop" style="color: yellow;"><!-- a href begin -->
+                        
+                        <i class="fa fa-fw fa-book"></i> Shops
+                        <i class="fa fa-fw fa-caret-down"></i>
+                        
+                </a><!-- a href finish -->
+                
+                <ul id="shop" class="collapse"><!-- collapse begin -->
+                    <li><!-- li begin -->
+                        <a href="index.php?view_shops" style="color: white;"> View Shops </a>
+                    </li><!-- li finish -->
+                </ul><!-- collapse finish -->
+                
+            </li><!-- li finish -->
             
           
             <li><!-- li begin -->
@@ -138,17 +154,17 @@
             <li><!-- li begin -->
                 <a href="#" data-toggle="collapse" data-target="#users" style="color: yellow;"><!-- a href begin -->
                         
-                        <i class="fa fa-fw fa-users"></i> Users
+                        <i class="fa fa-fw fa-users"></i> Profile
                         <i class="fa fa-fw fa-caret-down"></i>
                         
                 </a><!-- a href finish -->
                 
                 <ul id="users" class="collapse"><!-- collapse begin -->
                     <li><!-- li begin -->
-                        <a href="index.php?view_users" style="color: white;"> View Users </a>
+                        <a href="index.php?view_users" style="color: white;"> View Profile </a>
                     </li><!-- li finish -->
                     <li><!-- li begin -->
-                        <a href="index.php?user_profile=<?php echo $admin_id; ?>"style="color: white;"> Edit User Profile </a>
+                        <a href="index.php?user_profile=<?php echo $admin_id; ?>"style="color: white;"> Edit Profile </a>
                     </li><!-- li finish -->
                 </ul><!-- collapse finish -->
                 

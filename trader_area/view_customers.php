@@ -40,7 +40,7 @@
                                 <th> No: </th>
                                 <th> Name: </th>
                                 <th> E-Mail: </th>
-                                <th>Age</th>
+                                <th>Contact</th>
                                 
                             </tr><!-- tr finish -->
                         </thead><!-- thead finish -->

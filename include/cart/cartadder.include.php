@@ -30,6 +30,8 @@ session_start();
 
     $cheparse=oci_parse($conn,$checkerquery);
 
+   
+
     if (!$cheparse)
     {
         echo "add selection not done";
@@ -51,14 +53,17 @@ session_start();
     if (!$Uparse)
     {
         echo "add selection not done";
+
     }
     oci_execute($Uparse);
+    
 
     header("location: ../../cart.php?itemalreadyoncartbutquantityupdated=1");
     
         }
     }
     else{
+       
         
     $query="SELECT * FROM  CART WHERE USER_ID='$userid'";
 

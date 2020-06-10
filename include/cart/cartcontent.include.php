@@ -202,7 +202,7 @@ if(isset($_POST['couponsubmit'])){
                                 <li><button type="submit" name ="couponsubmit" style="padding:15px;">Apply Code</button></li>
                                 </form>
                                 <li><a href="#">Update Cart</a></li>
-                                <li><a href="checkout.php">Proceed Checkout</a></li>
+                                <li><a href="checkout.php">Check Out</a></li>
                             </ul>
                         </div>
                     </div>
