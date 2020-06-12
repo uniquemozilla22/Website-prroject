@@ -1,5 +1,5 @@
 <?php
-$i=rand(16,19);
+$i=rand(29,31);
 $sql_login = "SELECT * FROM PRODUCT where USER_ID='$i'"; 
 
 
@@ -77,9 +77,37 @@ while (($row= oci_fetch_array($login_stmt))==true)
 
 							<div class='product__content content--center'>
 								<h4><a href='singleproduct.php'>$productname</a></h4>
-								<ul class='prize d-flex'>
-									<li> $ $productprice</li>
-								</ul>
+								";
+			$Dquery="SELECT * from discount where DISCOUNT_ID=$discountid";
+			
+	$Dlogin_stmt = oci_parse($conn, $Dquery);
+
+	if(!$Dlogin_stmt)
+	{
+	echo "An error occurred in parsing the sql string. on discount \n"; 
+	exit; 
+	}
+
+	oci_execute($Dlogin_stmt);
+	if($rowd= oci_fetch_array($Dlogin_stmt))
+	{
+		$disper=$rowd['DISCOUNT_PERCENTAGE'];
+		$dispers=($disper*$productprice)/100;
+        $finalprice =$productprice-$dispers;
+
+		echo "<ul class='prize d-flex'>
+				<li>$ $finalprice</li>
+				<li class='old_prize'>$ $productprice</li>
+			</ul>";
+
+	}
+	else{
+		echo "<ul class='prize d-flex'>
+		<li>$ $productprice</li>
+	</ul>";
+	}
+			
+			echo "
 								<div class='action'>
 									<div class='actions_inner'>
 										<ul class='add_to_links'>
@@ -87,11 +115,6 @@ while (($row= oci_fetch_array($login_stmt))==true)
 											<li><a class='compare' href='index.php?wishadd=$productid'><i class='bi bi-heart-beat'></i></a></li>
 										</ul>
 									</div>
-								</div>
-								<div class='product__hover--content'>
-									<ul class='rating d-flex'>
-									
-									</ul>
 								</div>
 							</div>
 						</div>

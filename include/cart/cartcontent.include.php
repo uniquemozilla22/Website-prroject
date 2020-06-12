@@ -130,16 +130,57 @@ while($row=oci_fetch_array($cart_SELECT))
 	$shopid=$row['SHOP_ID'];
 	$userid=$row['USER_ID'];
     $discountid= $row['DISCOUNT_ID'];
+
+    $Dquery="SELECT * from discount where DISCOUNT_ID=$discountid";
+			
+	$Dlogin_stmt = oci_parse($conn, $Dquery);
+
+	if(!$Dlogin_stmt)
+	{
+	echo "An error occurred in parsing the sql string. on discount \n"; 
+	exit; 
+	}
+
+	oci_execute($Dlogin_stmt);
+	if($rowd= oci_fetch_array($Dlogin_stmt))
+	{
+        $disper=$rowd['DISCOUNT_PERCENTAGE'];
+        $dispers=($disper*$productprice)/100;
+        $finalprice =$productprice-$dispers;
+    }
     
 
-    $de=$productprice*$product_quantity;
+    if (isset($finalprice))
+    {
+        
+    $de=$finalprice*$product_quantity;
+
+    }
+    else{
+
+        $de=$productprice*$product_quantity;
+    }
     
     $total_price +=$de;
     echo"
     <tr>
     <td class='product-thumbnail'><a href='#'><img src='images/product/sm-3/1.jpg' alt='$productname'></a></td>
     <td class='product-name'><a href='singleproduct.php?productdi=$product_id'>'$productname'</a></td>
-    <td class='product-price'><span class='amount'>$ $productprice</span></td>
+
+    ";
+			
+    if (isset($finalprice))
+    {
+		echo "
+        <td class='product-price'><span class='amount'>$ $finalprice</span></td>";
+
+	}
+	else{
+		echo "
+        <td class='product-price'><span class='amount'>$ $productprice</span></td>";
+	}
+			
+			echo "
     <td class='product-quantity'><span class='amount'>$product_quantity</span></td></td>
     <td class='product-subtotal'>$$de</td>
     <td class='product-remove'><a href='cart.php?productidremove=$product_id&cart=$cart_id_show'> X</a></td>
@@ -149,7 +190,6 @@ while($row=oci_fetch_array($cart_SELECT))
 
 
    
-    
 }
 
 
@@ -179,9 +219,7 @@ if(isset($_POST['couponsubmit'])){
         $dis_per=$dis_row['DISCOUNT_PERCENTAGE'];
 
         $dis_pers= $dis_per * $total_price;
-        echo $dis_pers;
         $dis_price=$dis_pers/100;
-        echo $dis_price;
 
     }else 
     {

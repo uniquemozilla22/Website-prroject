@@ -29,6 +29,8 @@ if($_SESSION['admin_type']!='trader'){
 
         $shop = $row_edit['SHOP_ID'];
 
+        $discount = $row_edit['DISCOUNT_ID'];
+
         $review = $row_edit['REVIEW_ID'];
         
         $p_image1 = $row_edit['PRODUCT_IMAGE'];
@@ -79,7 +81,7 @@ if($_SESSION['admin_type']!='trader'){
 
         $get_review = "select * from REVIEW where REVIEW_ID='$review'";
         
-        $run_review = oci_parse($conn,$get_shop);
+        $run_review = oci_parse($conn,$get_review);
         
         oci_execute($run_review);
 
@@ -89,7 +91,22 @@ if($_SESSION['admin_type']!='trader'){
 
         $row_review = oci_fetch_array($run_review);
         
-       // $review_title = $row_shop['SHOP_NAME'];
+        $review_title = $row_review['REVIEW_COMMENT'];
+
+
+        $get_discount = "select * from DISCOUNT where DISCOUNT_ID='$discount'";
+        
+        $run_discount = oci_parse($conn,$get_discount);
+        
+        oci_execute($run_discount);
+
+        if(!$run_discount){
+            echo "Error while parsing";
+        }
+
+        $row_discount = oci_fetch_array($run_discount);
+
+        $discount_percentage = $row_discount['DISCOUNT_PERCENTAGE'];
 
 
 
@@ -240,7 +257,48 @@ if($_SESSION['admin_type']!='trader'){
                        </div>                      
                     </div>
                     
-                   
+                    <div class="form-group"> 
+                       
+                       <label class="col-md-3 control-label"> Discount </label> 
+                       
+                       <div class="col-md-6"> 
+                           
+                           <select name="discount" class="form-control"> 
+                               
+                           <option value="<?php echo $discount; ?>"> <?php echo $discount_percentage; ?> </option>
+                               
+                               <?php 
+                               
+                               $get_discount = "select * from DISCOUNT";
+
+                               $run_discount = oci_parse($conn,$get_discount);
+                               
+                               if(!$run_discount)
+                                {
+                                    echo "An error occurred in parsing the sql string.\n"; 
+                                    exit; 
+                                }
+                               oci_execute($run_discount);
+
+                               while ($row_discount=oci_fetch_array($run_discount)){
+                                   
+                                   $discount_id = $row_discount['DISCOUNT_ID'];
+                                   $discount_per = $row_discount['DISCOUNT_PERCENTAGE'];
+                           
+                                   echo "
+                                   
+                                   <option value='$discount_id'> $discount_per </option>
+                                   
+                                   ";
+                                   
+                               }
+                               
+                               ?>
+                               
+                           </select>
+                           
+                       </div>                      
+                    </div>
                    
                    <div class="form-group"><!-- form-group Begin -->
                        
@@ -376,6 +434,8 @@ if(isset($_POST['update'])){
 
     $shop=$_POST['shop'];
 
+    $discount=$_POST['discount'];
+
     $review=$_POST['quality'];
 
     $user_id=$_POST['admin_id'];
@@ -398,7 +458,7 @@ if(isset($_POST['update'])){
     
     move_uploaded_file($temp_name1,"product_images/$product_img1");
    
-    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop',REVIEW_ID='$review', USER_ID='$user_id', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORDS='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
+    $update_product = "update PRODUCT set CATEGORY_ID='$cat', SHOP_ID='$shop',REVIEW_ID='$review', USER_ID='$user_id', DISCOUNT_ID='$discount', PRODUCT_NAME='$product_title',PRODUCT_IMAGE='$product_img1',PRODUCT_KEYWORDS='$product_keywords',PRODUCT_DESCRIPTION='$product_desc',PRODUCT_PRICE='$product_price', MIN_ORDER='$minimum_order', MAX_ORDER='$maximum_order', ALLERGY_INFORMATION='$allergy_info' where PRODUCT_ID='$p_id'";
     $run_product = oci_parse($conn,$update_product);
     
     oci_execute($run_product);

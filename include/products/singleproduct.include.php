@@ -62,9 +62,40 @@ if ($row = oci_fetch_assoc($login_stmt))
 							<div class='product__info__main'>
 								<h1>$productname</h1>
 								
-								<div class='price-box'>
-									<span>$ $productprice</span>
-								</div>
+			";
+			$Dquery="SELECT * from discount where DISCOUNT_ID=$discountid";
+			
+	$Dlogin_stmt = oci_parse($conn, $Dquery);
+
+	if(!$Dlogin_stmt)
+	{
+	echo "An error occurred in parsing the sql string. on discount \n"; 
+	exit; 
+	}
+
+	oci_execute($Dlogin_stmt);
+	if($rowd= oci_fetch_array($Dlogin_stmt))
+	{
+		$disper=$rowd['DISCOUNT_PERCENTAGE'];
+		$dispers=($disper*$productprice)/100;
+        $finalprice =$productprice-$dispers;
+
+		echo "			
+			<div class='price-box' style='display:flex;'>
+		<span>$ $finalprice</span>
+		<span style='font-size:16px;padding-left:15px;color:red;'><del>$ $productprice</del></span>
+	</div>
+			";
+
+	}
+	else{
+		echo "<div class='price-box'>
+		<span>$ $productprice</span>
+	</div>";
+	}
+			
+			echo "
+								
 								<div class='product__overview'>
 								<p>$productdesc</p>
 								</div>
