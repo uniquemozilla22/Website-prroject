@@ -1,12 +1,15 @@
 <!-- cart-main-area start -->
 <?php
 
+if (isset($_GET['allitemsremoved']))
+{
+    $cart_message="All your items has been removed from the cart";
+}
+
 if (isset($_GET['itemadded']))
 {
     $cart_message="Your item has been added to cart";
 }
-
-
 if (isset($_GET['productidremove'])){
 
     $p_id=$_GET['productidremove'];
@@ -26,6 +29,50 @@ if (isset($_GET['productidremove'])){
     $cart_message= "Your item has been removed";  
 
 }
+
+if (isset($_GET['removeall']))
+{
+    if (isset($_SESSION['customer_id']))
+    {
+        $u_id = $_SESSION['customer_id'];
+
+    }
+    else if (isset($_SESSION['admin_id']))
+    {
+        $u_id = $_SESSION['admin_id'];
+
+    }
+    
+
+    $squery="SELECT *  FROM CART WHERE USER_ID ='$u_id'";
+
+    $select_query = oci_parse($conn,$squery);
+
+    if (!$select_query)
+    {
+        echo "Item not deleted because of sql error";
+    }
+    oci_execute($select_query); 
+    if ($select_row=oci_fetch_assoc($select_query))
+    {
+        $card_id=$select_row['CART_ID'];
+
+        $Dquery="DELETE FROM CART_PRODUCT WHERE CART_ID ='$card_id'";
+
+    $DELETE_parsing_query = oci_parse($conn,$Dquery);
+
+    if (!$DELETE_parsing_query)
+    {
+        echo "Item not deleted because of sql error";
+    }
+    oci_execute($DELETE_parsing_query);  
+    
+    $cart_message="All your items has been removed from the cart";
+        
+    }
+        
+    }
+    
 if(isset($_GET['itemalreadyoncart']))
 {
     $cart_message="Your item is already on the cart";
@@ -164,7 +211,7 @@ while($row=oci_fetch_array($cart_SELECT))
     $total_price +=$de;
     echo"
     <tr>
-    <td class='product-thumbnail'><a href='#'><img src='images/product/sm-3/1.jpg' alt='$productname'></a></td>
+    <td class='product-thumbnail'><a href='#'><img src='trader_area/product_images/$productimage' alt='$productname'></a></td>
     <td class='product-name'><a href='singleproduct.php?productdi=$product_id'>'$productname'</a></td>
 
     ";
@@ -239,8 +286,10 @@ if(isset($_POST['couponsubmit'])){
                                 <li><input type="text" placeholder="Coupon Code" name="couponcode" style="padding:15px;"></a></li>
                                 <li><button type="submit" name ="couponsubmit" style="padding:15px;">Apply Code</button></li>
                                 </form>
-                                <li><a href="#">Update Cart</a></li>
-                                <li><a href="checkout.php">Check Out</a></li>
+                                <li><a href="cart.php?removeall=1">Clear All</a></li>
+                                <?php echo "
+                                <li><a href='checkout.php?cartid=$cart_id_show'>Check Out</a></li>
+                                "; ?>
                             </ul>
                         </div>
                     </div>

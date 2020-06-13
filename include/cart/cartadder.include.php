@@ -8,13 +8,28 @@ session_start();
     {
         $productid=$_GET['productid'];
 
+        $checkeruery="SELECT * FROM PRODUCT WHERE PRODUCT_ID='$productid'";
+
+        $cheparse=oci_parse($conn,$checkeruery);
+    
+       
+    
+        if (!$cheparse)
+        {
+            echo "add selection not done";
+        }
+        oci_execute($cheparse);
+    
+        $rowP=oci_fetch_assoc($cheparse);
 
         if (isset($_GET['quantity']))
         {
             $productquantity=$_GET['quantity'];
         }
-        else{
-            $productquantity=1;
+        else if ($rowP==true){
+            
+        $minimumorder= $rowP['MIN_ORDER'];
+          $productquantity=$minimumorder;
         }
 
     if (isset($_SESSION['customer_id']))

@@ -53,7 +53,7 @@ if ($row = oci_fetch_assoc($login_stmt))
 						<div class='col-lg-6 col-12'>
 							<div class='wn__fotorama__wrapper'>
 								<div class='fotorama wn__fotorama__action' data-nav='thumbs'>
-									  <a href='1.jpg'><img src='images/product/1.jpg' alt=''></a>
+									  <a href='1.jpg'><img src='trader_area/product_images/$productimage' alt=''></a>
 						
 								</div>
 							</div>

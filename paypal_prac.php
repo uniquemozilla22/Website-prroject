@@ -1,48 +1,69 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>mywebsite</title>
-    <style>
-        table{
-            text-align: center;
-            border-color: lightgray;
-            width: 80%
-        }
-        img{
-            width: 80px;
-        }
-    </style>
+    <title>PHP - Paypal Payment Gateway Integration</title>
 </head>
+<body style="background:#E1E1E1">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
+<style>
+    
+    .checkoubox{
+background: #bce3da;
+    margin: 0 0 30px;
+    position: relative;
+    left: 65%;
+    border: solid 1px #e6e6e6;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
 
-<body>
-    <table border="1">
-        <tr>
-            <th>Cart Items</th>
-            <th>Product Name</th>
-            <th>Product Price</th>
-            <th>Product Quantity</th>
-        </tr>
-        <tr>
-            <td><img src="images/7239276_R_SET.jpg" alt=""></td>
-           
-            <td>$250</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td><img src="images/xiaomi-redmi-3s-plus-xxl.jpg" alt=""></td>
-            <td>REDMI MI INDIA'S BEST CELL PHONE</td>
-            <td>$140</td>
-            <td>2</td>
-        </tr>
-    </table>
-  
-      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-        <input type="hidden" name="cmd" value="_cart">
-        <input type="hidden" name="upload" value="1">
-        <input type="hidden" name="business" value="fakebusiness1264@gmail.com">
+}
 
-        <?php
+
+</style>
+
+
+<div class="checkoubox">
+
+   <?php
+   session_start();
+   include('include/connection.php');
+
+    $userid=$_SESSION['customer_id'];
+    $select_customer ="SELECT * FROM USERA WHERE USER_ID ='$userid'";
+    $run_customer =oci_parse($conn, $select_customer);
+    oci_execute($run_customer);
+    $row_customer =oci_fetch_array($run_customer);
+    $customer_id =$row_customer['USER_ID'];
+
+   ?> 
+
+	<h1 class="text-center">
+		  Payment Option
+	</h1>
+	<p class="lead text-center">
+		<a href="order.php?c_id=<?php echo $customer_id;?>">Pay via. Bank</a>
+	</p>
+	<center>
+	<img  width="150" height="130" src="images/paypl.png" >
+	</center>
+	<p class="lead text-center">
+		<a>OR</a>
+	</p>
+	<p class="lead text-center">
+		<a href="#">Paypal</a>
+	</p>
+
+	<center>
+		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> 
+			<input type="hidden" name="business" value="chgrocers1234@.com">
+			<input type="hidden" name="cmd" value="_cart">
+			<input type="hidden" name="upload" value="1">
+			<input type="hidden" name="currency_code" value="USD" >
+ 		   <input type="hidden" name="return" value="http://localhost/finalstopshop/paypal_order.php?c_id=<?php echo $customer_id;?>">
+ 		   <input type="hidden" name="cancel_return" value="http://localhost/finalstopshop/index.php">
+
+            <?php
 $S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid'";
 
 $cart_SELECT= oci_parse($conn,$S_query);
@@ -134,17 +155,18 @@ while($row=oci_fetch_array($cart_SELECT))
 
  		   	   <input type="hidden" name="quantity_<?php echo $i; ?>" value="<?php echo $product_quantity; ?>">
 
-        
-        <input type="hidden" name="item_name_1" value="<?php echo $productname; ?>">
-        <input type="hidden" name="amount_1" value="250">
-        <input type="hidden" name="quantity_1" value="3">
-        
-        <input type="hidden" name="item_name_2" value="REDMI MI INDIA'S BEST CELL PHONE">
-        <input type="hidden" name="return" value="http://localhost/website-prroject/return_paypal.php">
-        <input type="hidden" name="amount_2" value="140">
-        <input type="hidden" name="quantity_2" value="2">
-        <input type="submit" value="PayPal">
-        </form>
-  
+<?php
+
+
+?>
+<input type="image" name="submit" width="150" height="130" src="images/paypal.png">
+
+
+		</form>
+	
+	</center>
+
+
+</div>
 </body>
 </html>

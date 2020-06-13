@@ -1,5 +1,5 @@
 <?php
-$i=rand(29,31);
+$i=rand(16,19);
 $sql_login = "SELECT * FROM PRODUCT where USER_ID='$i'"; 
 
 
