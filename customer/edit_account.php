@@ -1,5 +1,4 @@
 <?php 
-session_start();
 if (isset($_SESSION['customer_id']))
 {
     $userid= $_SESSION['customer_id'];
@@ -181,6 +180,7 @@ if(isset($_POST['update'])){
     
     move_uploaded_file ($c_image_tmp,"customer_images/$c_image");
     
+
     $update_user = "UPDATE USERA SET USERNAME='$c_name',USER_EMAIL='$c_email',USER_PASSWORD='$c_pass',USER_PHONE='$c_contact',USER_ADDRESS='$c_address',USER_DESCRIPTION='$c_desc',USER_IMAGE='$c_image' where USER_ID='$userid'";
     $run_user = oci_parse($conn,$update_user);
 
