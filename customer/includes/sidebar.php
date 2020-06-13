@@ -25,24 +25,27 @@
         $customer_image = $row_customer['USER_IMAGE'];
         
         $customer_name = $row_customer['USERNAME'];
+
+        $customer_email = $row_customer['USER_EMAIL'];
         
         if(!isset($_SESSION['customer_id']) && !isset($_SESSION['admin_id'])){
-            echo "Hello";
+            
         }else{
             
             echo "
             
                 <center>
                 
-                    <img src='../customer_images/$customer_image' class='img-responsive' class='profile_image' >
+                    <img src='customer_images/$customer_image' class='img-responsive'  class='profile_image' >
                 
                 </center>
                 
                 <br/>
                 
-                <h3 class='panel-title' align='center'>
+                <h3 class='panel-title' align='center' style='color:RGB(237, 146, 92);font-weight:bold;'>
                 
                     Name: $customer_name
+                    Email:$customer_email
                 
                 </h3>
             

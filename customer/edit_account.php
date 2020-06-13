@@ -109,17 +109,16 @@ $customer_description = $row_customer['USER_DESCRIPTION'];
                    
                    <div class="form-group"><!-- form-group Begin -->
 
-                      <label class="col-md-3 control-label">Customer Image </label>
+                      <label class="col-md-3 control-label"> Customer Image </label>
 
                       <div class="col-md-6"><!-- col-md-6 Begin -->
 
-                          <input name="c_image" type="file" class="form-control">
+                          <input name="c_image" type="file" class="form-control" required>
 
-                          <img src="customer_images<?php echo $customer_image; ?>" alt="<?php echo $customer_name; ?>" width="70" height="70">
+                          <img src="customer_images/<?php echo $customer_image; ?>" alt="<?php echo $user_name; ?>" width="70" height="70">
 
                       </div><!-- col-md-6 Finish -->
-
-                   </div><!-- form-group Finish -->
+                      </div>
 
                    <div class="form-group">                       
                       <label class="col-md-3 control-label">Customer Description </label> 
@@ -156,25 +155,25 @@ if(isset($_POST['update'])){
    
     
     $c_name = $_POST['c_name'];
-   echo "$c_name";
+   
     
     $c_email = $_POST['c_email'];
-    echo "$c_email";
+    
 
     $c_address = $_POST['c_address'];
-    echo "$c_address";
+    
 
     $c_pass = $_POST['c_pass'];
-    echo "$c_pass";
+   
 
     $c_contact = $_POST['c_phone'];
-    echo "$c_contact";
+    
 
     $c_desc = $_POST['c_desc'];
-    echo "$c_desc";
+    
     
     $c_image = $_FILES['c_image']['name'];
-    echo "$c_image";
+    
 
     $c_image_tmp = $_FILES['c_image']['tmp_name'];
     
@@ -190,7 +189,7 @@ if(isset($_POST['update'])){
         
         echo "<script>alert('Your account has been updated successfully. Please login again.')</script>";
         
-        //echo "<script>window.open('logout.php','_self')</script>";
+        echo "<script>window.open('logout.php','_self')</script>";
         
     }
     

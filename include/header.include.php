@@ -121,7 +121,7 @@
 								if (isset( $_SESSION['customer_id'] )|| isset( $_SESSION['admin_id']) )
 
 								{
-									echo "<li><a href='customer/my_account.php'>My Account</a></li>";
+									echo "<li><a href='customer/my_account.php?edit_account'>My Account</a></li>";
 								}
 ?>
 							</ul>
@@ -177,7 +177,7 @@
 								</li>
 								<li><a href="about.php">About</a>
 								</li>
-								<li><a href="customer/my_account.php">My Account</a>
+								<li><a href="customer/my_account.php?edit_account">My Account</a>
 								</li>
 							</ul>
 						</nav>
