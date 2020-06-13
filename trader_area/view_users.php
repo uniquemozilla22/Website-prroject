@@ -55,8 +55,16 @@
                             <?php 
           
                                 $i=0;
+
+                                if($admin_name!='trader')
+                                {
+                                    $get_users = "select * from USERA where USER_TYPE='trader' AND USER_ID='$admin_id'";
+                                }
+                                else{
+                                    
+                                    $get_users = "select * from USERA where USER_TYPE='trader'";
+                                }
                             
-                                $get_users = "select * from USERA where USER_TYPE='trader'";
                                 
                                 $run_users = oci_parse($conn,$get_users);
 

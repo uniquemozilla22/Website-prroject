@@ -1,8 +1,8 @@
 <?php 
 
-$customer_session = $_SESSION['USER_EMAIL'];
+$customer_session = $_SESSION['customer_id'];
 
-$get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
+$get_customer = "select * from USERA where USER_ID='$customer_session'";
 
 $run_customer = oci_parse($conn,$get_customer);
 
@@ -29,6 +29,9 @@ $customer_phone = $row_customer['USER_PHONE'];
 $customer_address = $row_customer['USER_ADDRESS'];
 
 $customer_image = $row_customer['USER_IMAGE'];
+
+$customer_image = $row_customer['USER_DESCRIPTION'];
+
 
 ?>
 
@@ -153,7 +156,7 @@ if(isset($_POST['update'])){
 
     $c_pass = $_POST['c_pass'];
     
-    $c_contact = $_POST['c_contact'];
+    $c_contact = $_POST['c_phone'];
 
     $c_desc = $_POST['c_desc'];
     

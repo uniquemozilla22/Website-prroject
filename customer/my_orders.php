@@ -47,9 +47,9 @@
 
            <?php
 
-            $customer_session = $_SESSION['USER_EMAIL'];
+            $customer_session = $_SESSION['customer_id'];
 
-            $get_customer = "select * from USERA where USER_EMAIL='$customer_session'";
+            $get_customer = "select * from USERA where USER_ID='$customer_session'";
 
 
             $run_customer = oci_parse($conn,$get_customer);
@@ -64,7 +64,7 @@
 
             $customer_id = $row_customer['USER_ID'];
 
-            $get_orders = "select * from ORDERR where USER_ID=$customer_id";
+            $get_orders = "select * from ORDERR where USER_ID='$customer_id'";
 
             $run_orders = oci_parse($conn,$get_orders);
 

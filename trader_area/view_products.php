@@ -16,6 +16,7 @@
             <li class="active">
                 
                 <i class="fa fa-dashboard"></i> Dashboard / View Products
+                <a href="../index.php" class="btn btn-warning">Visit Website</a>
                 
             </li>
         </ol>
@@ -59,8 +60,14 @@
                             <?php 
           
                                 $i=0;
-                            
-                                $get_pro = "select * from PRODUCT";
+                                if($admin_name!='trader')
+                                {
+                                    $get_pro = "select * from PRODUCT where USER_ID='$admin_id'";
+                                }
+                                else{
+                                    
+                                    $get_pro = "select * from PRODUCT";
+                                }
                                 
                                 $run_pro = oci_parse($conn,$get_pro);
           

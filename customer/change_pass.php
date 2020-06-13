@@ -46,7 +46,7 @@
 
 if(isset($_POST['submit'])){
 
-    $c_email = $_SESSION['USER_EMAIL'];
+    $c_id = $_SESSION['customer_id'];
 
     $c_old_pass = $_POST['old_pass'];
 
@@ -82,7 +82,7 @@ if(isset($_POST['submit'])){
 
     }
 
-    $update_c_pass = "update customer set CUSTOMER_PASSWORD='$c_new_pass' where CUSTOMER_EMAIL='$c_email'";
+    $update_c_pass = "update USERA set USER_PASSWORD='$c_new_pass' where USER_ID='$c_id'";
 
     $run_c_pass = oci_parse($con,$update_c_pass);
 

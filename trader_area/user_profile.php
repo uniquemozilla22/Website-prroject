@@ -223,10 +223,8 @@ if(isset($_POST['update'])){
     
     if($run_user){
         
-        //echo "<script>alert('User has been updated sucessfully')</script>";
-        //echo "<script>window.open('../login.php','_self')</script>";
-        
-       // session_destroy();
+        echo "<script>alert('User has been updated sucessfully')</script>";
+        echo "<script>window.open('index.php?view_users','_self')</script>"; 
         
     }
     

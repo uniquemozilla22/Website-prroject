@@ -1,6 +1,21 @@
 <!-- cart-main-area start -->
+<?php
+
+if (isset($_GET['itemdeleted'])){
+
+    $message= "Wish list item has been deleted";
+}
+?>
+
 <div class="wishlist-area section-padding--lg bg__white">
             <div class="container">
+                <?php
+                if(isset($message))
+                {
+                    echo "<h3 style='color:red'>Item Deleted</h3>";
+                }
+
+                ?>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="wishlist-content">
@@ -18,30 +33,48 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="product-remove"><a href="#">×</a></td>
-                                                <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/1.jpg" alt=""></a></td>
-                                                <td class="product-name"><a href="#">Natoque penatibus</a></td>
-                                                <td class="product-price"><span class="amount">$165.00</span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock">In Stock</span></td>
-                                                <td class="product-add-to-cart"><a href="#"> Add to Cart</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product-remove"><a href="#">×</a></td>
-                                                <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/2.jpg" alt=""></a></td>
-                                                <td class="product-name"><a href="#">Quisque fringilla</a></td>
-                                                <td class="product-price"><span class="amount">$50.00</span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock">In Stock</span></td>
-                                                <td class="product-add-to-cart"><a href="#"> Add to Cart</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product-remove"><a href="#">×</a></td>
-                                                <td class="product-thumbnail"><a href="#"><img src="images/product/sm-3/3.jpg" alt=""></a></td>
-                                                <td class="product-name"><a href="#">Quisque fringilla</a></td>
-                                                <td class="product-price"><span class="amount">$65.00</span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock">In Stock</span></td>
-                                                <td class="product-add-to-cart"><a href="#"> Add to Cart</a></td>
-                                            </tr>
+                                            <?php
+                                                
+ if (isset($_COOKIE['mywish'])){
+        foreach($_COOKIE['mywish'] as $cookiename => $cookievalue){
+            $cname=htmlspecialchars($cookiename);
+            $productcid=htmlspecialchars($cookievalue);
+
+            $wishquery="SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$productcid'";
+
+            $wishsearch = oci_parse($conn, $wishquery); 
+
+            oci_execute($wishsearch);
+            
+
+            $product= oci_fetch_array($wishsearch);
+
+            $product_id=$product['PRODUCT_ID'];
+            $product_name=$product['PRODUCT_NAME'];
+            $product_rate=$product['PRODUCT_PRICE'];
+            $product_image =$product['PRODUCT_IMAGE'];
+            $product_status=$product['PRODUCT_STATUS'];
+            if ($product_status==1){
+                $statuspro="Available";
+            }
+            else if ($product_status==0){
+                $statuspro="Unavailable";
+            }
+            if (!empty($product_id))
+            echo  "  <tr>
+            <td class='product-remove'><a href='include/wishlist/wishdelete.include.php?wishdelete=$product_id'>×</a></td>
+            <td class='product-thumbnail'><a href='#'><img src='images/images/$product_image' alt='' width=80px height= 100px></a></td>
+            <td class='product-name'><a href='singleproduct.php?productdi=$product_id'>$product_name</a></td>
+            <td class='product-price'><span class='amount'>$product_rate</span></td>
+            <td class='product-stock-status'><span class='wishlist-in-stock'> $statuspro</span></td>
+            <td class='product-add-to-cart'><a href='include/cart/cartadder.include.php?productid=$product_id'> Add to Cart</a></td>
+        </tr>";
+
+        }
+ }
+                                            ?>
+                                           
+                                            
                                         </tbody>
                                     </table>
                                 </div>  

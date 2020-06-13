@@ -19,7 +19,7 @@
         
         $customer_name = $row_customer['USERNAME'];
         
-        if(!isset($_SESSION['USER_EMAIL'])){
+        if(!isset($_SESSION['customer_id'])){
             
         }else{
             

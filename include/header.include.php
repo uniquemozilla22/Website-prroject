@@ -1,3 +1,4 @@
+<?php include("include/connection.php"); ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -35,7 +36,7 @@
 					<div class="col-md-6 col-sm-6 col-6 col-lg-2">
 						<div class="logo">
 							<a href="index.php">
-								<img src="images/logo/logo.png" alt="logo images">
+								<img src="images/logo/logo.png" alt="logo images" width="75%">
 							</a>
 						</div>
 					</div>
@@ -114,7 +115,7 @@
 								</li>
 								<li class="drop"><a href="traders.php">Traders</a>
 								</li>
-								<li class="drop"><a href="blog.php">Blog</a>
+								<li class="drop"><a href="About.php">About</a>
 								</li>
 								<?php
 								if (isset( $_SESSION['customer_id'] )|| isset( $_SESSION['admin_id']) )
@@ -122,12 +123,7 @@
 								{
 									echo "<li><a href='customer/my_account.php'>My Account</a></li>";
 								}
-
-
-
 ?>
-								
-								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -149,29 +145,40 @@
 							<ul class="meninmenu">
 								<li><a href="index.php">Home</a></li>
 								<li><a href="products.php">Products</a>
-									<ul>
-										<li><a href="products.php">Meat</a></li>
-										<li><a href="products.php">Fruits</a></li>
-										<li><a href="products.php">Vegetables</a></li>
-										<li><a href="products.php">Eggs</a></li>
-									</ul>
+								<ul>
+											<?php
+
+								$sql_login = "	SELECT * FROM  CATEGORY C"; 
+
+								$login_stmt = oci_parse($conn, $sql_login);
+
+								if(!$login_stmt)
+								{
+									echo "An error occurred in parsing the sql string.\n"; 
+									exit; 
+								}
+
+								oci_execute($login_stmt);
+								while ($row = oci_fetch_assoc($login_stmt))
+								{
+									
+									$category = $row['CATEGORY_ID'];
+									$category_name= $row['CATEGORY_NAME'];
+
+									echo "
+									<li><a href='products.php?category=$category'>$category_name</a></li>
+									
+									";								
+								}
+								?>
+										</ul>
 								</li>
 								<li><a href="traders.php">Traders</a>
-								<ul>
-											<li><a href="traders.php">Meat</a></li>
-											<li><a href="traders.php">Fruits</a></li>
-											<li><a href="traders.php">Vegetables</a></li>
-											<li><a href="traders.php">Eggs</a></li>
-											
-										</ul>
 								</li>
 								<li><a href="about.php">About</a>
 								</li>
-								<li><a href="blog.php">Blog</a>
-								</li>
 								<li><a href="customer/my_account.php">My Account</a>
 								</li>
-								<li><a href="contact.php">Contact</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -185,16 +192,17 @@
 		<!-- //Header -->
 		<!-- Start Search Popup -->
 		<div class="brown--color box-search-content search_active block-bg close__top">
-			<form id="search_mini_form" class="minisearch" action="#">
+			<form id="search_mini_form" class="minisearch" action="products.php">
 				<div class="field__search">
-					<input type="text" placeholder="Search entire store here...">
+					<input type="text" name="searchkeyword" placeholder="Search entire store here...">
 					<div class="action">
-						<a href="#"><i class="zmdi zmdi-search"></i></a>
+						<button type ="searchsubmit"><a><i class="zmdi zmdi-search"></a></i></button>
 					</div>
 				</div>
 			</form>
 			<div class="close__wrap">
 				<span>close</span>
 			</div>
+			
 		</div>
 		<!-- End Search Popup -->

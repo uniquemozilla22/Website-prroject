@@ -43,6 +43,33 @@ if (isset($_POST['otpsubmit'])) {
 					$_SESSION['admin_name']=$username;
 					$_SESSION['admin_id']=$userid;
 					$_SESSION['admin_type']=$type;
+					
+				$S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid'";
+
+				$cart_SELECT= oci_parse($conn,$S_query);
+
+				if(!$cart_SELECT){
+				    echo "sql error";
+				}
+
+				oci_execute($cart_SELECT);
+
+				if(oci_num_rows($cart_SELECT)<1)
+				{
+
+			    $i_query ="INSERT INTO CART VALUES (null,0,'$userid')";
+
+				$cart_created= oci_parse($conn,$i_query);
+
+				if(!$cart_created){
+ 				   echo "cart not created for your ID";
+					}
+
+				oci_execute($cart_created);
+
+				echo"<h3> Enjoy your shop </h3>";
+
+				}
 					header("Location: ../../trader_area/index.php?dashboard");
 				}
 				else{
@@ -51,6 +78,33 @@ if (isset($_POST['otpsubmit'])) {
 					$_SESSION['customer_name']=$username;
 					$_SESSION['customer_id']=$userid;
 					$_SESSION['customer_type']=$type;
+					
+					$S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid'";
+
+					$cart_SELECT= oci_parse($conn,$S_query);
+
+					if(!$cart_SELECT){
+					    echo "sql error";
+					}
+
+					oci_execute($cart_SELECT);
+
+					if(oci_num_rows($cart_SELECT)<1)
+					{
+
+ 					   $i_query ="INSERT INTO CART VALUES (null,0,'$userid')";
+
+						$cart_created= oci_parse($conn,$i_query);
+
+					if(!$cart_created){
+					    echo "cart not created for your ID";
+					}
+
+					oci_execute($cart_created);
+
+					echo"<h3> Enjoy your shop </h3>";
+
+					}
 					header("location: ../../index.php?loginSucess='$userid'");
 
 				}

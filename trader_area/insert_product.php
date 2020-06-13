@@ -28,6 +28,7 @@ if($_SESSION['admin_type']!='trader'){
             <li class="active"> 
                 
                 <i class="fa fa-dashboard"></i> Dashboard / Insert Products
+                <a href="../index.php" class="btn btn-warning">Visit Website</a>
                 
             </li> 
             
@@ -153,6 +154,49 @@ if($_SESSION['admin_type']!='trader'){
                        </div>                      
                     </div>
                     
+                    <div class="form-group"> 
+                       
+                       <label class="col-md-3 control-label"> Discount </label> 
+                       
+                       <div class="col-md-6"> 
+                           
+                           <select name="discount" class="form-control"> 
+                               
+                               <option disabled selected hidden> Select a Discount Percentage </option>
+                               
+                               <?php 
+                               
+                               $get_discount = "select * from DISCOUNT";
+
+                               $run_discount = oci_parse($conn,$get_discount);
+                               
+                               if(!$run_discount)
+                                {
+                                    echo "An error occurred in parsing the sql string.\n"; 
+                                    exit; 
+                                }
+                               oci_execute($run_discount);
+
+                               while ($row_discount=oci_fetch_array($run_discount)){
+                                   
+                                   $discount_id = $row_discount['DISCOUNT_ID'];
+                                   $discount_per = $row_discount['DISCOUNT_PERCENTAGE'];
+                           
+                                   echo "
+                                   
+                                   <option value='$discount_id'> $discount_per </option>
+                                   
+                                   ";
+                                   
+                               }
+                               
+                               ?>
+                               
+                           </select>
+                           
+                       </div>                      
+                    </div>
+                    
                    
                    <div class="form-group">                       
                       <label class="col-md-3 control-label"> Product Image 1 </label> 
@@ -217,6 +261,8 @@ if($_SESSION['admin_type']!='trader'){
                       </div>                      
                    </div>
 
+                  
+
                    <div class="form-group">                       
                       <label class="col-md-3 control-label"> Product Description </label> 
                       
@@ -268,9 +314,10 @@ if(isset($_POST['submit'])){
     $userid=$_SESSION['admin_id'];
     $cat = $_POST['cat'];
     $shop=$_POST['shop'];
+    $discount=$_POST['discount'];
     $review=$_POST['quality'];
     $product_price = $_POST['product_price'];
-    $product_keywords = $_POST['product_keywords'];
+    $product_keywords = strtoupper($_POST['product_keywords']);
     $product_status = $_POST['product_status'];
     $product_desc = $_POST['product_desc'];
     $maximum_order=$_POST['maximum_order'];
@@ -286,9 +333,9 @@ if(isset($_POST['submit'])){
 
     
     
-    $insert_product = "INSERT INTO PRODUCT (PRODUCT_NAME,PRODUCT_DESCRIPTION,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_KEYWORDS,PRODUCT_STATUS, MIN_ORDER,MAX_ORDER,ALLERGY_INFORMATION,CATEGORY_ID,SHOP_ID,REVIEW_ID,USER_ID)
+    $insert_product = "INSERT INTO PRODUCT (PRODUCT_NAME,PRODUCT_DESCRIPTION,PRODUCT_PRICE,PRODUCT_IMAGE,PRODUCT_KEYWORDS,PRODUCT_STATUS, MIN_ORDER,MAX_ORDER,ALLERGY_INFORMATION,CATEGORY_ID,SHOP_ID,DISCOUNT_ID,REVIEW_ID,USER_ID)
     VALUES
-    ('$product_title',' $product_desc','$product_price','$product_img1','$product_keywords','$product_status','$minimum_order','$maximum_order','$allergy_info','$cat','$shop','$review','$userid')";
+    ('$product_title',' $product_desc','$product_price','$product_img1','$product_keywords','$product_status','$minimum_order','$maximum_order','$allergy_info','$cat','$shop','$discount','$review','$userid')";
     
     $run_product = oci_parse($conn,$insert_product);
 

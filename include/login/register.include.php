@@ -52,6 +52,7 @@ if(isset($_POST['register'])){
 			
 			$qry = oci_parse($conn, $query);
 			oci_execute($qry);
+			
 
 			header("location: ../../login.php?registeredandemailsent=1");
 		}
