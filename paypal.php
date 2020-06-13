@@ -14,7 +14,18 @@
         }
     </style>
 </head>
+<?php
+   session_start();
+   include('include/connection.php');
 
+    $userid=$_SESSION['customer_id'];
+    $select_customer ="SELECT * FROM USERA WHERE USER_ID ='$userid'";
+    $run_customer =oci_parse($conn, $select_customer);
+    oci_execute($run_customer);
+    $row_customer =oci_fetch_array($run_customer);
+    $customer_id =$row_customer['USER_ID'];
+
+   ?> 
 <body>
     <table border="1">
         <tr>
@@ -75,7 +86,7 @@ while($row=oci_fetch_array($cart_SELECT))
 
     if (($row=oci_fetch_assoc($parsing_cart_showing))==true)
     {
-        $productname = $row['PRODUCT_NAME'];
+    $productname = $row['PRODUCT_NAME'];
 	$productid = $row['PRODUCT_ID'];
 	$productdesc = $row ['PRODUCT_DESCRIPTION'];
 	$productstatus =$row['PRODUCT_STATUS'];
@@ -124,20 +135,13 @@ while($row=oci_fetch_array($cart_SELECT))
     $total_price +=$de;
     
     }
+    echo"
+    <input type='hidden' name='item_name_1' value='$productname'>
+        <input type='hidden' name='amount_1' value='250'>
+        <input type='hidden' name='quantity_1' value='3'>";
+        
 }
 ?>
-
- 		   <input type="hidden" name="item_name_<?php echo $i; ?>" value="<?php echo $productname; ?>">
-
- 		   	   <input type="hidden" name="amount_<?php echo $i; ?>" value="<?php echo $productprice;?>">
-
-
- 		   	   <input type="hidden" name="quantity_<?php echo $i; ?>" value="<?php echo $product_quantity; ?>">
-
-        
-        <input type="hidden" name="item_name_1" value="<?php echo $productname; ?>">
-        <input type="hidden" name="amount_1" value="250">
-        <input type="hidden" name="quantity_1" value="3">
         
         <input type="hidden" name="item_name_2" value="REDMI MI INDIA'S BEST CELL PHONE">
         <input type="hidden" name="return" value="http://localhost/website-prroject/return_paypal.php">
@@ -145,6 +149,7 @@ while($row=oci_fetch_array($cart_SELECT))
         <input type="hidden" name="quantity_2" value="2">
         <input type="submit" value="PayPal">
         </form>
+        
   
 </body>
 </html>
