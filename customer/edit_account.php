@@ -1,8 +1,15 @@
 <?php 
+session_start();
+if (isset($_SESSION['customer_id']))
+{
+    $userid= $_SESSION['customer_id'];
+}
+else if (isset($_SESSION['admin_id']))
+{
+    $userid=$_SESSION['admin_id'];
+}
 
-$customer_session = $_SESSION['customer_id'];
-
-$get_customer = "select * from USERA where USER_ID='$customer_session'";
+$get_customer = "select * from USERA where USER_ID='$userid'";
 
 $run_customer = oci_parse($conn,$get_customer);
 
@@ -30,9 +37,8 @@ $customer_address = $row_customer['USER_ADDRESS'];
 
 $customer_image = $row_customer['USER_IMAGE'];
 
-$customer_image = $row_customer['USER_DESCRIPTION'];
-
-
+$customer_description = $row_customer['USER_DESCRIPTION'];
+    
 ?>
 
 <h1 align="center"> Edit Your Account </h1>
@@ -108,9 +114,9 @@ $customer_image = $row_customer['USER_DESCRIPTION'];
 
                       <div class="col-md-6"><!-- col-md-6 Begin -->
 
-                          <input name="c_image" type="file" class="form-control" required>
+                          <input name="c_image" type="file" class="form-control">
 
-                          <img src="trader_images/<?php echo $customer_image; ?>" alt="<?php echo $customer_name; ?>" width="70" height="70">
+                          <img src="customer_images<?php echo $customer_image; ?>" alt="<?php echo $customer_name; ?>" width="70" height="70">
 
                       </div><!-- col-md-6 Finish -->
 
@@ -120,7 +126,9 @@ $customer_image = $row_customer['USER_DESCRIPTION'];
                       <label class="col-md-3 control-label">Customer Description </label> 
                       
                       <div class="col-md-6">                        
-                          <textarea name="c_desc" value="<?php echo $customer_desc; ?>" cols="19" rows="6" class="form-control"></textarea>
+                          <textarea name="c_desc"  cols="19" rows="6" class="form-control">
+                          <?php echo $customer_description; ?>
+                          </textarea>
                           
                       </div>                      
                    </div>
@@ -146,40 +154,47 @@ $customer_image = $row_customer['USER_DESCRIPTION'];
 
 if(isset($_POST['update'])){
     
-    $update_id = $customer_id;
+   
     
     $c_name = $_POST['c_name'];
+   echo "$c_name";
     
     $c_email = $_POST['c_email'];
-    
+    echo "$c_email";
+
     $c_address = $_POST['c_address'];
+    echo "$c_address";
 
     $c_pass = $_POST['c_pass'];
-    
+    echo "$c_pass";
+
     $c_contact = $_POST['c_phone'];
+    echo "$c_contact";
 
     $c_desc = $_POST['c_desc'];
+    echo "$c_desc";
     
     $c_image = $_FILES['c_image']['name'];
-    
+    echo "$c_image";
+
     $c_image_tmp = $_FILES['c_image']['tmp_name'];
     
     move_uploaded_file ($c_image_tmp,"customer_images/$c_image");
     
-    $update_customer = "update USERA set USERNAME='$c_name',USER_EMAIL='$c_email',USER_PASSWORD='$c_pass',USER_ADDRESS='$c_address',USER_PHONE='$c_contact',USER_IMAGE='$c_image', ,USER_DESCRIPTION='$c_desc' where USER_ID='$update_id' ";
-    
-    $run_customer = oci_parse($conn,$update_customer);
+    $update_user = "UPDATE USERA SET USERNAME='$c_name',USER_EMAIL='$c_email',USER_PASSWORD='$c_pass',USER_PHONE='$c_contact',USER_ADDRESS='$c_address',USER_DESCRIPTION='$c_desc',USER_IMAGE='$c_image' where USER_ID='$userid'";
+    $run_user = oci_parse($conn,$update_user);
 
-    oci_execute($run_customer);
+    oci_execute($run_user);
     
-    if($run_customer){
+    if($run_user){
         
         echo "<script>alert('Your account has been updated successfully. Please login again.')</script>";
         
-        echo "<script>window.open('logout.php','_self')</script>";
+        //echo "<script>window.open('logout.php','_self')</script>";
         
     }
     
 }
 
 ?>
+

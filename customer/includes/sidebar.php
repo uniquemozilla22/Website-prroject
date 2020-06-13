@@ -4,30 +4,37 @@
         
         <?php 
         include("db.php");
-        
-        $customer_session = $_SESSION['customer_id'] ||  $_SESSION['admin_id'];
-        
-        $get_customer = "select * from USERA where USER_ID='$customer_session'";
+       
+        if (isset($_SESSION['customer_id']))
+        {
+            $userid= $_SESSION['customer_id'];
+        }
+        else if (isset($_SESSION['admin_id']))
+        {
+            $userid=$_SESSION['admin_id'];
+        }
+
+        $get_customer = "select * from USERA where USER_ID='$userid'";
         
         $run_customer = oci_parse($conn,$get_customer);
 
         oci_execute($run_customer);
         
-        $row_customer = oci_fetch_array($run_customer);
+        $row_customer = oci_fetch_assoc($run_customer);
         
         $customer_image = $row_customer['USER_IMAGE'];
         
         $customer_name = $row_customer['USERNAME'];
         
-        if(!isset($_SESSION['customer_id'])){
-            
+        if(!isset($_SESSION['customer_id']) && !isset($_SESSION['admin_id'])){
+            echo "Hello";
         }else{
             
             echo "
             
                 <center>
                 
-                    <img src='customer_images/$customer_image' class='img-responsive' >
+                    <img src='../customer_images/$customer_image' class='img-responsive' class='profile_image' >
                 
                 </center>
                 

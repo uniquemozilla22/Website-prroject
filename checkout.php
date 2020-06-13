@@ -1,3 +1,5 @@
+
+
 <?php
 
 include('include/connection.php');
@@ -6,16 +8,54 @@ session_start();
 if (isset($_SESSION['customer_id']))
 {
     $userid= $_SESSION['customer_id'];
+    $username=$_SESSION['customer_name'];
 }
 else if (isset($_SESSION['admin_id']))
 {
     $userid=$_SESSION['admin_id'];
+    $username=$_SESSION['admin_name'];
 }
+if (isset($_GET['cartid']))
+{
+    $cartid=$_GET['cartid'];
+}
+
+
+if (isset($_POST['collectionsubmit']))
+{
+   $select_que="SELECT * FROM COLLECTION_SLOT WHERE USER_ID = '$userid'";
+   $parse_sele=oci_parse($conn,$select_que);
+   if (!$parse_sele)
+   {
+       echo "selection query on collection not parsed";
+   }
+   oci_execute($parse_sele);
+   $row=oci_fetch_assoc($parse_sele);
+   if($row==true){
+    $checkoutmessage="Already a payment remaining cannot add more";
+
+   }
+   else
+   { $time= $_POST['hour'];
+    $day=$_POST['day'];
+    $status=$_POST['address'];
+    $insertoncollection= "INSERT INTO COLLECTION_SLOT(SLOT_ID,SLOT_TIME,SLOT_STATUS,SLOT_DATE,USER_ID) VALUES(null,'$time','$status','$day','$userid')";
+
+    $parsing=oci_parse($conn,$insertoncollection);
+
+    oci_execute($parsing);
+
+    header("location: include/order/orderconfirm.include.php?cart=$cartid && ");
+}
+
+}
+
+
 
 include('include/header.include.php');
 include('include/banner.include.php');
 
-$S_query ="SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid'";
+$S_query ="SELECT * FROM  CART_PRODUCT WHERE CART_ID='$cartid'";
 
 $cart_SELECT= oci_parse($conn,$S_query);
 
@@ -25,6 +65,20 @@ if(!$cart_SELECT){
 
 oci_execute($cart_SELECT);
 $total_price=0;
+if (isset($checkoutmessage))
+{
+    echo $checkoutmessage;
+}
+
+echo"
+<div class='container'>
+<div class='row justify-content-center'>
+<div class='col-lg-6 px-4 pb-4' id='order'>
+<h4 class='text-center text-info p-2'  >Complete Your Order!</h4>
+<div class='jumbotron p-3 mb-2 text-center' style='background-color:RGB(201, 190, 185);'>
+<h6 class='lead'<b>Product  :
+
+";
 
 while($row=oci_fetch_array($cart_SELECT))
 {
@@ -67,17 +121,18 @@ while($row=oci_fetch_array($cart_SELECT))
     $de=$productprice*$product_quantity;
     
     $total_price +=$de;
+
+
+
+    echo 
+    "
+    
+    </b>$productname ( X $product_quantity)
+    ";
     }
 }
 ?>
-        
-        <div class="container">
-        <div class="row justify-content-center">
-        <div class="col-lg-6 px-4 pb-4" id="order">
-        <h4 class="text-center text-info p-2"  >Complete Your Order!</h4>
-        <div class="jumbotron p-3 mb-2 text-center" style='background-color:RGB(201, 190, 185);'>
-        <h6 class="lead"><b>Product(s)  :</b><?php echo $productname?></h6>
-        <h6 class="lead"><b>Delivery Charge:</b> Free</h6>
+        </h6>
         <h5><b>Total Amount Payable:  </b><?php echo number_format($total_price,2)?></h5>
         </div>
 
@@ -85,34 +140,190 @@ while($row=oci_fetch_array($cart_SELECT))
         <input type="hidden" name="products" value="<?php $productname;?>">
         <input type="hidden" name="grand_total" value="<?php $total_price;?>">
             <div class="form-group">
-            <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+            <input type="text" name="name" class="form-control" placeholder="Enter Name" required value="<?php echo $username ?>">
             </div>
-
             <div class="form-group">
-            <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+            <textarea name="address" cols="19" rows="3" class="form-control" placeholder="Enter order description(if any)...."> </textarea>           
             </div>
-
+            <h6 class="text-center lead">Select the day</h6>
             <div class="form-group">
-            <input type="tel" name="phone" class="form-control" placeholder="Enter Phone" required>
-            </div>
+            <select name="day" class="form-control">
+            <?php
 
-            <div class="form-group">
-            <textarea name="address" cols="19" rows="3" class="form-control" placeholder="Enter Delivery Address Here...."> </textarea>           
-            </div>
+            
 
-            <h6 class="text-center lead">Select Payment Mode</h6>
-            <div class="form-group">
-            <select name="pmode" class="form-control">
-            <option value="" selected disabled>-Select Payment Mode-</option>
-            <option value="cod" >-Cash On Delivery-</option>
-            <option value="netbanking" >-Net Banking-</option>
-            <option value="cards" >-Debit/Credit Card-</option>
+	// Prints the day
+    $today= date("l"); 
+    $time=date("H"); //the current time in 24 hr format
+    
+        if ($today=='Friday') { //if purchase day is friday, then all days & slots for next week is open
+        echo"<option value='NEXT WEDNESDAY' selected>Next Wednesday</option>";
+        echo "<option value='NEXT THURSDAY'>Next Thursday</option>";
+        echo "<option value='NEXT FRIDAY'>Next Friday</option>";
+        }
+        elseif ($today=='Thursday' && $time>=19 ) //if purchase day is thursday & time is 7pm or late then all days & slots for next week is open
+        {
+        echo"<option value='NEXT WEDNESDAY' selected>Next Wednesday</option>";
+        echo "<option value='NEXT THURSDAY'>Next Thursday</option>";
+        echo "<option value='NEXT FRIDAY'>Next Friday</option>";
+        }
+        elseif ($today=='Thursday' && $time<19 ) //if purchase day is thursday & time is earlier than 7pm then
+        {
+        echo"<option value='NEXT WEDNESDAY' selected>Next Wednesday</option>";	
+        echo "<option value='NEXT THURSDAY'>Next Thurday</option>";
+        echo "<option value='FRIDAY'> Friday</option>";			//friday's one slot is open
+        }
+        elseif($today=='Wednesday' && ($time>=19)) //if purchase day is wednesday and time is 7pm or late 
+        {
+            echo"<option value='NEXT WEDNESDAY' selected>Next Wednesday</option>";
+        echo "<option value='NEXT THURSDAY'>Next Thursday</option>";
+        echo "<option value='FRIDAY'>Friday</option>";	//only Friday's all slot are open
+        }
+        elseif ($today=='Wednesday' && $time<19) {	//if purchase day is wednesday and time is earlier than 7pm
+        echo"<option value='NEXT WEDNESDAY' selected>Next Wednesday</option>";
+        echo "<option value='THURSDAY'> Thursday</option>"; //selected thursday's slots are open
+        echo "<option value='FRIDAY'>Friday</option>"; //Friday's all slots are open
+        }
+            elseif($today=='Tuesday' && $time>=19) //if purchase day is tuesday and time is 7pm or late 
+        {
+        echo"<option value='NEXT WEDNESDAY' selected>Next Wednesday</option>"; 
+        echo "<option value='THURSDAY'>Thursday</option>";	//All slots for thursday and friday along with next wednesday is open
+        echo "<option value='FRIDAY'>Friday</option>";
+        }
+        elseif($today=='Tuesday' && $time<19) //if purchase day is tuesday and time is earlier than 7pm
+        {
+        echo"<option value='WEDNESDAY' selected> Wednesday</option>"; //all slots for following 3 days are open
+        echo "<option value='THURSDAY'>Thursday</option>";
+        echo "<option value='FRIDAY'>Friday</option>";
+        }
+        else
+        {
+        echo"<option value='WEDNESDAY' selected> Wednesday</option>"; //else, if purachase day if on any other day, upcoming wed, thursday and fri are slots are open
+        echo "<option value='THURSDAY'>Thursday</option>";
+        echo "<option value='FRIDAY'>Friday</option>";
+        }
+
+
+
+
+?>
+            
+            </select>
+            </div>  <div class="form-group">
+            <select name="hour" class="form-control">
+            <?php
+	$dayselected=$_POST['day'];
+	
+	$time=date("H");
+
+		if ($today=='Friday') { //if purchase day is friday, then all days & slots for next week is open
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>";
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+		}//inside friday
+		elseif ($today=='Tuesday' ) { 
+			if ($time>=19) {	//if purchase day is tuesday and time is 7pm or late 
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>"; //all slots for thurday, friday and next wednesday is open
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif($time<10) //if purchase day is tuesday and time is 10am or earlier
+			{
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>"; //all slots for upcoming next are open
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif (($time>=13 || $time<=15) && $dayselected=='wed') {
+			echo"<option disabled value='10AM to 1PM'> 10AM to 1PM </option>"; //if purchase day is tuesday and time is between 1pm to 3pm and 																				
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";				////Collection day is Wednesday, the first slot is unavailable
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif (($time>=16|| $time<=18) && $dayselected=='wed') { 
+			echo"<option disabled value='10AM to 1PM'> 10AM to 1PM </option>"; //if purchase day is tuesday and time is between 4pm to 6pm and 
+			echo "<option disabled value='1PM to 4PM'>1PM to 4PM</option>";	////Collection day is Wednesday,only the last slot is available
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			else{
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>"; //
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+				
+		}//inside tuesday
+		elseif ($today=='Wednesday' ) { 
+			if ($time>=19) {
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>"; //if purchase day is wednesday and time is 7pm or late 
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";	//all slots from friday and upcoming wed and thursday is free
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif($time<10)
+			{
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>";	//if purchase day is wednesday and time is 10am or earlier 
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";		////all slots are open
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif (($time>=13 || $time<=15) && $dayselected=='thu') {
+			echo"<option disabled value='10AM to 1PM'> 10AM to 1PM </option>";	//if purchase day is wednesday and time is between 1pm to 3pm and Collection day
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";				//thursday, only the first slot is unavailable
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif (($time>=16|| $time<=18) && $dayselected=='thu') {
+			echo"<option disabled value='10AM to 1PM'> 10AM to 1PM </option>";	//if purchase day is wednesday and time is between 4pm to 6pm and Collection day
+			echo "<option disabled value='1PM to 4PM'>1PM to 4PM</option>";		//thursday the last slot is available
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			else{
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>"; //else all slots for any days selected is free
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+
+		}//inside wednesday
+		elseif ($today=='Thursday') {
+			if ($time>=19) {
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>"; //if purchase day is thursday and time is 7pm or late 
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";		//all slots for next days are open
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif($time<10)
+			{
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>"; //if purchase day is thursday and time is 10am or earlier 
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";		//all slots are open
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif (($time>=13 || $time<=15) && $dayselected=='fri') {
+			echo"<option disabled value='10AM to 1PM'> 10AM to 1PM </option>"; //if purchase day is thursday and time is between 1pm to 3pm and Collection day
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";				//is friday then only the first slot is unavailable
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			elseif (($time>=16|| $time<=18) && $dayselected=='fri') { 
+			echo"<option disabled value='10AM to 1PM'> 10AM to 1PM </option>";//if purchase day is thursday and time is between 4pm to 6pm and Collection day
+			echo "<option disabled value='1PM to 4PM'>1PM to 4PM</option>";		//is friday, only the last slot is available
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+			else{
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>"; //else all slots for any days selected is free
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+			}
+
+		}//thursday
+		else
+		{
+			echo"<option value='10AM to 1PM'> 10AM to 1PM </option>";
+			echo "<option value='1PM to 4PM'>1PM to 4PM</option>";
+			echo "<option value='4PM to 7PM'>4PM to 7PM</option>";
+		}
+
+?>
+            
             </select>
             </div>
 
             <div class="form-group">
-                <input type="submit" name="submit" value="Place Order" class="btn btn-danger btn-block">
+                <input type="submit" name="collectionsubmit" value="Place Order" class="btn btn-danger btn-block">
             </div>
+
 
         </div>
         </div>
