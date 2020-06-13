@@ -11,23 +11,29 @@
 
 <?php 
 
-    if(isset($_GET['edit_shop'])){
+    if(isset($_GET['edit_shops'])){
         
-        $edit_shop_id = $_GET['edit_shop'];
+        $edit_shop_id = $_GET['edit_shops'];
         
         $edit_shop_query = "select * from SHOP where SHOP_ID='$edit_shop_id'";
         
         $run_edit = oci_parse($conn,$edit_shop_query);
+
+        oci_execute($run_edit);
         
         $row_edit = oci_fetch_array($run_edit);
-        
-        oci_execute($run_edit);
+
+        if(!$run_edit){
+            echo "Sql error";
+        }
 
         $shop_id = $row_edit['SHOP_ID'];
         
         $shop_title = $row_edit['SHOP_NAME'];
         
         $shop_desc = $row_edit['SHOP_DESCRIPTION'];
+
+        $shop_img = $row_edit['SHOP_IMAGE'];
         
     }
 
@@ -38,7 +44,8 @@
         <ol class="breadcrumb"><!-- breadcrumb begin -->
             <li>
                 
-                <i class="fa fa-dashboard"></i> Dashboard / Edit SHOP
+                <i class="fa fa-dashboard"></i> Dashboard / Edit Shop
+                <a href="../index.php" class="btn btn-warning">Visit Website</a>
                 
             </li>
         </ol><!-- breadcrumb finish -->
@@ -51,7 +58,7 @@
             <div class="panel-heading"><!-- panel-heading begin -->
                 <h3 class="panel-title"><!-- panel-title begin -->
                 
-                    <i class="fa fa-pencil fa-fw"></i> Edit SHOP
+                    <i class="fa fa-pencil fa-fw"></i> Edit Shop
                 
                 </h3><!-- panel-title finish -->
             </div><!-- panel-heading finish -->
@@ -73,6 +80,9 @@
                         </div><!-- col-md-6 finish -->
                     
                     </div><!-- form-group finish -->
+                    
+
+                    
                     <div class="form-group"><!-- form-group begin -->
                     
                         <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
@@ -83,11 +93,16 @@
                         
                         <div class="col-md-6"><!-- col-md-6 begin -->
                         
-                        <input value=" <?php echo $shop_desc; ?> " name="shop_desc" type="text" class="form-control">
+                          
+                        <textarea name="shop_desc" cols="19" rows="6" class="form-control">
+                              
+                              <?php echo $shop_desc; ?>
+                              
+                          </textarea>
                         
                         </div><!-- col-md-6 finish -->
-                    
                     </div><!-- form-group finish -->
+
                     <div class="form-group"><!-- form-group begin -->
                     
                         <label for="" class="control-label col-md-3"><!-- control-label col-md-3 begin --> 
@@ -114,18 +129,20 @@
 
           if(isset($_POST['update'])){
               
-              $shop_title = $_POST['CATEGORY_NAME'];
+              $shop_title = $_POST['shop_title'];
               
-              $shop_desc = $_POST['PRODUCT_QUANTITY'];
-              
-              $update_shop = "update CATEGORY set CATEGORY_NAME='$shop_title',PRODUCT_QUANTITY='$shop_desc' where CATEGORY_ID='$shop_id'";
+              $shop_desc = $_POST['shop_desc'];
+
+             
+
+              $update_shop = "update SHOP set SHOP_NAME='$shop_title',SHOP_DESCRIPTION='$shop_desc' where SHOP_ID='$shop_id'";
               
               $run_shop = oci_parse($conn,$update_shop);
               
-              oci_execute($run_shop)
+              oci_execute($run_shop);
               if($run_shop){
                   
-                  echo "<script>alert('Your Category Has Been Updated')</script>";
+                  echo "<script>alert('Your Shop Has Been Updated')</script>";
                   
                   echo "<script>window.open('index.php?view_shops','_self')</script>";
                   

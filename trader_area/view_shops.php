@@ -41,7 +41,9 @@
                                 <th> Shop ID </th>
                                 <th> Shop Name </th>
                                 <th> Shop Description </th>
-                                
+                                <th> Shop Image </th>
+                                <th> Edit Shop </th>
+                                <th> Delete Shop </th>
                             </tr><!-- tr finish -->
                         </thead><!-- thead finish -->
                         
@@ -64,17 +66,36 @@
                                     $shop_title = $row_shop['SHOP_NAME'];
                                     
                                     $shop_desc = $row_shop['SHOP_DESCRIPTION'];
+
+                                    $shop_img = $row_shop['SHOP_IMAGE'];
                                     
                                     $i++;
                             
                             ?>
                             
                             <tr><!-- tr begin -->
-                                <td> <?php echo $i; ?> </td>
+                                <td> <?php echo $shop_id ?> </td>
                                 <td> <?php echo $shop_title; ?> </td>
                                 <td> <?php echo $shop_desc; ?> </td>
+                             <td> <img src="shop_images/<?php echo $shop_img; ?>" width="60" height="60"></td>
+                                <td>    
+                                <a href="index.php?delete_shop=<?php echo $shop_id; ?>">
+                                     
+                                     <i class="fa fa-trash-o"></i> Delete
+                                 
+                                  </a> 
+                                  
+                             </td>
+                                <td> 
+                                     
+                                     <a href="index.php?edit_shops=<?php echo $shop_id; ?>">
+                                     
+                                        <i class="fa fa-pencil"></i> Edit
+                                    
+                                     </a> 
+                                    
+                                </td>
                                
-                                
                             </tr><!-- tr finish -->
                             
                             <?php } ?>

@@ -136,6 +136,9 @@
                 </a><!-- a href finish -->
                 
                 <ul id="shop" class="collapse"><!-- collapse begin -->
+                <li><!-- li begin -->
+                        <a href="index.php?insert_shops" style="color: white;"> Insert Shops </a>
+                    </li><!-- li finish -->
                     <li><!-- li begin -->
                         <a href="index.php?view_shops" style="color: white;"> View Shops </a>
                     </li><!-- li finish -->

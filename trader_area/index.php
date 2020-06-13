@@ -139,34 +139,24 @@
                         
                         include("view_shops.php");
                         
+                } if(isset($_GET['insert_shops'])){
+                        
+                        include("insert_shops.php");
+                        
+                }
+                if(isset($_GET['edit_shops'])){
+                        
+                        include("edit_shops.php");
+                        
                 } 
-                if(isset($_GET['delete_p_cat'])){
                         
-                        include("delete_p_cat.php");
-                        
-                }   if(isset($_GET['edit_p_cat'])){
-                        
-                        include("edit_p_cat.php");
-                        
-                }   if(isset($_GET['insert_cat'])){
-                        
-                        include("insert_cat.php");
-                        
-                }    if(isset($_GET['edit_cat'])){
-                        
-                        include("edit_cat.php");
-                        
-                }   if(isset($_GET['delete_cat'])){
-                        
-                        include("delete_cat.php");
-                        
-                }   if(isset($_GET['view_customers'])){
+                  if(isset($_GET['view_customers'])){
                         
                         include("view_customers.php");
                         
-                }   if(isset($_GET['delete_customer'])){
+                }   if(isset($_GET['delete_shop'])){
                         
-                        include("delete_customer.php");
+                        include("delete_shop.php");
                         
                 }   if(isset($_GET['view_users'])){
                         
