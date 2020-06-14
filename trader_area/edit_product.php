@@ -20,6 +20,8 @@ if($_SESSION['admin_type']!='trader'){
         oci_execute($run_edit);
         
         $row_edit = oci_fetch_array($run_edit);
+
+        
         
         $p_id = $row_edit['PRODUCT_ID'];
         
@@ -427,7 +429,7 @@ if($_SESSION['admin_type']!='trader'){
 <?php 
 
 if(isset($_POST['update'])){
-    
+
     $product_title = $_POST['product_title'];
 
     $cat = $_POST['cat'];
@@ -438,7 +440,7 @@ if(isset($_POST['update'])){
 
     $review=$_POST['quality'];
 
-    $user_id=$_POST['admin_id'];
+    $user_id=$_SESSION['admin_id'];
 
     $product_price = $_POST['product_price'];
 
@@ -448,7 +450,7 @@ if(isset($_POST['update'])){
 
     $maximum_order=$_POST['maximum_order'];
 
-    $minimim_order=$_POST['minimum_order'];
+    $minimum_order=$_POST['minimum_order'];
 
     $allergy_info=$_POST['allergy_info'];
     
