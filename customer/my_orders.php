@@ -74,6 +74,7 @@
         $row_customer = oci_fetch_array($run_customer);
 
         $cart_id = $row_customer['CART_ID'];
+        $discount_id = $row_customer['DISCOUNT_ID'];
 
         $get_orders = "SELECT * FROM CART_PRODUCT WHERE CART_ID='$cart_id'";
 
@@ -135,8 +136,6 @@
     $discountid= $row['DISCOUNT_ID'];
     
 
-    
-    
            
 
             
@@ -151,7 +150,7 @@
             <td> <?php echo $deliverday; ?> </td>
             <td> <?php echo $pickuptime; ?> </td>
              <td> <?php echo $STATUS; ?> </td>
-             <td><a href="invoice.php?invoice_no=<?php echo $order_invoice;?>" class="btn btn-info btn-md" target="_blank">View Invoice</a>
+             <td><a href="createincoice.php" class="btn btn-info btn-md" target="_blank">View Invoice</a>
              </td>
 
              <td><a href="sendmail.php?invoice_no=<?php echo $order_invoice;?>" class="btn btn-info btn-md">Mail Invoice</a>
