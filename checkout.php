@@ -140,11 +140,10 @@ while ($row = oci_fetch_assoc($stmt)) {
     <input type="hidden" name="cmd" value="_cart">
     <input type="hidden" name="upload" value="1">
     <input type='hidden' name='business' value='sb-rvpml2285907@business.example.com'>
-    <input type='hidden' name='currency_code' value='USD>'>
-    <input type='hidden' name='notify_url'
-               value='http://localhost/website-prroject/notify.php'>
+    <input type='hidden' name='currency_code' value='USD'>
+    <input type='hidden' name='notify_url' value='http://localhost/website-prroject/notify.php'>
     <input type='hidden' name='return' value='http://localhost/website-prroject/checkoutSuccessful.php'>
-    <?php echo $paypalHiddenData; ?> 
+    <?php echo $paypalHiddenData; ?>
     <!-- /.PayPal logic -->
 
     <input type="hidden" name="products" value="<?php $productname; ?>">
@@ -158,9 +157,8 @@ while ($row = oci_fetch_assoc($stmt)) {
     <h6 class="text-center lead">Select the day</h6>
     <div class="form-group">
         <select name="day" class="form-control">
+
             <?php
-
-
 
             // Prints the day
             $today = date("l");
