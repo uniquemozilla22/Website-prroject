@@ -1,72 +1,102 @@
-<!-- Start My Account Area -->
-<section class="my_account_area pt--80 pb--55 bg--white">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6 col-12">
-						<div class="my__account__wrapper">
-							<h3 class="account__title">Login</h3>
-							<form action="#">
-								<div class="account__form">
-									<div class="input__box">
-										<label>Username or email address <span>*</span></label>
-										<input type="text">
-									</div>
-									<div class="input__box">
-										<label>Password<span>*</span></label>
-										<input type="text">
-									</div>
-									<div class="form__btn">
-										<button>Login</button>
-										<label class="label-for-checkbox">
-											<input id="rememberme" class="input-checkbox" name="rememberme" value="forever" type="checkbox">
-											<span>Remember me</span>
-										</label>
-									</div>
-									<a class="forget_pass" href="#">Lost your password?</a>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="col-lg-6 col-12">
-						<div class="my__account__wrapper">
-							<h3 class="account__title">Register</h3>
-							<form action="#">
-								<div class="account__form">
-								<div class="input__box">
-										<label>Your Name<span>*</span></label>
-										<input type="text">
-									</div>
-									<div class="input__box">
-										<label>Email address <span>*</span></label>
-										<input type="email">
-									</div>
-									<div class="input__box">
-										<label>Your Address</label>
-										<label>Address 1 <span>*</span></label>
-										<input type="text">
-										<label>Address 2</label>
-										<input type="text">
-									</div>
-									<div class="input__box">
-										<label>Phone Number<span>*</span></label>
-										<input type="email">
-									</div>
-									<div class="input__box">
-										<label>Password<span>*</span></label>
-										<input type="password">
-									</div>
-									<div class="input__box">
-										<label>Confirm Password<span>*</span></label>
-										<input type="password">
-									</div>
-									<div class="form__btn">
-										<button>Register</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- End My Account Area -->
+
+
+<!-- LOGIN -->
+<?php 
+
+include("../connection.php");
+
+
+if(isset($_POST['login'])){
+$user = $_POST['username'];
+$pass = $_POST['pass'];
+
+$sql_login = "SELECT * FROM USERA WHERE USERNAME='$user' OR USER_EMAIL ='$user'"; 
+
+$login_stmt = oci_parse($conn, $sql_login);
+
+if(!$login_stmt)
+{
+    echo "An error occurred in parsing the sql string.\n"; 
+    exit; 
+}
+
+oci_execute($login_stmt);
+
+if (($row= oci_fetch_array($login_stmt))==true)
+{
+	$username = $row['USERNAME'];
+	$userid = $row['USER_ID'];
+	$password = $row ['USER_PASSWORD'];
+	$user_status =$row['USER_STATUS'];
+	$type=$row['USER_TYPE'];
+	$verified_password= password_verify($pass,$password);
+
+	if ($user_status=="verified")
+	{
+		
+	if ($verified_password==true && $type=="customer")
+	{
+		session_start();
+		$_SESSION['customer_name']=$username;
+		$_SESSION['customer_id']=$userid;
+		$_SESSION['customer_type']=$type;
+		header("Location: ../../index.php?loginSucess='$userid'");
+
+	}else if ($verified_password==true && $type=="trader"){
+	
+		session_start();
+		$_SESSION['admin_name']=$username;
+		$_SESSION['admin_id']=$userid;
+		$_SESSION['admin_type']=$type;
+		header("Location: ../../trader_area/index.php?dashboard");
+	}
+
+	else if($verified_password==false){
+		header("Location: ../../login.php?onlypasswordwrong=1");
+
+	}	  
+	else {
+
+		header("Location: ../../login.php?emailpasswordwrong=1");
+	}
+
+	}
+	else{
+		
+		?>
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP VERification</title>
+    <link rel="stylesheet" href="otp.css">
+</head>
+<body>
+    <div class="prompt">
+        Enter the code generated on your mobile device below to log in!
+    </div>
+    
+    <form method="post" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off" action="verify_customer.php">
+        <input type="text" id="digit-1" name="digit" />
+		<button type="submit" name="otpsubmit">Submit OTP</button>
+    </form>
+
+    <script src="otp.js"></script>
+</body>
+</html>
+
+
+	<?php 
+}
+}
+else{
+	header("location: ../../login.php?invalidemail=1");
+}
+}
+
+?> 
+
+
+		
+
