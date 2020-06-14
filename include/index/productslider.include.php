@@ -30,7 +30,7 @@ $name_fetch= oci_fetch_assoc($sle);
 $traderName= $name_fetch['USERNAME'];
 
 echo " 
-<section class='wn__product__area brown--color pt--80  pb--30'>
+<section class='wn__product__area brown--color pt--80  pb--30' style='background-color:RGB(211, 215, 222);'>
 			<div class='container'>
 				<div class='row'>
 					<div class='col-lg-12'>

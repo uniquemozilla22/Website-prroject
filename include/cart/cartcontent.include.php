@@ -80,7 +80,7 @@ $dis_price = 0;
 $coupon_code = 0;
 ?>
 
-<div class='cart-main-area section-padding--lg bg--white'>
+<div class='cart-main-area section-padding--lg bg--white' style='background-color:RGB(211, 215, 222);'>
     <div class='container'>
         <div class='row'>
             <div class='col-md-12 col-sm-12 ol-lg-12'>

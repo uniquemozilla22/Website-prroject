@@ -1,4 +1,4 @@
-<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg" style='background-color:RGB(201, 190, 185);'>
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg" style='background-color:RGB(211, 215, 222);'>
         	<div class="container">			
         			<div class="col-lg-9 col-12 order-1 order-lg-2">
         			

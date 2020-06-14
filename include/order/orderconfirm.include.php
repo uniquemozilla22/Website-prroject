@@ -36,8 +36,21 @@ if (($row=oci_fetch_array($parse_select))==true)
     $collectionslotstatus=$row['SLOT_STATUS'];
     $collectionslotdate=$row['SLOT_DATE'];
 
+    $select_PAYMENT="SELECT * FROM PAYMENT WHERE USER_ID=$userid";
+
+$parse_select_payment=oci_parse($conn,$select_PAYMENT);
+
+if(!$parse_select_payment)
+{
+    echo"there is a sql error in slecting the collection slot";
+}
+oci_execute($parse_select_payment);
+$pay=oci_fetch_array($parse_select_payment);
+
+$payid=$pay['PAYMENT_ID'];
+
     
-$insert_order="INSERT INTO ORDERR(ORDER_ID,ORDER_STATUS,ORDER_TIME,ORDER_DATE,ORDER_DESCRIPTION,CART_ID,PAYMENT_ID,SLOT_ID) VALUES(null,'PAID','$collectionslottime','$collectionslotdate','$collectionslotstatus','$cart_id',null,'$collectionslotid')";
+$insert_order="INSERT INTO ORDERR(ORDER_ID,ORDER_STATUS,ORDER_TIME,ORDER_DATE,ORDER_DESCRIPTION,CART_ID,PAYMENT_ID,SLOT_ID) VALUES(null,'PAID','$collectionslottime','$collectionslotdate','$collectionslotstatus','$cart_id','$payid','$collectionslotid')";
 $parse_iinsert=oci_parse($conn,$insert_order);
 
 if(!$parse_iinsert)

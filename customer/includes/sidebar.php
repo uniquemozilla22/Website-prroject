@@ -1,4 +1,4 @@
-<div class="panel panel-default sidebar-menu"><!--  panel panel-default sidebar-menu Begin  -->
+<div class="panel panel-default sidebar-menu" style='background-color:RGB(211, 215, 222);'><!--  panel panel-default sidebar-menu Begin  -->
     
     <div class="panel-heading"><!--  panel-heading  Begin  -->
         

@@ -44,7 +44,7 @@ if ($row = oci_fetch_assoc($login_stmt))
 	$discountid= $row['DISCOUNT_ID'];
 
 
-	echo " <div class='maincontent bg--white pt--80 pb--55'>
+	echo " <div class='maincontent bg--white pt--80 pb--55' >
 	<div class='container'>
 		<div class='row'>
 			<div class='col-lg-9 col-12'>
