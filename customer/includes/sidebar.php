@@ -31,9 +31,9 @@
         if(!isset($_SESSION['customer_id']) && !isset($_SESSION['admin_id'])){
             
         }else{
-            
+            if(isset($_SESSION['customer_id'])){
             echo "
-            
+              
                 <center>
                 
                     <img src='customer_images/$customer_image' class='img-responsive'  class='profile_image' >
@@ -51,7 +51,27 @@
             
             ";
             
+        }else{
+            echo "
+              
+            <center>
+            
+                <img src='../trader_area/trader_images/$customer_image' class='img-responsive'  class='profile_image' >
+            
+            </center>
+            
+            <br/>
+            
+            <h3 class='panel-title' align='center' style='color:RGB(237, 146, 92);font-weight:bold;'>
+            
+                Name: $customer_name
+                Email:$customer_email
+            
+            </h3>
+        
+        ";
         }
+    }
         
         ?>
         

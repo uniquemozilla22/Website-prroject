@@ -106,6 +106,7 @@ $customer_description = $row_customer['USER_DESCRIPTION'];
                        
                    </div><!-- form-group Finish -->
                    
+
                    
                    <div class="form-group"><!-- form-group Begin -->
 
@@ -114,8 +115,8 @@ $customer_description = $row_customer['USER_DESCRIPTION'];
                       <div class="col-md-6"><!-- col-md-6 Begin -->
 
                           <input name="c_image" type="file" class="form-control" required>
-
-                          <img src="customer_images/<?php echo $customer_image; ?>" alt="<?php echo $user_name; ?>" width="70" height="70">
+                         
+                          <img src="customer_images/<?php echo $customer_image; ?>"  width="70" height="70">
 
                       </div><!-- col-md-6 Finish -->
                       </div>
