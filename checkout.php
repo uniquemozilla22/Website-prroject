@@ -15,30 +15,6 @@ if (isset($_GET['cartid'])) {
 }
 
 
-if (isset($_POST['collectionsubmit'])) {
-    $select_que = "SELECT * FROM COLLECTION_SLOT WHERE USER_ID = '$userid'";
-    $parse_sele = oci_parse($conn, $select_que);
-    if (!$parse_sele) {
-        echo "selection query on collection not parsed";
-    }
-    oci_execute($parse_sele);
-    $row = oci_fetch_assoc($parse_sele);
-    if ($row == true) {
-        $checkoutmessage = "Already a payment remaining cannot add more";
-    } else {
-        $time = $_POST['hour'];
-        $day = $_POST['day'];
-        $status = $_POST['address'];
-        $insertoncollection = "INSERT INTO COLLECTION_SLOT(SLOT_ID,SLOT_TIME,SLOT_STATUS,SLOT_DATE,USER_ID) VALUES(null,'$time','$status','$day','$userid')";
-
-        $parsing = oci_parse($conn, $insertoncollection);
-
-        oci_execute($parsing);
-
-        header("location: include/order/orderconfirm.include.php?cart=$cartid && ");
-    }
-}
-
 
 
 include('include/header.include.php');
@@ -114,44 +90,23 @@ while ($row = oci_fetch_array($cart_SELECT)) {
     ";
     }
 }
-$count = 1;
-$paypalHiddenData = '';
-$query = "SELECT * FROM CART_PRODUCT CP, PRODUCT P WHERE CP.PRODUCT_ID = P.PRODUCT_ID AND CART_ID = $_GET[cartid]";
-$stmt = oci_parse($conn, $query);
-oci_execute($stmt);
-while ($row = oci_fetch_assoc($stmt)) {
-    // generate hidden inputs to submit to paypal
-    $paypalHiddenData .= "<input type='hidden' name='item_name_$count'
-               value='$row[PRODUCT_NAME]'/>
-        <input type='hidden' name='quantity_$count'
-               value='$row[PRODUCT_QUANTITY]'/>
-        <input type='hidden' name='amount_$count'
-               value='$row[PRODUCT_PRICE]'/>";
-    ++$count;
-}
+
 
 ?>
 </h6>
 <h5><b>Total Amount Payable: </b><?php echo number_format($total_price, 2) ?></h5>
 </div>
 
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" id="placeOrder">
-    <!-- PayPal logic -->
-    <input type="hidden" name="cmd" value="_cart">
-    <input type="hidden" name="upload" value="1">
-    <input type='hidden' name='business' value='sb-rvpml2285907@business.example.com'>
-    <input type='hidden' name='currency_code' value='USD'>
-    <input type='hidden' name='notify_url' value='http://localhost/website-prroject/notify.php'>
-    <input type='hidden' name='return' value='http://localhost/website-prroject/checkoutSuccessful.php'>
-    <?php echo $paypalHiddenData; ?>
-    <!-- /.PayPal logic -->
+<?php
 
-    <input type="hidden" name="products" value="<?php $productname; ?>">
-    <input type="hidden" name="grand_total" value="<?php $total_price; ?>">
-    <div class="form-group">
+if (!isset($_GET['setted']))
+{
+    ?>
+<form action ="checkoutrun.php" method='POST'>
+<div class="form-group">
         <input type="text" name="name" class="form-control" placeholder="Enter Name" required value="<?php echo $username ?>">
     </div>
-    <div class="form-group">
+<div class="form-group">
         <textarea name="address" cols="19" rows="3" class="form-control" placeholder="Enter order description(if any)...."> </textarea>
     </div>
     <h6 class="text-center lead">Select the day</h6>
@@ -302,10 +257,51 @@ while ($row = oci_fetch_assoc($stmt)) {
 
         </select>
     </div>
-
     <div class="form-group">
         <input type="submit" name="collectionsubmit" value="Place Order" class="btn btn-danger btn-block">
     </div>
+
+</form>
+<?php
+}else{ 
+$count = 1;
+$paypalHiddenData = '';
+$query = "SELECT * FROM CART_PRODUCT CP, PRODUCT P WHERE CP.PRODUCT_ID = P.PRODUCT_ID AND CART_ID = $cartid";
+$stmt = oci_parse($conn, $query);
+oci_execute($stmt);
+while ($row = oci_fetch_assoc($stmt)) {
+    // generate hidden inputs to submit to paypal
+    $paypalHiddenData .= "<input type='hidden' name='item_name_$count'
+               value='$row[PRODUCT_NAME]'/>
+        <input type='hidden' name='quantity_$count'
+               value='$row[PRODUCT_QUANTITY]'/>
+        <input type='hidden' name='amount_$count'
+               value='$row[PRODUCT_PRICE]'/>";
+    ++$count;
+}
+?>
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" id="placeOrder">
+    <!-- PayPal logic -->
+    <input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="upload" value="1">
+    <input type='hidden' name='business' value='sb-rvpml2285907@business.example.com'>
+    <input type='hidden' name='currency_code' value='USD'>
+    <input type='hidden' name='notify_url' value='http://localhost/website-prroject/notify.php'>
+    <input type='hidden' name='return' value='http://localhost/website-prroject/checkoutSuccessful.php'>
+    <?php echo $paypalHiddenData; ?>
+    <!-- /.PayPal logic -->
+
+    <input type="hidden" name="products" value="<?php $productname; ?>">
+    <input type="hidden" name="grand_total" value="<?php $total_price; ?>">
+   
+    <div class="form-group">
+        <input type="submit" name="collectionsubmit" value="Paypal" class="btn btn-block">
+    </div>
+    </form>
+    <?php
+
+    }
+    ?>
 
 
     </div>
