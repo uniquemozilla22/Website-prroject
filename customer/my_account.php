@@ -127,6 +127,6 @@ if(isset($id)){
 else if(!isset( $_SESSION['customer_id'] )|| !isset( $_SESSION['admin_id']) )
 {
     
-    echo "<script>window.open('../checkout.php','_self')</script>";
+    echo "<script>window.open('../login.php','_self')</script>";
     
 } ?>

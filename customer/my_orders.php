@@ -8,7 +8,9 @@
 
 <p class="text-muted">
 
-    If you have any questions, do not hesitate to <a href="../contact.php">Contact Us</a>.
+    If you have any questions, do not hesitate to Contact Us.</br>
+    Contact : 01-5132076</br>
+    Taste Best, Checkhuderfax, London
 
 </p>
 

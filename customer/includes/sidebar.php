@@ -27,6 +27,10 @@
         $customer_name = $row_customer['USERNAME'];
 
         $customer_email = $row_customer['USER_EMAIL'];
+
+        $customer_phone = $row_customer['USER_PHONE'];
+
+        $customer_address = $row_customer['USER_ADDRESS'];
         
         if(!isset($_SESSION['customer_id']) && !isset($_SESSION['admin_id'])){
             
@@ -42,12 +46,13 @@
                 
                 <br/>
                 
-                <h3 class='panel-title' align='center' style='color:RGB(237, 146, 92);font-weight:bold;'>
+                <h6 class='panel-title' align='center' style='color:RGB(237, 146, 92);font-weight:bold;'>
                 
                     Name: $customer_name
-                    Email:$customer_email
+                    $customer_email
+                    Contact: $customer_phone
                 
-                </h3>
+                </h6>
             
             ";
             
@@ -62,12 +67,13 @@
             
             <br/>
             
-            <h3 class='panel-title' align='center' style='color:RGB(237, 146, 92);font-weight:bold;'>
+            <h6 class='panel-title' align='center' style='color:RGB(237, 146, 92);font-weight:bold;'>
             
-                Name: $customer_name
-                Email:$customer_email
+            Name: $customer_name
+            $customer_email
+            Contact: $customer_phone
             
-            </h3>
+            </h6>
         
         ";
         }
@@ -91,17 +97,6 @@
                 
             </li>
             
-            
-            <li class="<?php if(isset($_GET['pay_offline'])){ echo "active"; } ?>">
-                
-                <a href="my_account.php?pay_offline">
-                    
-                    <i class="fa fa-list"></i> Pay Offline
-                    
-                </a>
-                
-            </li>
-
             
             <li class="<?php if(isset($_GET['edit_account'])){ echo "active"; } ?>">
                 
