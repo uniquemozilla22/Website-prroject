@@ -23,7 +23,23 @@
 <table class="table table-bordered table-hover"><!--  table table-bordered table-hover Begin  -->
 
     <thead><!--  thead Begin  -->
+<?php
+  $get_cus = "SELECT * FROM CART WHERE USER_ID='$userid' AND CART_STATUS=1";
 
+
+  $run_cusr = oci_parse($conn,$get_cus);
+
+  oci_execute($run_cusr);
+
+  if(!$run_cusr){
+      echo "Error in parsing";
+  }
+
+  $row_cu = oci_fetch_array($run_cusr);
+  
+  $cart_id = $row_cu['CART_ID'];
+
+?>
         <tr><!--  tr Begin  -->
 
             <th> PRODUCT NAME</th>
@@ -34,7 +50,7 @@
             <th> TIME </th>
             <th> Your Message </th>
             <th> View Invoice </th>
-            <th> Send Invoice </th>
+            <th><a href='removeorder.php?cartid=<?php echo $cart_id ?>'> Remove Invoice</a> </th>
 
 
         </tr><!--  tr Finish  -->
@@ -157,7 +173,7 @@
              <td><a href="createincoice.php" class="btn btn-info btn-md" target="_blank">View Invoice</a>
              </td>
 
-             <td><a href="sendmail.php?invoice_no=<?php echo $order_invoice;?>" class="btn btn-info btn-md">Mail Invoice</a>
+             <td><a href="#" class="btn btn-info btn-md">Mail Invoice</a>
              </td>
 
 

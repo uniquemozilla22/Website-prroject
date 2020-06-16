@@ -7,6 +7,7 @@
 if (isset($_GET['allitemsremoved'])) {
     $cart_message = "All your items has been removed from the cart";
 }
+$counter=0;
 
 if(isset($_GET['orderplaced']))
 {
@@ -131,6 +132,7 @@ $coupon_code = 0;
 
                                 oci_execute($cart_SELECT);
                                 $total_price = 0;
+                                
 
                                 while ($row = oci_fetch_array($cart_SELECT)) {
 
@@ -219,6 +221,7 @@ $coupon_code = 0;
     <td class='product-remove'><a href='cart.php?productidremove=$product_id&cart=$cart_id_show'> X</a></td>
     </tr>
     ";
+    $counter++;
                                     }
 
                                 }
@@ -251,7 +254,7 @@ $coupon_code = 0;
                                         $dis_pers = $dis_per * $total_price;
                                         $dis_price = $dis_pers / 100;
                                     } else {
-                                        header("location: cart.php?discountnotavailable=1");
+                                        $dis_price="Invalid Discount Name";
                                     }
                                 }
 
@@ -269,6 +272,12 @@ $coupon_code = 0;
                         </form>
                         <li><a href="cart.php?removeall=1">Clear All</a></li>
                         <?php
+                        if ($counter>=20)
+                        {
+                            $check="You can order maximum 20 items at a time";
+                            echo "$check";
+                        }
+                        else{
                         if (isset($card_id)) {
                             echo "
                                 <li><a href='checkout.php?cartid=$card_id'>Check Out</a></li>
@@ -278,6 +287,7 @@ $coupon_code = 0;
                                     <li><a href='checkout.php?cartid=$cart_id_show'>Check Out</a></li>
                                     ";
                         }
+                    }
                         ?>
                     </ul>
                 </div>
@@ -298,7 +308,21 @@ $coupon_code = 0;
                     </div>
                     <div class="cart__total__amount">
                         <span>Grand Total</span>
-                        <span>$<?php echo $discounted_price = $total_price - $dis_price; ?></span>
+                    
+                        <span>$<?php
+                        if(is_string($dis_price))
+                        {
+                            $discounted_price = $total_price;
+                        echo $discounted_price; 
+                         
+                        }
+                        else{
+                            $discounted_price = $total_price - $dis_price;
+                            echo $discounted_price;
+                            
+                    }
+                        ?>
+                        </span>
                     </div>
                 </div>
             </div>
