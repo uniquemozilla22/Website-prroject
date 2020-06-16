@@ -18,6 +18,8 @@ if (isset($_SESSION['customer_id'])) {
             echo "selection query on collection not parsed";
         }
         oci_execute($insertPayment);
+
+      
     
         $Select_query="SELECT* FROM CART WHERE USER_ID='$userid'";
         $select_parse= oci_parse($conn, $Select_query);
@@ -29,6 +31,12 @@ if (isset($_SESSION['customer_id'])) {
         if (($row=oci_fetch_assoc($select_parse))==true)
         {
             $cart_id=$row['CART_ID'];
+            $updatecart_product="UPDATE CART_PRODUCT SET STATUS=1 WHERE CART_ID='$cart_id' ";
+            $update_parse = oci_parse($conn, $updatecart_product);
+            if (!$update_parse) {
+                echo "selection query on collection not parsed";
+            }
+            oci_execute($update_parse);
             header("location: include/order/orderconfirm.include.php?cart=$cart_id");
     
         }

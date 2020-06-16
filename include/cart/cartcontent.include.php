@@ -8,6 +8,15 @@ if (isset($_GET['allitemsremoved'])) {
     $cart_message = "All your items has been removed from the cart";
 }
 
+if(isset($_GET['orderplaced']))
+{
+    
+    $cart_message = "Your items have been placed for order. You can see your invoice in <a href='customer\createincoice.php'>INVOICE</a>";
+}
+
+if (isset($_GET['notordered'])) {
+    $cart_message = "You need to pay for the Products to see the invoice.";
+}
 if (isset($_GET['itemadded'])) {
     $cart_message = "Your item has been added to cart";
 }
@@ -112,7 +121,7 @@ $coupon_code = 0;
 
 
                                 <?php
-                                $S_query = "SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid'";
+                                $S_query = "SELECT * FROM CART c , CART_PRODUCT cp WHERE c.CART_ID=cp.CART_ID AND USER_ID='$userid' AND STATUS=0";
 
                                 $cart_SELECT = oci_parse($conn, $S_query);
 
@@ -296,4 +305,5 @@ $coupon_code = 0;
         </div>
     </div>
 </div>
+
 <!-- cart-main-area end -->

@@ -74,9 +74,13 @@
         $row_customer = oci_fetch_array($run_customer);
 
         $cart_id = $row_customer['CART_ID'];
-        $discount_id = $row_customer['DISCOUNT_ID'];
+        if (isset($row_customer['DISCOUNT_ID']))
+        {
+            $discount_id = $row_customer['DISCOUNT_ID'];
 
-        $get_orders = "SELECT * FROM CART_PRODUCT WHERE CART_ID='$cart_id'";
+        }
+
+        $get_orders = "SELECT * FROM CART_PRODUCT WHERE CART_ID='$cart_id' AND STATUS =1";
 
         $run_orders = oci_parse($conn,$get_orders);
 
@@ -87,22 +91,22 @@
         }
 
         $i = 1;
-    
+        $COLQUERY= "SELECT * FROM COLLECTION_SLOT WHERE USER_ID ='$userid'";
+        $COLLPARSE = oci_parse($conn,$COLQUERY);
+
+    oci_execute($COLLPARSE);
+
+    if(!$COLLPARSE){
+        echo "Error in parsing";
+    }
+    $rowCOLL = oci_fetch_array($COLLPARSE);
+
+    $deliverday=$rowCOLL['SLOT_DATE'];
+    $pickuptime=$rowCOLL['SLOT_TIME'];
+    $STATUS=$rowCOLL['SLOT_STATUS'];
          while ($row_all =oci_fetch_array($run_orders)){
              
-            $COLQUERY= "SELECT * FROM COLLECTION_SLOT WHERE USER_ID ='$userid'";
-            $COLLPARSE = oci_parse($conn,$COLQUERY);
-    
-        oci_execute($COLLPARSE);
-    
-        if(!$COLLPARSE){
-            echo "Error in parsing";
-        }
-        $rowCOLL = oci_fetch_array($COLLPARSE);
-    
-        $deliverday=$rowCOLL['SLOT_DATE'];
-        $pickuptime=$rowCOLL['SLOT_TIME'];
-        $STATUS=$rowCOLL['SLOT_STATUS'];
+            
           
             $P_ID = $row_all['PRODUCT_ID'];
             $productquantity=$row_all['PRODUCT_QUANTITY'];

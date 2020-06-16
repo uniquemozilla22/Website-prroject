@@ -20,7 +20,7 @@ if (isset($_GET['cartid'])) {
 include('include/header.include.php');
 include('include/banner.include.php');
 
-$S_query = "SELECT * FROM  CART_PRODUCT WHERE CART_ID='$cartid'";
+$S_query = "SELECT * FROM  CART_PRODUCT WHERE CART_ID='$cartid' AND STATUS=0";
 
 $cart_SELECT = oci_parse($conn, $S_query);
 
@@ -80,6 +80,31 @@ while ($row = oci_fetch_array($cart_SELECT)) {
 
         $de = $productprice * $product_quantity;
 
+        $Dquery = "SELECT * from discount where DISCOUNT_ID=$discountid";
+
+                                        $Dlogin_stmt = oci_parse($conn, $Dquery);
+
+                                        if (!$Dlogin_stmt) {
+                                            echo "An error occurred in parsing the sql string. on discount \n";
+                                            exit;
+                                        }
+
+                                        oci_execute($Dlogin_stmt);
+                                        if ($rowd = oci_fetch_array($Dlogin_stmt)) {
+                                            $disper = $rowd['DISCOUNT_PERCENTAGE'];
+                                            $dispers = ($disper * $productprice) / 100;
+                                            $finalprice = $productprice - $dispers;
+                                        }
+
+
+                                        if (isset($finalprice)) {
+
+                                            $de = $finalprice * $product_quantity;
+                                        } else {
+
+                                            $de = $productprice * $product_quantity;
+                                        }
+
         $total_price += $de;
 
 
@@ -103,13 +128,15 @@ if (!isset($_GET['setted']))
 {
     ?>
 <form action ="checkoutrun.php" method='POST'>
+<h6>Your Name (Username):</h6>
 <div class="form-group">
         <input type="text" name="name" class="form-control" placeholder="Enter Name" required value="<?php echo $username ?>">
     </div>
+    <h6>Your Message:</h6>
 <div class="form-group">
         <textarea name="address" cols="19" rows="3" class="form-control" placeholder="Enter order description(if any)...."> </textarea>
     </div>
-    <h6 class="text-center lead">Select the day</h6>
+    <h6 class="text-center lead">Select the day for picking up:</h6>
     <div class="form-group">
         <select name="day" class="form-control">
 
@@ -266,17 +293,38 @@ if (!isset($_GET['setted']))
 }else{ 
 $count = 1;
 $paypalHiddenData = '';
-$query = "SELECT * FROM CART_PRODUCT CP, PRODUCT P WHERE CP.PRODUCT_ID = P.PRODUCT_ID AND CART_ID = $cartid";
+$query = "SELECT * FROM CART_PRODUCT CP, PRODUCT P WHERE CP.PRODUCT_ID = P.PRODUCT_ID AND CART_ID = $cartid AND CP.STATUS=0";
 $stmt = oci_parse($conn, $query);
 oci_execute($stmt);
 while ($row = oci_fetch_assoc($stmt)) {
+    $productprice=$row['PRODUCT_PRICE'];
+    if(isset($row['DISCOUNT_ID']))
+    {
+
+        $discount=$row['DISCOUNT_ID'];
+        $discount_query = "SELECT * FROM DISCOUNT WHERE DISCOUNT_ID=$discount";
+    $discount_parse = oci_parse($conn, $discount_query);
+    oci_execute($discount_parse);
+    if ($discount_row=oci_fetch_assoc($discount_parse))
+    {
+        $disper = $discount_row['DISCOUNT_PERCENTAGE'];
+        $dispers = ($disper * $productprice) / 100;
+        $finalprice = $productprice - $dispers;
+    }
+    
+    }else{
+        $finalprice=$productprice;
+    }
+
+    
+
     // generate hidden inputs to submit to paypal
     $paypalHiddenData .= "<input type='hidden' name='item_name_$count'
                value='$row[PRODUCT_NAME]'/>
         <input type='hidden' name='quantity_$count'
                value='$row[PRODUCT_QUANTITY]'/>
         <input type='hidden' name='amount_$count'
-               value='$row[PRODUCT_PRICE]'/>";
+               value='$finalprice'/>";
     ++$count;
 }
 ?>
@@ -287,7 +335,7 @@ while ($row = oci_fetch_assoc($stmt)) {
     <input type='hidden' name='business' value='sb-rvpml2285907@business.example.com'>
     <input type='hidden' name='currency_code' value='USD'>
     <input type='hidden' name='notify_url' value='http://localhost/website-prroject/notify.php'>
-    <input type='hidden' name='return' value='http://localhost/website-prroject/checkoutSuccessful.php'>
+    <input type='hidden' name='return' value='http://localhost/Website-prroject/checkoutSuccessful.php'>
     <?php echo $paypalHiddenData; ?>
     <!-- /.PayPal logic -->
 
