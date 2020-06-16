@@ -111,6 +111,7 @@ if(isset($_GET['loginSucess']))
 										<select name='tradertype'>  
                     					<option value='customer'>Customer</option>
                     					<option value='trader'>Trader</option>
+										<option value='management'>Management</option>
                 						</select>
 									</div>
 									<div class="form__btn">
@@ -164,6 +165,7 @@ if(isset($_GET['loginSucess']))
 										<select name='customertype'>  
                     					<option value='customer'>Customer</option>
                     					<option value='trader'>Trader</option>
+										<option value='management'>Management</option>
                 						</select>
 									</div>
 									

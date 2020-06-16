@@ -49,6 +49,11 @@ if (($row= oci_fetch_array($login_stmt))==true)
 		$_SESSION['admin_id']=$userid;
 		$_SESSION['admin_type']=$type;
 		header("Location: ../../trader_area/index.php?dashboard==1&&user_profile=$userid");
+	}else if($type=='management'){
+		echo "<script>alert('To view management dashboard </br> <a href='http://127.0.0.1:8080/apex/f?p=104:LOGIN_DESKTOP:6225547306363:::::'>Click here</a></script>"; 
+        
+      
+	   header('Location: http://127.0.0.1:8080/apex/f?p=104:LOGIN_DESKTOP:6225547306363:::::');
 	}
 
 	else if($verified_password==false){
