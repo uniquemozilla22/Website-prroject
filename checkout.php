@@ -328,7 +328,24 @@ while ($row = oci_fetch_assoc($stmt)) {
     ++$count;
 }
 ?>
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" id="placeOrder">
+<div class="box" style="background-color:RGB(211, 215, 222);">
+<center><!--  center Begin  -->
+
+
+<h3> Paypal For Your Payment </h3>
+
+<p class="text-muted">
+
+    If you have any questions, do not hesitate to Contact Us.</br>
+    Contact : 01-5132076</br>
+    Taste Best, Checkhuderfax, London
+
+</p>
+
+</center><!--  center Finish  -->
+
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" id="placeOrder" style="background-color:RGB(211, 215, 222);">
     <!-- PayPal logic -->
     <input type="hidden" name="cmd" value="_cart">
     <input type="hidden" name="upload" value="1">
@@ -341,11 +358,13 @@ while ($row = oci_fetch_assoc($stmt)) {
 
     <input type="hidden" name="products" value="<?php $productname; ?>">
     <input type="hidden" name="grand_total" value="<?php $total_price; ?>">
+
    
-    <div class="form-group">
-        <input type="submit" name="collectionsubmit" value="Paypal" class="btn btn-block">
+    <div class="form-group" >
+        <input type="image" type="submit" name="collectionsubmit"  width="200" height="130" src="images/paypal.png" style="border:5px,solid,red; margin-left:150px;" >
     </div>
     </form>
+    </div>
     <?php
 
     }
