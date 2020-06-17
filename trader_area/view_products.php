@@ -60,14 +60,8 @@
                             <?php 
           
                                 $i=0;
-                                if($admin_name!='trader')
-                                {
-                                    $get_pro = "select * from PRODUCT where USER_ID='$admin_id'";
-                                }
-                                else{
-                                    
-                                    $get_pro = "select * from PRODUCT";
-                                }
+                                 $get_pro = "select * from PRODUCT where USER_ID='$admin_id'";
+                               
                                 
                                 $run_pro = oci_parse($conn,$get_pro);
           

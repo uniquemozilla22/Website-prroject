@@ -25,7 +25,7 @@
             
             echo "<script>alert('One of your product has been Deleted')</script>";
             
-            echo "<script>window.open('index.php?view_shop','_self')</script>";
+            echo "<script>window.open('index.php?view_shops','_self')</script>";
             
         }
         
