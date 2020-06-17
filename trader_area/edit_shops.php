@@ -141,10 +141,14 @@
               
               oci_execute($run_shop);
               if($run_shop){
+
+                $insert_message="<div class='alert alert-success' role='alert'>
+                Your Shop Has Been Updated
+                </div>";
+                echo $insert_message;
                   
-                  echo "<script>alert('Your Shop Has Been Updated')</script>";
+                //   echo "<script>alert('')</script>";
                   
-                  echo "<script>window.open('index.php?view_shops','_self')</script>";
                   
               }
               

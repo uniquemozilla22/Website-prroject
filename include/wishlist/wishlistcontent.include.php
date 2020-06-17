@@ -78,7 +78,7 @@ if (isset($_GET['wishadd'])){
             if (!empty($product_id))
             echo  "  <tr>
             <td class='product-remove'><a href='include/wishlist/wishdelete.include.php?wishdelete=$product_id'>×</a></td>
-            <td class='product-thumbnail'><a href='#'><img src='images/images/$product_image' alt='$product_name' width=80px height= 100px></a></td>
+            <td class='product-thumbnail'><a href='#'><img src='trader_area/product_images/$product_image' alt='$product_name' width=80px height= 100px></a></td>
             <td class='product-name'><a href='singleproduct.php?productdi=$product_id'>$product_name</a></td>
             <td class='product-price'><span class='amount'>$product_rate</span></td>
             <td class='product-stock-status'><span class='wishlist-in-stock'> $statuspro</span></td>

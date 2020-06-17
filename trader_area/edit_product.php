@@ -467,9 +467,11 @@ if(isset($_POST['update'])){
 
     if($run_product){
         
-       echo "<script>alert('Your product has been updated Successfully')</script>"; 
         
-       echo "<script>window.open('index.php?view_products','_self')</script>"; 
+       $insert_message="<div class='alert alert-success' role='alert'>
+       Your product has been updated Successfully
+       </div>";
+       echo $insert_message;
         
     }
     
