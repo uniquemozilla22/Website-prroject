@@ -1,4 +1,10 @@
- <!-- Start Slider area -->
+ <!-- Start Slider area --><?php if (isset($message))
+{
+	
+	echo $message;
+}
+?>
+
  <div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
         	<!-- Start Single Slide -->
 	        <div class="slide animation__style10 bg-image--1 fullscreen align__center--left">
@@ -37,4 +43,6 @@
             </div>
             <!-- End Single Slide -->
         </div>
+		<br />
+		
         <!-- End Slider area -->

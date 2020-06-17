@@ -4,9 +4,9 @@
     
     <form action="" method="post"><!-- form Begin -->
         
-       <input type="submit" name="Yes" value="Yes, I want to delete" class="btn btn-danger">
+       <input type="submit" name="Yes" value="Yes, I want to deactivate" class="btn btn-danger">
         
-       <input type="submit" name="No" value="No, I don't want to delete" class="btn btn-primary">
+       <input type="submit" name="No" value="No, I don't want to deactivate" class="btn btn-primary">
         
     </form><!-- form Finish -->
     
@@ -29,9 +29,9 @@ if(isset($_POST['Yes'])){
         
         session_destroy();
         
-        echo "<script>alert('Your account has been deleted successfully.)</script>";
+        echo "<script>alert('Your account has been deactivated successfully.)</script>";
         
-      //  echo "<script>window.open('../index.php','_self')</script>";
+        echo "<script>window.open('../index.php','_self')</script>";
         
     }
     

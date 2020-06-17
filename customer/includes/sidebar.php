@@ -122,7 +122,7 @@
                 
                 <a href="my_account.php?delete_account">
                     
-                    <i class="fa fa-trash-o"></i> Delete Account
+                    <i class="fa fa-trash-o"></i> Deactivate Account
                     
                 </a>
                 

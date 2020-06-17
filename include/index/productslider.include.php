@@ -28,6 +28,7 @@ oci_execute($sle);
 $name_fetch= oci_fetch_assoc($sle);
 
 $traderName= $name_fetch['USERNAME'];
+$traderDesc= $name_fetch['USER_DESCRIPTION'];
 
 echo " 
 <section class='wn__product__area brown--color pt--80  pb--30' style='background-color:RGB(211, 215, 222);'>
@@ -36,7 +37,7 @@ echo "
 					<div class='col-lg-12'>
 						<div class='section__title text-center'>
 							<h2 class='title__be--2'>Trader :<span class='color--theme'> $traderName</span></h2>
-							<p>There will be some description about the trader and above will be the name of trader.</p>
+							<p>$traderDesc</p>
 						</div>
 					</div>
 				</div>

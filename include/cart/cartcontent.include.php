@@ -5,18 +5,37 @@
 // var_dump($_SESSION);
 // echo "</pre>";
 if (isset($_GET['allitemsremoved'])) {
-    $cart_message = "All your items has been removed from the cart";
+    $cart_message = "
+    
+    <div class='alert alert-success' role='alert'>
+    All your items has been removed from the cart
+</div>
+    
+    ";
+    
 }
 $counter=0;
 
 if(isset($_GET['orderplaced']))
 {
+    $cart_message = "
     
-    $cart_message = "Your items have been placed for order. You can see your invoice in <a href='customer\createincoice.php'>INVOICE</a>";
+    <div class='alert alert-success' role='alert'>
+    Your items have been placed for order. You can see your invoice in <a href='customer\createincoice.php'>INVOICE</a>
+</div>
+    
+    ";
+    
 }
 
 if (isset($_GET['notordered'])) {
-    $cart_message = "You need to pay for the Products to see the invoice.";
+    $cart_message = "
+    
+    <div class='alert alert-danger' role='alert'>
+    You need to pay for the Products to see the invoice.
+</div>
+    
+    ";
 }
 if (isset($_GET['itemadded'])) {
     $cart_message = "Your item has been added to cart";
@@ -36,7 +55,11 @@ if (isset($_GET['productidremove'])) {
     }
     oci_execute($parsing_query);
 
-    $cart_message = "Your item has been removed";
+    $cart_message = "
+    <div class='alert alert-danger' role='alert'>
+    Your item has been removed
+</div>
+    ";
 }
 
 if (isset($_GET['removeall'])) {
@@ -66,16 +89,29 @@ if (isset($_GET['removeall'])) {
             echo "Item not deleted because of sql error";
         }
         oci_execute($DELETE_parsing_query);
-
-        $cart_message = "All your items has been removed from the cart";
+        $cart_message = "
+        <div class='alert alert-danger' role='alert'>
+        Your all item has been removed
+    </div>
+        ";
     }
 }
 
 if (isset($_GET['itemalreadyoncart'])) {
-    $cart_message = "Your item is already on the cart";
+    $cart_message = "
+    <div class='alert alert-info' role='alert'>
+    Your Item is already on the cart.
+</div>
+    ";
 }
 if (isset($_GET['itemalreadyoncartbutquantityupdated'])) {
-    $cart_message = "Your item was already on the cart but the quantity is updated";
+    
+
+    $cart_message = "
+    <div class='alert alert-warning' role='alert'>
+    Your item was already on the cart but the quantity is updated
+</div>
+    ";
 }
 
 include("include/connection.php");

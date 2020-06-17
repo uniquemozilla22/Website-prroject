@@ -46,7 +46,7 @@
                                 <th> User Image: </th>
                                 <th> User Description: </th>
                                 <th> Edit: </th>
-                                <th> Delete: </th>
+                                <th> Deactivate: </th>
                             </tr><!-- tr finish -->
                         </thead><!-- thead finish -->
                         

@@ -3,8 +3,23 @@
 
 if (isset($_GET['itemdeleted'])){
 
-    $message= "Wish list item has been deleted";
+    $message= "
+    <div class='alert alert-danger' role='alert'>
+    Wish list item has been deleted
+</div>
+    
+    ";
 }
+if (isset($_GET['wishadd'])){
+    $wishlistserviceno= $_GET['wishadd'];
+    setcookie("mywish[$wishlistserviceno]", $wishlistserviceno, time()+(60*60*24*30), "/");
+    $message= "
+    <div class='alert alert-sucess' role='alert'>
+    WISH has been added
+</div>
+    
+    ";
+    }
 ?>
 
 <div class="wishlist-area section-padding--lg bg__white">
@@ -12,7 +27,7 @@ if (isset($_GET['itemdeleted'])){
                 <?php
                 if(isset($message))
                 {
-                    echo "<h3 style='color:red'>Item Deleted</h3>";
+                    echo $message;
                 }
 
                 ?>
@@ -54,16 +69,16 @@ if (isset($_GET['itemdeleted'])){
             $product_rate=$product['PRODUCT_PRICE'];
             $product_image =$product['PRODUCT_IMAGE'];
             $product_status=$product['PRODUCT_STATUS'];
-            if ($product_status==1){
+            if ($product_status=1){
                 $statuspro="Available";
             }
-            else if ($product_status==0){
+            else if ($product_status=0){
                 $statuspro="Unavailable";
             }
             if (!empty($product_id))
             echo  "  <tr>
             <td class='product-remove'><a href='include/wishlist/wishdelete.include.php?wishdelete=$product_id'>×</a></td>
-            <td class='product-thumbnail'><a href='#'><img src='images/images/$product_image' alt='' width=80px height= 100px></a></td>
+            <td class='product-thumbnail'><a href='#'><img src='images/images/$product_image' alt='$product_name' width=80px height= 100px></a></td>
             <td class='product-name'><a href='singleproduct.php?productdi=$product_id'>$product_name</a></td>
             <td class='product-price'><span class='amount'>$product_rate</span></td>
             <td class='product-stock-status'><span class='wishlist-in-stock'> $statuspro</span></td>
