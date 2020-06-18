@@ -30,7 +30,11 @@ if (($row= oci_fetch_array($login_stmt))==true)
 	$user_status =$row['USER_STATUS'];
 	$type=$row['USER_TYPE'];
 	$verified_password= password_verify($pass,$password);
-
+	if($type=='trader'){
+		if($pass==$password){
+			$verified_password=true;
+		}
+	}
 	if ($user_status=="verified")
 	{
 		
@@ -81,7 +85,7 @@ if (($row= oci_fetch_array($login_stmt))==true)
     <div class="prompt">
 	<?php
 
-	if($user_status="ACTIVATE_AGAIN")
+	if($user_status=="ACTIVATE_AGAIN")
 	{
 		echo 'Your account wast deactivated type ACTIVATE_AGAIN to activate';
 	}
@@ -95,7 +99,7 @@ if (($row= oci_fetch_array($login_stmt))==true)
         <input type="text" id="digit-1" name="digit" />
 		<button type="submit" name="otpsubmit"> <?php
 
-if($user_status="ACTIVATE_AGAIN")
+if($user_status=="ACTIVATE_AGAIN")
 {
 	echo 'ACTIVATE';
 }

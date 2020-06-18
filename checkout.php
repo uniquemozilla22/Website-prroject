@@ -367,7 +367,7 @@ while ($row = oci_fetch_assoc($stmt)) {
     <input type='hidden' name='business' value='sb-rvpml2285907@business.example.com'>
     <input type='hidden' name='currency_code' value='USD'>
     <input type='hidden' name='notify_url' value='http://localhost/website-prroject/notify.php'>
-    <input type='hidden' name='return' value='http://localhost/Website-prroject(local)/checkoutSuccessful.php'>
+    <input type='hidden' name='return' value='http://localhost/Website-prroject/checkoutSuccessful.php'>
     <?php echo $paypalHiddenData; ?>
     <!-- /.PayPal logic -->
 

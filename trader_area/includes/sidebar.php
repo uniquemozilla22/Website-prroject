@@ -174,6 +174,12 @@
             </li><!-- li finish -->
             
             <li><!-- li begin -->
+                <a href="http://127.0.0.1:8080/apex/f?p=106:LOGIN_DESKTOP:5364829047718:::::" style="color: yellow;" ><!-- a href begin -->
+                    <i class="fa fa-fw fa-power-off"></i>Trader Apex Interface
+                </a><!-- a href finish -->
+            </li><!-- li finish -->
+
+            <li><!-- li begin -->
                 <a href="logout.php" style="color: yellow;" ><!-- a href begin -->
                     <i class="fa fa-fw fa-power-off"></i>Log Out
                 </a><!-- a href finish -->

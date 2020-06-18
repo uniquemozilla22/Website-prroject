@@ -12,7 +12,8 @@ if (isset($_SESSION['customer_id'])) {
 // eta xai checkout successful vaesi order ma insert garney data haru.
 // redirect: 
 
-    $query="INSERT INTO PAYMENT (PAYMENT_ID, PAYMENT_STATUS,PAYMENT_TYPE,PAYMENT_DATE,USER_ID) VALUES (null,'PAID','PAYPAL',SYSDATE,'$userid')";
+$date=date('m/d/Y');
+$query="INSERT INTO PAYMENT (PAYMENT_ID, PAYMENT_STATUS,PAYMENT_TYPE,PAYMENT_DATE,USER_ID) VALUES (null,'PAID','PAYPAL','$date','$userid')";
     $insertPayment = oci_parse($conn, $query);
         if (!$insertPayment) {
             echo "selection query on collection not parsed";
