@@ -13,7 +13,22 @@ if (isset($_SESSION['customer_id'])) {
 if (isset($_GET['cartid'])) {
     $cartid = $_GET['cartid'];
 }
-
+if (isset($_GET['setted']))
+{
+    $checkoutmessage = "
+    <div class='alert alert-success' role='alert'>
+    Your time has been set now you can pay for your cart products
+</div>
+    ";
+}
+if (isset($_GET['sameday']))
+{
+    $checkoutmessage = "
+    <div class='alert alert-success' role='alert'>
+    We acknowledge that you already have ordered the product. You can pick the items on the same day.
+</div>
+    ";
+}
 
 
 
@@ -352,7 +367,7 @@ while ($row = oci_fetch_assoc($stmt)) {
     <input type='hidden' name='business' value='sb-rvpml2285907@business.example.com'>
     <input type='hidden' name='currency_code' value='USD'>
     <input type='hidden' name='notify_url' value='http://localhost/website-prroject/notify.php'>
-    <input type='hidden' name='return' value='http://localhost/Website-prroject/checkoutSuccessful.php'>
+    <input type='hidden' name='return' value='http://localhost/Website-prroject(local)/checkoutSuccessful.php'>
     <?php echo $paypalHiddenData; ?>
     <!-- /.PayPal logic -->
 

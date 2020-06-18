@@ -15,22 +15,25 @@
         
         $delete_id = $_GET['delete_user'];
         
-        $delete_user = "delete from USERA where USER_ID='$delete_id'";
         
-        $run_delete = oci_parse($conn,$delete_user);
+        $delete_customer = "UPDATE USERA SET USER_STATUS='ACTIVATE_AGAIN' where USER_ID='$delete_id'";
+    
+    $run_delete_customer = oci_parse($conn,$delete_customer);
 
-        oci_execute($run_delete);
+    oci_execute($run_delete_customer);
+    
+    if($run_delete_customer){
         
-        if($run_delete){
-            
-            echo "<script>alert('Your account has been Deleted')</script>";
-            
-           // echo "<script>window.open('../login.php')</script>";
-            
-        }
+        session_destroy();
         
+        echo "<script>alert('Your account has been deactivated successfully.)</script>";
+        
+
+echo "<script>window.open('../index.php','_self')</script>";
+        
+        
+    }
+}
     }
 
 ?>
-
-<?php } ?>

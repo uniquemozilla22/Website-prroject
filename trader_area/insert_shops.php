@@ -5,6 +5,18 @@ if($_SESSION['admin_type']!='trader'){
     echo "<script>window.open('../login.php','_self')</script>";
     
 }else{
+                                $shop_query = "SELECT COUNT(SHOP_ID) FROM SHOP";
+
+                                $cart_SELECT = oci_parse($conn, $shop_query);
+
+                                if (!$cart_SELECT) {
+                                    echo "sql error";
+                                }
+                                oci_execute($cart_SELECT);
+                                $row = oci_fetch_assoc($cart_SELECT);
+                                
+                                $count =$row['COUNT(SHOP_ID)'];
+
 
 ?>
 
@@ -56,6 +68,17 @@ if($_SESSION['admin_type']!='trader'){
            </div>  
            
            <div class="panel-body"> 
+           <?php
+
+           if ($count>=10)
+           {
+            $insert_message="<div class='alert alert-danger' role='alert'>
+No shop can be inserted now. 10 shops added to the System
+</div>";
+echo $insert_message;
+           }
+           else{
+               ?>
            <form action="" class="form-horizontal" method="post"><!-- form-horizontal begin -->
                     <div class="form-group"><!-- form-group begin -->
                     
@@ -67,7 +90,7 @@ if($_SESSION['admin_type']!='trader'){
                         
                         <div class="col-md-6"><!-- col-md-6 begin -->
                         
-                            <input name="shop_title" type="text" class="form-control">
+                            <input name="shop_title" type="text" class="form-control" required >
                         
                         </div><!-- col-md-6 finish -->
                     
@@ -87,7 +110,7 @@ if($_SESSION['admin_type']!='trader'){
                         <div class="col-md-6"><!-- col-md-6 begin -->
                         
                           
-                        <textarea name="shop_desc" cols="19" rows="6" class="form-control">
+                        <textarea name="shop_desc" cols="19" rows="6" class="form-control" required>
                               
                             
                               
@@ -112,6 +135,7 @@ if($_SESSION['admin_type']!='trader'){
                     
                     </div><!-- form-group finish -->
                 </form><!-- form-horizontal finish -->
+           <?php } ?>
                
            </div>
             
@@ -148,11 +172,11 @@ if(isset($_POST['submit'])){
     
     if($run_shop){
         
-
-       echo "<script>alert('Your shop has been inserted Successfully')</script>"; 
-        
-        
-        echo "<script>window.open('index.php?view_shops','_self')</script>"; 
+$insert_message="<div class='alert alert-success' role='alert'>
+Shop has been inserted sucessfully.
+</div>";
+echo $insert_message;
+       
          
         
     }

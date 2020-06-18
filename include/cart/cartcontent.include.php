@@ -61,6 +61,11 @@ if (isset($_GET['productidremove'])) {
 </div>
     ";
 }
+if (isset($_SESSION['customer_id'])) {
+    $u_id = $_SESSION['customer_id'];
+} else if (isset($_SESSION['admin_id'])) {
+    $u_id = $_SESSION['admin_id'];
+}
 
 if (isset($_GET['removeall'])) {
     if (isset($_SESSION['customer_id'])) {
@@ -314,16 +319,37 @@ $coupon_code = 0;
                             echo "$check";
                         }
                         else{
-                        if (isset($card_id)) {
-                            echo "
-                                <li><a href='checkout.php?cartid=$card_id'>Check Out</a></li>
-                                ";
-                        } else if (isset($cart_id_show)) {
-                            echo "
-                                    <li><a href='checkout.php?cartid=$cart_id_show'>Check Out</a></li>
-                                    ";
-                        }
+                            $COLQUERY= "SELECT * FROM COLLECTION_SLOT WHERE USER_ID ='$u_id'";
+        $COLLPARSE = oci_parse($conn,$COLQUERY);
+
+    oci_execute($COLLPARSE);
+    $rocill=oci_fetch_assoc($COLLPARSE);
+    if ($rocill==false)
+    {
+        if (isset($card_id)) {
+            echo "
+                <li><a href='checkout.php?cartid=$card_id'>Check Out</a></li>
+                ";
+        } else if (isset($cart_id_show)) {
+            echo "
+                    <li><a href='checkout.php?cartid=$cart_id_show'>Check Out</a></li>
+                    ";
+        }
+    }
+    else{
+        if (isset($card_id)) {
+            echo "
+                <li><a href='checkout.php?cartid=$card_id&sameday=1'>Check Out</a></li>
+                ";
+        } else if (isset($cart_id_show)) {
+            echo "
+                    <li><a href='checkout.php?cartid=$cart_id_show&sameday=1'>Check Out</a></li>
+                    ";
+        }
+                       
                     }
+                    }
+
                         ?>
                     </ul>
                 </div>

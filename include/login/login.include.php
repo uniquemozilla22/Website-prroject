@@ -79,12 +79,30 @@ if (($row= oci_fetch_array($login_stmt))==true)
 </head>
 <body>
     <div class="prompt">
-        Enter the code generated on your mobile device below to log in!
+	<?php
+
+	if($user_status="ACTIVATE_AGAIN")
+	{
+		echo 'Your account wast deactivated type ACTIVATE_AGAIN to activate';
+	}
+	else{
+	echo 'Enter the code generated on your mobile device below to log in!';
+}
+      ?>  
     </div>
     
     <form method="post" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off" action="verify_customer.php">
         <input type="text" id="digit-1" name="digit" />
-		<button type="submit" name="otpsubmit">Submit OTP</button>
+		<button type="submit" name="otpsubmit"> <?php
+
+if($user_status="ACTIVATE_AGAIN")
+{
+	echo 'ACTIVATE';
+}
+else{
+echo 'Submit OTP';
+}
+  ?> </button>
     </form>
 
     <script src="otp.js"></script>

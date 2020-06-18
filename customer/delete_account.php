@@ -19,7 +19,7 @@ $c_id = $_SESSION['customer_id'];
 
 if(isset($_POST['Yes'])){
     
-    $delete_customer = "delete from USERA where USER_ID='$c_id'";
+    $delete_customer = "UPDATE USERA SET USER_STATUS='ACTIVATE_AGAIN' where USER_ID='$c_id'";
     
     $run_delete_customer = oci_parse($conn,$delete_customer);
 
@@ -31,7 +31,10 @@ if(isset($_POST['Yes'])){
         
         echo "<script>alert('Your account has been deactivated successfully.)</script>";
         
-        echo "<script>window.open('../index.php','_self')</script>";
+session_destroy();
+
+echo "<script>window.open('../index.php','_self')</script>";
+        
         
     }
     
