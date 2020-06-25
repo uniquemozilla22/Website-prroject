@@ -127,11 +127,7 @@
                         
                         include("edit_product.php");
                         
-                }   if(isset($_GET['insert_p_cat'])){
-                        
-                        include("insert_p_cat.php");
-                        
-                }   if(isset($_GET['view_cats'])){
+                }      if(isset($_GET['view_cats'])){
                         
                         include("view_cats.php");
                         
